@@ -127,8 +127,8 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         Optional<FluidStack> contained = FluidUtil.getFluidContained(heldItem);
 
         if (contained.isPresent()) {
-            this.wineAge = heldItem.get(WINE_AGE.get());
-            this.woodType = heldItem.get(WOOD_TYPE.get());
+            this.wineAge = heldItem.getOrDefault(WINE_AGE.get(),0);
+            this.woodType = heldItem.getOrDefault(WOOD_TYPE.get(), "none");
         }
 
         System.out.print("Wine Age " + wineAge + "Wood Type " + woodType);
@@ -215,8 +215,8 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private static final Map<Fluid, Supplier<Item>> FLUID_TO_BOTTLE = Map.of(
-            ModFluids.SOURCE_RED_WINE.get(), ModItems.RED_WINE_BOTTLE,
-            ModFluids.SOURCE_WHITE_WINE.get(), ModItems.WHITE_WINE_BOTTLE
+            ModFluids.RED_WINE.source().get(), ModItems.RED_WINE_BOTTLE,
+            ModFluids.WHITE_WINE.source().get(), ModItems.WHITE_WINE_BOTTLE
     );
 
     private boolean isOutputEmpty() {

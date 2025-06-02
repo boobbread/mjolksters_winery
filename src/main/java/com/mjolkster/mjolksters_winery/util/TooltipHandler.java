@@ -27,8 +27,10 @@ public class TooltipHandler {
                 event.getToolTip().add(Component.literal("Wood Type: Oak").withStyle(ChatFormatting.GOLD));
             } else if (woodTypeRaw.contains("spruce")) {
                 event.getToolTip().add(Component.literal("Wood Type: Spruce").withStyle(ChatFormatting.GOLD));
-            } else {
+            } else if (woodTypeRaw.contains("acacia")){
                 event.getToolTip().add(Component.literal("Wood Type: Acacia").withStyle(ChatFormatting.GOLD));
+            } else {
+                event.getToolTip().add(Component.literal("Wood Type: None").withStyle(ChatFormatting.GOLD));
             }
 
 

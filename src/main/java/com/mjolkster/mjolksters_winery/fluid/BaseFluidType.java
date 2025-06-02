@@ -5,22 +5,13 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-/**
- * Basic implementation of {@link FluidType} that supports specifying still and flowing textures in the constructor.
- *
- * @author Choonster (<a href="https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/1.19.x/LICENSE.txt">MIT License</a>)
- * Change by: Kaupenjoe
- * Added overlayTexture and tintColor as well. Also converts tint color into fog color
- */
 public class BaseFluidType extends FluidType {
     private final ResourceLocation stillTexture;
     private final ResourceLocation flowingTexture;
@@ -59,7 +50,6 @@ public class BaseFluidType extends FluidType {
             public int getTintColor() {
                 return tintColor;
             }
-
 
             @Override
             public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,

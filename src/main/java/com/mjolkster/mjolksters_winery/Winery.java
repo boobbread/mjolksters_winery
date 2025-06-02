@@ -64,7 +64,6 @@ public class Winery
         ModRecipes.register(modEventBus);
         ModSounds.register(modEventBus);
 
-        ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
 
         ModDataComponents.register(modEventBus);
@@ -121,8 +120,8 @@ public class Winery
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.ACACIA_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOTTLING_MACHINE.get(), RenderType.translucent());
 
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_RED_WINE.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WHITE_WINE.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_WINE.source().get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.WHITE_WINE.source().get(), RenderType.translucent());
             });
 
         }
@@ -133,10 +132,10 @@ public class Winery
         }
         @SubscribeEvent
         public static void onClientExtensions(RegisterClientExtensionsEvent event) {
-            event.registerFluidType(((BaseFluidType) ModFluidTypes.RED_WINE_FLUID_TYPE.get()).getClientFluidTypeExtensions(),
-                    ModFluidTypes.RED_WINE_FLUID_TYPE.get());
-            event.registerFluidType(((BaseFluidType) ModFluidTypes.WHITE_WINE_FLUID_TYPE.get()).getClientFluidTypeExtensions(),
-                    ModFluidTypes.WHITE_WINE_FLUID_TYPE.get());
+            event.registerFluidType(((BaseFluidType) ModFluids.RED_WINE.fluidType().get()).getClientFluidTypeExtensions(),
+                    ModFluids.RED_WINE.fluidType().get());
+            event.registerFluidType(((BaseFluidType) ModFluids.WHITE_WINE.fluidType().get()).getClientFluidTypeExtensions(),
+                    ModFluids.WHITE_WINE.fluidType().get());
         }
     }
 }
