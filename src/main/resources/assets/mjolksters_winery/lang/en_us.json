@@ -1,14 +1,17 @@
 {
   "block.mjolksters_winery.demijohn": "Demijohn",
   "block.mjolksters_winery.fermenter": "Fermenter",
-  "item.mjolksters_winery.red_wine_bucket": "Bucket of Red Wine",
-  "item.mjolksters_winery.white_wine_bucket": "Bucket of White Wine",
   "block.mjolksters_winery.crusher": "Crusher",
   "block.mjolksters_winery.oak_aging_barrel": "Oak Aging Barrel",
   "block.mjolksters_winery.spruce_aging_barrel": "Spruce Aging Barrel",
   "block.mjolksters_winery.acacia_aging_barrel": "Acacia Aging Barrel",
   "block.mjolksters_winery.bottling_machine": "Auto Bottler",
+
+  "item.mjolksters_winery.red_wine_bucket": "Bucket of Red Wine",
+  "item.mjolksters_winery.white_wine_bucket": "Bucket of White Wine",
+  "item.mjolksters_winery.potato_wash_bucket": "Bucket of Potato Wash",
   "item.mjolksters_winery.red_wine_bottle": "Red Wine Bottle",
   "item.mjolksters_winery.white_wine_bottle": "White Wine Bottle",
+
   "itemGroup.mjolksters_winery": "Mjolkster's Winery"
 }

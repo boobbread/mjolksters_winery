@@ -10,12 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public class CommonTags {
-    public static final TagKey<Item> BUCKETS_RED_WINE = commonItemTag("buckets/red_wine");
-
-
-
-
-
+    public static final TagKey<Fluid> WINE = commonFluidTag("wine");
 
     private static TagKey<Block> commonBlockTag(String path) {
         return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", path));

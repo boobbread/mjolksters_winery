@@ -48,15 +48,19 @@ public class ModItems {
     public static final Supplier<Item> BOTTLING_MACHINE = registerWithTab("bottling_machine",
             () -> new BlockItem(ModBlocks.BOTTLING_MACHINE.get(), basicItem()));
 
-    // item
+    // buckets
 
     public static final Supplier<Item> RED_WINE_BUCKET = registerWithTab("red_wine_bucket",
             () -> new BucketItem(ModFluids.RED_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> RED_WINE_BOTTLE = registerWithTab("red_wine_bottle",
-            () -> new Item(drinkableItem()));
     public static final Supplier<Item> WHITE_WINE_BUCKET = registerWithTab("white_wine_bucket",
             () -> new BucketItem(ModFluids.WHITE_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> WHITE_WINE_BOTTLE =
-            registerWithTab("white_wine_bottle", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> POTATO_WASH_BUCKET = registerWithTab("potato_wash_bucket",
+            () -> new BucketItem(ModFluids.POTATO_WASH.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    // bottles
+
+    public static final Supplier<Item> RED_WINE_BOTTLE = registerWithTab("red_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> WHITE_WINE_BOTTLE = registerWithTab("white_wine_bottle",
+            () -> new Item(drinkableItem()));
 }

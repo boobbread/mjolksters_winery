@@ -4,6 +4,7 @@ import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineMenu;
+import com.mjolkster.mjolksters_winery.tag.CommonTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -43,6 +44,8 @@ import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.FACING;
 import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.IN_USE;
 import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_AGE;
 import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WOOD_TYPE;
+import static com.mjolkster.mjolksters_winery.registry.ModFluids.RED_WINE;
+import static com.mjolkster.mjolksters_winery.registry.ModFluids.WHITE_WINE;
 
 public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvider {
     public final FluidTank fluidTank = new FluidTank(FluidType.BUCKET_VOLUME, this::isFluidValid) {
@@ -215,7 +218,7 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private static final Map<Fluid, Supplier<Item>> FLUID_TO_BOTTLE = Map.of(
-            ModFluids.RED_WINE.source().get(), ModItems.RED_WINE_BOTTLE,
+            RED_WINE.source().get(), ModItems.RED_WINE_BOTTLE,
             ModFluids.WHITE_WINE.source().get(), ModItems.WHITE_WINE_BOTTLE
     );
 

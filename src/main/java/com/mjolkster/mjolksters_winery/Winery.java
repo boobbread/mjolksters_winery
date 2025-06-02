@@ -32,25 +32,16 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Winery.MODID)
 public class Winery
 {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "mjolksters_winery";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public Winery(IEventBus modEventBus, ModContainer modContainer)
     {
-        // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (winery) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(TooltipHandler.class);
 
@@ -64,34 +55,29 @@ public class Winery
         ModRecipes.register(modEventBus);
         ModSounds.register(modEventBus);
 
-        ModFluids.register(modEventBus);
+        ModFluids.FLUIDS.register(modEventBus);
+        ModFluids.FLUID_TYPES.register(modEventBus);
 
         ModDataComponents.register(modEventBus);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
-        // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
@@ -102,9 +88,7 @@ public class Winery
             event.register(ModMenuTypes.AGING_BARREL_MENU.get(), AgingBarrelScreen::new);
             event.register(ModMenuTypes.BOTTLING_MACHINE_MENU.get(), BottlingMachineScreen::new);
         }
-
     }
-
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientSetup {
@@ -112,7 +96,7 @@ public class Winery
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                // Set render type here
+                // blocks
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.DEMIJOHN.get(), RenderType.cutout());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRUSHER.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.OAK_AGING_BARREL.get(), RenderType.solid());
@@ -120,6 +104,7 @@ public class Winery
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.ACACIA_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOTTLING_MACHINE.get(), RenderType.translucent());
 
+                // fluids
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_WINE.source().get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.WHITE_WINE.source().get(), RenderType.translucent());
             });
@@ -136,6 +121,8 @@ public class Winery
                     ModFluids.RED_WINE.fluidType().get());
             event.registerFluidType(((BaseFluidType) ModFluids.WHITE_WINE.fluidType().get()).getClientFluidTypeExtensions(),
                     ModFluids.WHITE_WINE.fluidType().get());
+            event.registerFluidType(((BaseFluidType) ModFluids.POTATO_WASH.fluidType().get()).getClientFluidTypeExtensions(),
+                    ModFluids.POTATO_WASH.fluidType().get());
         }
     }
 }

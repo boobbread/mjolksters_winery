@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mjolksters_winery:source_red_wine",
+    "mjolksters_winery:source_white_wine",
+    "mjolksters_winery:flowing_red_wine",
+    "mjolksters_winery:flowing_white_wine"
+  ]
+}
