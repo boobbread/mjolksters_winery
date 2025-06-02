@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_planks"
+    },
+    "B": {
+      "item": "minecraft:barrel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "mjolksters_winery:acacia_aging_barrel"
+  },
+  "group": "winery"
+}

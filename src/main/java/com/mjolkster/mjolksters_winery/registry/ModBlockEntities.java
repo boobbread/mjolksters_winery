@@ -1,0 +1,46 @@
+package com.mjolkster.mjolksters_winery.registry;
+
+import com.mjolkster.mjolksters_winery.Winery;
+import com.mjolkster.mjolksters_winery.block.entity.AgingBarrelBlockEntity;
+import com.mjolkster.mjolksters_winery.block.entity.BottlingMachineBlockEntity;
+import com.mjolkster.mjolksters_winery.block.entity.CrusherBlockEntity;
+import com.mjolkster.mjolksters_winery.block.entity.DemijohnBlockEntity;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
+
+public class ModBlockEntities {
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Winery.MODID);
+
+    public static final Supplier<BlockEntityType<DemijohnBlockEntity>> DEMIJOHN_BE =
+            BLOCK_ENTITIES.register("demijohn_be", () -> BlockEntityType.Builder.of(
+                    DemijohnBlockEntity::new, ModBlocks.DEMIJOHN.get()).build(null)
+            );
+
+    public static final Supplier<BlockEntityType<CrusherBlockEntity>> CRUSHER_BE =
+            BLOCK_ENTITIES.register("crusher_be", () -> BlockEntityType.Builder.of(
+                    CrusherBlockEntity::new, ModBlocks.CRUSHER.get()).build(null)
+            );
+
+    public static final Supplier<BlockEntityType<AgingBarrelBlockEntity>> AGING_BARREL_BE =
+            BLOCK_ENTITIES.register("aging_barrel_be", () -> BlockEntityType.Builder.of(
+                    AgingBarrelBlockEntity::new,
+                    ModBlocks.OAK_AGING_BARREL.get(),
+                    ModBlocks.SPRUCE_AGING_BARREL.get(),
+                    ModBlocks.ACACIA_AGING_BARREL.get()
+                    ).build(null)
+            );
+
+    public static final Supplier<BlockEntityType<BottlingMachineBlockEntity>> BOTTLING_MACHINE_BE =
+            BLOCK_ENTITIES.register("bottling_machine_be", () -> BlockEntityType.Builder.of(
+                    BottlingMachineBlockEntity::new, ModBlocks.BOTTLING_MACHINE.get()).build(null)
+            );
+
+    public static void register(IEventBus eventBus) {
+        BLOCK_ENTITIES.register(eventBus);
+    }
+}

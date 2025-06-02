@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mjolksters_winery:block/acacia_aging_barrel"
+    },
+    "facing=south": {
+      "model": "mjolksters_winery:block/acacia_aging_barrel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mjolksters_winery:block/acacia_aging_barrel",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "mjolksters_winery:block/acacia_aging_barrel",
+      "y": 90
+    }
+  }
+}

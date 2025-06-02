@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "mjolksters_winery:demijohn"
+  },
+  "group": "winery"
+}

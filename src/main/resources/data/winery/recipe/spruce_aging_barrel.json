@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:spruce_planks"
+    },
+    "B": {
+      "item": "minecraft:barrel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "mjolksters_winery:spruce_aging_barrel"
+  },
+  "group": "winery"
+}

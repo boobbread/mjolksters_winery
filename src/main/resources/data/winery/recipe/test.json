@@ -1,0 +1,11 @@
+{
+  "type": "mjolksters_winery:demijohn",
+  "id": "mjolksters_winery:test",
+  "ingredient1": { "item": "minecraft:water_bucket" },
+  "ingredient2": { "item": "minecraft:sugar" },
+  "ingredient3": { "item": "minecraft:sweet_berries" },
+  "result": {
+    "id": "mjolksters_winery:source_red_wine",
+    "amount": 1000
+  }
+}

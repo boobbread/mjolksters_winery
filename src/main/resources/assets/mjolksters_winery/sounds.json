@@ -1,0 +1,12 @@
+{
+  "demijohn_open" : {
+    "subtitle": "sounds.mjolksters_winery.demijohn_open",
+    "sounds" : [
+      {
+        "name": "mjolksters_winery:demijohn_open",
+        "pitch": 0.8
+      }
+
+    ]
+  }
+}

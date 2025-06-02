@@ -1,0 +1,35 @@
+
+{
+  "variants": {
+    "facing=north,in_use=false": {
+      "model": "mjolksters_winery:block/bottling_machine"
+    },
+    "facing=south,in_use=false": {
+      "model": "mjolksters_winery:block/bottling_machine",
+      "y": 180
+    },
+    "facing=west,in_use=false": {
+      "model": "mjolksters_winery:block/bottling_machine",
+      "y": 270
+    },
+    "facing=east,in_use=false": {
+      "model": "mjolksters_winery:block/bottling_machine",
+      "y": 90
+    },
+    "facing=north,in_use=true": {
+      "model": "mjolksters_winery:block/bottling_machine_in_use"
+    },
+    "facing=south,in_use=true": {
+      "model": "mjolksters_winery:block/bottling_machine_in_use",
+      "y": 180
+    },
+    "facing=west,in_use=true": {
+      "model": "mjolksters_winery:block/bottling_machine_in_use",
+      "y": 270
+    },
+    "facing=east,in_use=true": {
+      "model": "mjolksters_winery:block/bottling_machine_in_use",
+      "y": 90
+    }
+  }
+}
