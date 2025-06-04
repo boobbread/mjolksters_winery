@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "mjolksters_winery:block/crusher"
+    },
+    "facing=south": {
+      "model": "mjolksters_winery:block/crusher",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mjolksters_winery:block/crusher",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "mjolksters_winery:block/crusher",
+      "y": 90
     }
   }
 }

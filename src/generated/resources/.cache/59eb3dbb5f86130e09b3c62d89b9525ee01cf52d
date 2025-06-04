@@ -1,5 +1,7 @@
-// 1.21.1	2025-05-30T17:31:24.0143679	Loot Tables
-7f9d3c2ff384cc2411eeed2d3eea82d81cf1e0fa data/mjolksters_winery/loot_table/blocks/aging_barrel.json
+// 1.21.1	2025-06-03T20:36:11.308355	Loot Tables
+99eb4106d8d4e52512af02fb0662232a5d3dabf0 data/mjolksters_winery/loot_table/blocks/acacia_aging_barrel.json
+5ed4a97485d210cf28eec7807721deff1e1db662 data/mjolksters_winery/loot_table/blocks/bottling_machine.json
 6cac22d3dfa83e8c254a05fb339307669ac8a95b data/mjolksters_winery/loot_table/blocks/crusher.json
 6533f2b2ebb023dbcae8a1a4b464642ece197a09 data/mjolksters_winery/loot_table/blocks/demijohn.json
-f7b267a2a4a83b028bfa1b33186a5f88f1cd684f data/mjolksters_winery/loot_table/blocks/fermenter.json
+5b9e17000a957a1d49e113863ad0c91ac42b909a data/mjolksters_winery/loot_table/blocks/oak_aging_barrel.json
+a2782cfdb99b572d3016623ba58a464bf41f8386 data/mjolksters_winery/loot_table/blocks/spruce_aging_barrel.json

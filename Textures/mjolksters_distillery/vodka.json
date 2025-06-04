@@ -1,0 +1,10 @@
+{
+  "type": "mjolksters_winery:distiller",
+  "ingredient": {
+    "fluid": "mjolksters_winery:source_potato_wash",
+    "amount": 1000},
+  "result": {
+    "id": "mjolksters_winery:source_red_wine",
+    "amount": 250
+  }
+}

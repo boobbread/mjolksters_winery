@@ -14,9 +14,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.joml.Vector3f;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModFluids {
+    public static final List<WineryFluid> WINERY_FLUIDS = new ArrayList<>();
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(BuiltInRegistries.FLUID, Winery.MODID);
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, Winery.MODID);
 
@@ -25,14 +28,12 @@ public class ModFluids {
     public static final ResourceLocation WATER_FLOWING_RL = ResourceLocation.parse("block/water_flow");
     public static final ResourceLocation WATER_OVERLAY_RL = ResourceLocation.parse("block/water_overlay");
 
-    public static final ResourceLocation MASH_OVERLAY_RL = ResourceLocation.parse("block/water_overlay");
-
     // register wines here
     public static final WineryFluid RED_WINE = registerWineFluid("red_wine", 0xFF5B0000, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.RED_WINE_BUCKET);
     public static final WineryFluid WHITE_WINE = registerWineFluid("white_wine", 0xFFFFE9AA, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.WHITE_WINE_BUCKET);
 
-    // register washes here
-    public static final WineryFluid POTATO_WASH = registerWashFluid("potato_wash", 0xFFBA9C45, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.POTATO_WASH_BUCKET);
+    // register juices here
+    public static final WineryFluid JUICE = registerJuiceFluid("juice", 0xFFFFFFFF, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.JUICE_BUCKET);
 
     private static Supplier<FluidType> registerFluidType(String name, FluidType fluidType) {
         return FLUID_TYPES.register(name, () -> fluidType);
@@ -55,11 +56,14 @@ public class ModFluids {
         source[0] = FLUIDS.register("source_" + name, () -> new BaseFlowingFluid.Source(properties));
         flowingFluid[0] = FLUIDS.register("flowing_" + name, () -> new BaseFlowingFluid.Flowing(properties));
 
+        WineryFluid fluid = new WineryFluid(fluidType, source[0], flowingFluid[0], properties);
+        WINERY_FLUIDS.add(fluid);
+
         return new WineryFluid(fluidType, source[0], flowingFluid[0], properties);
     }
 
-    private static WineryFluid registerWashFluid(String name, int color, ResourceLocation still, ResourceLocation flowing, ResourceLocation overlay, Supplier<Supplier<Item>> bucket) {
-        Supplier<FluidType> fluidType = registerFluidType(name + "_fluid",
+    private static WineryFluid registerJuiceFluid(String name, int color, ResourceLocation still, ResourceLocation flowing, ResourceLocation overlay, Supplier<Supplier<Item>> bucket) {
+        Supplier<FluidType> fluidType = registerFluidType(name + "_juice_fluid",
                 new BaseFluidType(still, flowing, overlay, color,
                         new Vector3f(108f / 255f, 168f / 255f, 212f / 255f),
                         FluidType.Properties.create()));
@@ -74,6 +78,9 @@ public class ModFluids {
 
         source[0] = FLUIDS.register("source_" + name, () -> new BaseFlowingFluid.Source(properties));
         flowingFluid[0] = FLUIDS.register("flowing_" + name, () -> new BaseFlowingFluid.Flowing(properties));
+
+        WineryFluid fluid = new WineryFluid(fluidType, source[0], flowingFluid[0], properties);
+        WINERY_FLUIDS.add(fluid);
 
         return new WineryFluid(fluidType, source[0], flowingFluid[0], properties);
     }

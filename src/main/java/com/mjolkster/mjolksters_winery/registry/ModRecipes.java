@@ -1,6 +1,7 @@
 package com.mjolkster.mjolksters_winery.registry;
 
 import com.mjolkster.mjolksters_winery.Winery;
+import com.mjolkster.mjolksters_winery.recipe.CrusherRecipe;
 import com.mjolkster.mjolksters_winery.recipe.DemijohnRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -25,6 +26,17 @@ public class ModRecipes {
         }
 
     });
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CrusherRecipe>> CRUSHER_SERIALISER =
+            SERIALISERS.register("crusher", CrusherRecipe.Serialiser::new);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<CrusherRecipe>> CRUSHER_TYPE =
+            TYPES.register("crusher", () -> new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return "crusher";
+                }
+
+            });
 
     public static void register(IEventBus eventBus) {
         SERIALISERS.register(eventBus);

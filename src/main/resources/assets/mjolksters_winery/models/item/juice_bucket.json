@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/bucket",
+  "textures":{
+    "layer0": "minecraft:item/bucket",
+    "layer1": "mjolksters_winery:item/juice_bucket_tint"
+  }
+}

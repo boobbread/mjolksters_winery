@@ -15,8 +15,9 @@ public class VoxelShapeHandler {
     public static final Map<String, Map<Direction, VoxelShape>> SHAPE_MAPS = new HashMap<>();
 
     static {
-        registerShapeMap("bottling_machine", makeDirectionalShapes(new AABB(1/16.0, 0, 8/16.0, 15/16.0, 11/16.0, 1.0)));
-        registerShapeMap("aging_barrel", makeDirectionalShapes(new AABB(2/16.0, 0, 2/16.0, 14/16.0, 14/16.0, 1.0)));
+        registerShapeMap("bottling_machine", makeDirectionalShapes(new AABB(1 / 16.0, 0, 8 / 16.0, 15 / 16.0, 11 / 16.0, 1.0)));
+        registerShapeMap("aging_barrel", makeDirectionalShapes(new AABB(2 / 16.0, 0, 2 / 16.0, 14 / 16.0, 14 / 16.0, 1.0)));
+        registerShapeMap("crusher", makeDirectionalShapes(new AABB(3 / 16.0, 0, 3 / 16.0, 13 / 16.0, 9 / 16.0, 13 / 16.0)));
     }
 
     public static Map<Direction, VoxelShape> makeDirectionalShapes(AABB baseBox) {

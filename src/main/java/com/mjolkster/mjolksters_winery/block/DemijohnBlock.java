@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DemijohnBlock extends BaseEntityBlock {
 
-    public static final VoxelShape SHAPE = Block.box(2,0,2,14,12,14);
+    public static final VoxelShape SHAPE = Block.box(4,0,4,12,12,12);
     public static final MapCodec<DemijohnBlock> CODEC = simpleCodec(DemijohnBlock::new);
 
     public DemijohnBlock(Properties properties) {

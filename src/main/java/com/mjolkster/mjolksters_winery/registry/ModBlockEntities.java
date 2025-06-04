@@ -1,10 +1,7 @@
 package com.mjolkster.mjolksters_winery.registry;
 
 import com.mjolkster.mjolksters_winery.Winery;
-import com.mjolkster.mjolksters_winery.block.entity.AgingBarrelBlockEntity;
-import com.mjolkster.mjolksters_winery.block.entity.BottlingMachineBlockEntity;
-import com.mjolkster.mjolksters_winery.block.entity.CrusherBlockEntity;
-import com.mjolkster.mjolksters_winery.block.entity.DemijohnBlockEntity;
+import com.mjolkster.mjolksters_winery.block.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;

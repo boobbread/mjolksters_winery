@@ -1,6 +1,7 @@
 package com.mjolkster.mjolksters_winery.registry;
 
 import com.google.common.collect.Sets;
+import com.mjolkster.mjolksters_winery.item.JuiceBucketItem;
 import com.mjolkster.mjolksters_winery.Winery;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
@@ -27,11 +28,19 @@ public class ModItems {
     // utils
 
     public static Item.Properties basicItem() {
+
         return new Item.Properties();
     }
     public static Item.Properties drinkableItem() {
         return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
     }
+    public static Item.Properties grapeItem() {
+        return new Item.Properties().stacksTo(64);
+    }
+    public static Item.Properties yeastItem() {
+        return new Item.Properties().stacksTo(1);
+    }
+
 
     // block
 
@@ -54,8 +63,10 @@ public class ModItems {
             () -> new BucketItem(ModFluids.RED_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final Supplier<Item> WHITE_WINE_BUCKET = registerWithTab("white_wine_bucket",
             () -> new BucketItem(ModFluids.WHITE_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> POTATO_WASH_BUCKET = registerWithTab("potato_wash_bucket",
-            () -> new BucketItem(ModFluids.POTATO_WASH.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final Supplier<Item> JUICE_BUCKET = registerWithTab("juice_bucket",
+            () -> new JuiceBucketItem(ModFluids.JUICE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
 
     // bottles
 
@@ -63,4 +74,59 @@ public class ModItems {
             () -> new Item(drinkableItem()));
     public static final Supplier<Item> WHITE_WINE_BOTTLE = registerWithTab("white_wine_bottle",
             () -> new Item(drinkableItem()));
+
+    // grapes - red
+
+    public static final Supplier<Item> PINOT_NOIR = registerWithTab("pinot_noir_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> SANGIOVESE = registerWithTab("sangiovese_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> CABERNET_SAUVIGNON = registerWithTab("cabernet_sauvignon_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> TEMPRANILLO = registerWithTab("tempranillo_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> MOONDROP = registerWithTab("moondrop_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> RUBY_ROMAN = registerWithTab("ruby_roman_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> AUTUMN_ROYAL = registerWithTab("autumn_royal_grapes",
+            () -> new Item(grapeItem()));
+
+    // grapes - white
+
+    public static final Supplier<Item> RIESLING = registerWithTab("riesling_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> CHARDONNAY = registerWithTab("chardonnay_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> SAUVIGNON_BLANC = registerWithTab("sauvignon_blanc_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> PINOT_GRIGIO = registerWithTab("pinot_grigio_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> COTTON_CANDY = registerWithTab("cotton_candy_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> GRENACHE_BLANC = registerWithTab("grenache_blanc_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> WATERFALL = registerWithTab("waterfall_grapes",
+            () -> new Item(grapeItem()));
+
+    // grapes - special
+
+    public static final Supplier<Item> KOSHU = registerWithTab("koshu_grapes",
+            () -> new Item(grapeItem()));
+    public static final Supplier<Item> PINOT_DE_LENFER = registerWithTab("pinot_de_lenfer_grapes",
+            () -> new Item(grapeItem()));
+
+    // yeasts
+
+    public static final Supplier<Item> PASTEUR_RED = registerWithTab("pasteur_red_yeast",
+            () -> new Item(yeastItem()));
+    public static final Supplier<Item> MONTRACHE = registerWithTab("montrachet_yeast",
+            () -> new Item(yeastItem()));
+    public static final Supplier<Item> COTE_DES_BLANCS = registerWithTab("cote_des_blancs_yeast",
+            () -> new Item(yeastItem()));
+    public static final Supplier<Item> PREMIER_CUVEE = registerWithTab("premier_cuvee_yeast",
+            () -> new Item(yeastItem()));
+    public static final Supplier<Item> CHAMPAGNE = registerWithTab("champagne_yeast",
+            () -> new Item(yeastItem()));
+
 }

@@ -1,5 +1,6 @@
 package com.mjolkster.mjolksters_winery;
 
+import com.mjolkster.mjolksters_winery.codec.JuiceType;
 import com.mjolkster.mjolksters_winery.registry.*;
 import com.mjolkster.mjolksters_winery.util.renderer.BottlingMachineBlockRenderer;
 import com.mjolkster.mjolksters_winery.util.renderer.DemijohnBlockRenderer;
@@ -8,12 +9,25 @@ import com.mjolkster.mjolksters_winery.screen.AgingBarrelScreen;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineScreen;
 import com.mjolkster.mjolksters_winery.screen.DemijohnScreen;
 import com.mjolkster.mjolksters_winery.util.TooltipHandler;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.model.BakedModelWrapper;
+import net.neoforged.neoforge.client.model.CompositeModel;
+import net.neoforged.neoforge.fluids.FluidType;
+import org.checkerframework.checker.units.qual.N;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -29,8 +43,10 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod(Winery.MODID)
 public class Winery
@@ -45,6 +61,7 @@ public class Winery
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(TooltipHandler.class);
 
+
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
@@ -57,6 +74,8 @@ public class Winery
 
         ModFluids.FLUIDS.register(modEventBus);
         ModFluids.FLUID_TYPES.register(modEventBus);
+
+
 
         ModDataComponents.register(modEventBus);
 
@@ -105,24 +124,67 @@ public class Winery
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOTTLING_MACHINE.get(), RenderType.translucent());
 
                 // fluids
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.RED_WINE.source().get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.WHITE_WINE.source().get(), RenderType.translucent());
+                for (ModFluids.WineryFluid fluid : ModFluids.WINERY_FLUIDS) {
+                    ItemBlockRenderTypes.setRenderLayer(fluid.source().get(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluid.flowing().get(), RenderType.translucent());
+                }
             });
-
         }
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(ModBlockEntities.DEMIJOHN_BE.get(), DemijohnBlockRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.BOTTLING_MACHINE_BE.get(), BottlingMachineBlockRenderer::new);
         }
+
         @SubscribeEvent
         public static void onClientExtensions(RegisterClientExtensionsEvent event) {
-            event.registerFluidType(((BaseFluidType) ModFluids.RED_WINE.fluidType().get()).getClientFluidTypeExtensions(),
-                    ModFluids.RED_WINE.fluidType().get());
-            event.registerFluidType(((BaseFluidType) ModFluids.WHITE_WINE.fluidType().get()).getClientFluidTypeExtensions(),
-                    ModFluids.WHITE_WINE.fluidType().get());
-            event.registerFluidType(((BaseFluidType) ModFluids.POTATO_WASH.fluidType().get()).getClientFluidTypeExtensions(),
-                    ModFluids.POTATO_WASH.fluidType().get());
+            for (ModFluids.WineryFluid fluid : ModFluids.WINERY_FLUIDS) {
+                FluidType type = fluid.fluidType().get();
+                if (type instanceof BaseFluidType baseType) {
+                    event.registerFluidType(baseType.getClientFluidTypeExtensions(), type);
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void registerItemColours(RegisterColorHandlersEvent.Item event) {
+            event.register((stack, tintIndex) -> {
+                if (tintIndex == 1) {
+                    JuiceType data = stack.get(ModDataComponents.JUICE_TYPE.get());
+
+                    if (data != null) {
+                        return data.colour();
+                    }
+
+                }
+                return -1;
+            }, ModItems.JUICE_BUCKET.get());
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

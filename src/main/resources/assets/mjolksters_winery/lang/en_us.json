@@ -7,11 +7,39 @@
   "block.mjolksters_winery.acacia_aging_barrel": "Acacia Aging Barrel",
   "block.mjolksters_winery.bottling_machine": "Auto Bottler",
 
-  "item.mjolksters_winery.red_wine_bucket": "Bucket of Red Wine",
-  "item.mjolksters_winery.white_wine_bucket": "Bucket of White Wine",
-  "item.mjolksters_winery.potato_wash_bucket": "Bucket of Potato Wash",
   "item.mjolksters_winery.red_wine_bottle": "Red Wine Bottle",
   "item.mjolksters_winery.white_wine_bottle": "White Wine Bottle",
+
+  "item.mjolksters_winery.red_wine_bucket": "Bucket of Red Wine",
+  "item.mjolksters_winery.white_wine_bucket": "Bucket of White Wine",
+
+  "item.mjolksters_winery.juice_bucket": "%s Juice Bucket",
+  "item.mjolksters_winery.juice_bucket.empty": "Empty Juice Bucket",
+
+  "item.mjolksters_winery.pinot_noir_grapes": "Pinot Noir Grapes",
+  "item.mjolksters_winery.sangiovese_grapes": "Sangiovese Grapes",
+  "item.mjolksters_winery.cabernet_sauvignon_grapes": "Cabernet Sauvignon Grapes",
+  "item.mjolksters_winery.tempranillo_grapes": "Tempranillo Grapes",
+  "item.mjolksters_winery.moondrop_grapes": "Moondrop Grapes",
+  "item.mjolksters_winery.autumn_royal_grapes": "Autumn Royal Grapes",
+  "item.mjolksters_winery.ruby_roman_grapes": "Ruby Roman Grapes",
+
+  "item.mjolksters_winery.riesling_grapes": "Riesling Grapes",
+  "item.mjolksters_winery.chardonnay_grapes": "Chardonnay Grapes",
+  "item.mjolksters_winery.sauvignon_blanc_grapes": "Sauvignon Blanc Grapes",
+  "item.mjolksters_winery.pinot_grigio_grapes": "Pinot Grigio Grapes",
+  "item.mjolksters_winery.cotton_candy_grapes": "Cotton Candy Grapes",
+  "item.mjolksters_winery.grenache_blanc_grapes": "Grenache Blanc Grapes",
+  "item.mjolksters_winery.waterfall_grapes": "Waterfall Grapes",
+
+  "item.mjolksters_winery.koshu_grapes": "Koshu Grapes",
+  "item.mjolksters_winery.pinot_de_lenfer_grapes": "Pinot des L'enfer grapes",
+
+  "item.mjolksters_winery.pasteur_red_yeast": "Pasteur Red Yeast",
+  "item.mjolksters_winery.montrachet_yeast": "Montrachet Yeast",
+  "item.mjolksters_winery.cote_des_blancs_yeast": "Cote des Blancs Yeast",
+  "item.mjolksters_winery.premier_cuvee_yeast": "Premier Cuvee Yeast",
+  "item.mjolksters_winery.champagne_yeast": "Champagne Yeast",
 
   "itemGroup.mjolksters_winery": "Mjolkster's Winery"
 }

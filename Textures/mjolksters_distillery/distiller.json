@@ -1,0 +1,20 @@
+
+{
+  "variants": {
+    "facing=north": {
+      "model": "mjolksters_winery:block/distiller"
+    },
+    "facing=south": {
+      "model": "mjolksters_winery:block/distiller",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mjolksters_winery:block/distiller",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "mjolksters_winery:block/distiller",
+      "y": 90
+    }
+  }
+}

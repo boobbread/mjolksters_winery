@@ -1,10 +1,5 @@
 package com.mjolkster.mjolksters_winery.recipe;
 
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.entity.player.StackedContents;

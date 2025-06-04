@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mjolksters_winery:item/sauvignon_blanc_grapes"
+  }
+}
