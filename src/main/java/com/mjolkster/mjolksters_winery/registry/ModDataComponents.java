@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery.registry;
 
-import com.mjolkster.mjolksters_winery.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;

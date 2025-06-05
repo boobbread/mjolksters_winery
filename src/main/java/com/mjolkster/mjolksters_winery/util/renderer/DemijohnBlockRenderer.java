@@ -50,9 +50,7 @@ public class DemijohnBlockRenderer implements BlockEntityRenderer<DemijohnBlockE
             return;
         }
 
-        FluidType type = fluid.getFluidType();
-        IClientFluidTypeExtensions cExt = IClientFluidTypeExtensions.of(type);
-        int argb = cExt.getTintColor(fluid);
+        int argb = be.inputJuiceColour;
 
         float a = 1.0f;
         float r = ((argb >> 16) & 0xFF) / 255.0f;

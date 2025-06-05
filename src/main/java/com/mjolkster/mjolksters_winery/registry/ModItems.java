@@ -3,6 +3,7 @@ package com.mjolkster.mjolksters_winery.registry;
 import com.google.common.collect.Sets;
 import com.mjolkster.mjolksters_winery.item.JuiceBucketItem;
 import com.mjolkster.mjolksters_winery.Winery;
+import com.mjolkster.mjolksters_winery.item.WineBucketItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
@@ -22,6 +23,11 @@ public class ModItems {
     public static Supplier<Item> registerWithTab(final String name, final Supplier<Item> supplier) {
         Supplier<Item> block = ITEMS.register(name, supplier);
         CREATIVE_TAB_ITEMS.add(block);
+        return block;
+    }
+
+    public static Supplier<Item> registerWithoutTab(final String name, final Supplier<Item> supplier) {
+        Supplier<Item> block = ITEMS.register(name, supplier);
         return block;
     }
 
@@ -59,14 +65,10 @@ public class ModItems {
 
     // buckets
 
-    public static final Supplier<Item> RED_WINE_BUCKET = registerWithTab("red_wine_bucket",
-            () -> new BucketItem(ModFluids.RED_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> WHITE_WINE_BUCKET = registerWithTab("white_wine_bucket",
-            () -> new BucketItem(ModFluids.WHITE_WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-
-    public static final Supplier<Item> JUICE_BUCKET = registerWithTab("juice_bucket",
+    public static final Supplier<Item> JUICE_BUCKET = registerWithoutTab("juice_bucket",
             () -> new JuiceBucketItem(ModFluids.JUICE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-
+    public static final Supplier<Item> WINE_BUCKET = registerWithoutTab("wine_bucket",
+            () -> new WineBucketItem(ModFluids.WINE.source().get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // bottles
 

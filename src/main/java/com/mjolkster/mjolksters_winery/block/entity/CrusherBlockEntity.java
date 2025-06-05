@@ -1,7 +1,6 @@
 package com.mjolkster.mjolksters_winery.block.entity;
 
-import com.mjolkster.mjolksters_winery.codec.JuiceType;
-import com.mjolkster.mjolksters_winery.item.JuiceBucketItem;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
@@ -41,6 +40,7 @@ public class CrusherBlockEntity extends BlockEntity {
 
     private String grapeType = "";
     private int grapeColour = 0xFFFFFFFF;
+    private boolean isCrusherEmpty = true;
 
     private static final Map<Item, JuiceType> GRAPE_JUICE_MAP = new HashMap<>();
     static {
@@ -177,16 +177,6 @@ public class CrusherBlockEntity extends BlockEntity {
     private ItemInteractionResult extractJuice(Player player, InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
 
-        // Allow any juice bucket (empty)
-        if (!(heldItem.getItem() instanceof JuiceBucketItem)) {
-            return ItemInteractionResult.FAIL;
-        }
-
-        // Check if bucket is empty (no juice type component)
-        if (heldItem.get(JUICE_TYPE.get()) != null) {
-            return ItemInteractionResult.FAIL;
-        }
-
         if (!fluidTank.isEmpty() && fluidTank.getFluidAmount() >= FluidType.BUCKET_VOLUME) {
             ItemStack filledContainer = fillContainer(heldItem);
             if (filledContainer.isEmpty()) {
@@ -204,16 +194,20 @@ public class CrusherBlockEntity extends BlockEntity {
                 player.getInventory().add(filledContainer.copy());
             }
 
+            this.grapeColour = 0;
+            this.grapeType = "";
+
             level.playSound(null, worldPosition, SoundEvents.BUCKET_FILL,
                     SoundSource.BLOCKS, 0.8f, 1.0f);
             setChanged();
+            onDrained();
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         return ItemInteractionResult.FAIL;
     }
 
     private ItemStack fillContainer(ItemStack heldItem) {
-        if (heldItem.is(ModItems.JUICE_BUCKET.get())) {
+        if (heldItem.is(Items.BUCKET)) {
             FluidStack drained = fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
             if (drained.getAmount() == FluidType.BUCKET_VOLUME) {
                 fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
@@ -238,7 +232,13 @@ public class CrusherBlockEntity extends BlockEntity {
     }
 
     private boolean isExtractableContainer(ItemStack stack) {
-        return stack.getItem() instanceof JuiceBucketItem;
+        return stack.is(Items.BUCKET);
+    }
+
+    private void onDrained() {
+        if (fluidTank.isEmpty()) {
+            this.isCrusherEmpty = true;
+        } else {this.isCrusherEmpty = false;}
     }
 
     @Override

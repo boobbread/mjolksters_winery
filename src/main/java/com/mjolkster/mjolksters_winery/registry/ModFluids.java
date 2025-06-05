@@ -29,8 +29,7 @@ public class ModFluids {
     public static final ResourceLocation WATER_OVERLAY_RL = ResourceLocation.parse("block/water_overlay");
 
     // register wines here
-    public static final WineryFluid RED_WINE = registerWineFluid("red_wine", 0xFF5B0000, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.RED_WINE_BUCKET);
-    public static final WineryFluid WHITE_WINE = registerWineFluid("white_wine", 0xFFFFE9AA, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.WHITE_WINE_BUCKET);
+    public static final WineryFluid WINE = registerWineFluid("wine", 0xFFFFFFFF, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.WINE_BUCKET);
 
     // register juices here
     public static final WineryFluid JUICE = registerJuiceFluid("juice", 0xFFFFFFFF, WATER_STILL_RL, WATER_FLOWING_RL, WATER_OVERLAY_RL, () -> ModItems.JUICE_BUCKET);

@@ -1,10 +1,12 @@
 package com.mjolkster.mjolksters_winery.block.entity;
 
+import com.mjolkster.mjolksters_winery.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineMenu;
 import com.mjolkster.mjolksters_winery.tag.CommonTags;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -42,10 +44,8 @@ import java.util.function.Supplier;
 
 import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.FACING;
 import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.IN_USE;
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_AGE;
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WOOD_TYPE;
-import static com.mjolkster.mjolksters_winery.registry.ModFluids.RED_WINE;
-import static com.mjolkster.mjolksters_winery.registry.ModFluids.WHITE_WINE;
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.*;
+import static com.mjolkster.mjolksters_winery.registry.ModFluids.WINE;
 
 public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvider {
     public final FluidTank fluidTank = new FluidTank(FluidType.BUCKET_VOLUME, this::isFluidValid) {
@@ -86,6 +86,8 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
 
     private String woodType = "";
     private int wineAge = 0;
+    public int inputWineColour = 0;
+    private String inputWineName = "";
 
     public float fillProgress = 0;
 
@@ -100,16 +102,7 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
                 return switch (i) {
                     case 0 -> fluidTank.getFluidAmount();
                     case 1 -> fluidTank.getCapacity();
-                    case 2 -> {
-                        FluidStack fluid = fluidTank.getFluid();
-                        if (!fluid.isEmpty()) {
-                            FluidType type = fluid.getFluid().getFluidType();
-                            IClientFluidTypeExtensions cExt = IClientFluidTypeExtensions.of(type);
-                            yield cExt.getTintColor();
-                        }
-                        yield 0xFFFFFFFF;
-
-                    }
+                    case 2 -> inputWineColour;
                     default -> 0;
                 };
             }
@@ -127,12 +120,10 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
 
     public ItemInteractionResult onBucketUse(Player player, InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-        Optional<FluidStack> contained = FluidUtil.getFluidContained(heldItem);
+        FluidStack fluidStack = new FluidStack(ModFluids.WINE.source().get(), FluidType.BUCKET_VOLUME);
 
-        if (contained.isPresent()) {
-            this.wineAge = heldItem.getOrDefault(WINE_AGE.get(),0);
-            this.woodType = heldItem.getOrDefault(WOOD_TYPE.get(), "none");
-        }
+        this.wineAge = heldItem.getOrDefault(WINE_AGE.get(),0);
+        this.woodType = heldItem.getOrDefault(WOOD_TYPE.get(), "none");
 
         System.out.print("Wine Age " + wineAge + "Wood Type " + woodType);
         // 1. Handle extracting fluid into an empty bucket
@@ -143,11 +134,11 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
                     return ItemInteractionResult.FAIL;
                 }
             }
-        } else if (contained.isPresent()) {
-            FluidStack fluidStack = contained.get();
+        } else if (heldItem.getItem() instanceof WineBucketItem) {
             if (fluidTank.isFluidValid(fluidStack)) {
                 int filledAmount = fluidTank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
                 if (filledAmount == FluidType.BUCKET_VOLUME) {
+                    getInfo(heldItem);
 
                     heldItem.shrink(1);
                     ItemStack emptyBucket = new ItemStack(Items.BUCKET);
@@ -164,6 +155,18 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         }
 
         return ItemInteractionResult.FAIL;
+    }
+
+    private void getInfo(ItemStack heldItem) {
+        if (!heldItem.isEmpty()) {
+            JuiceType nullJuiceType = new JuiceType(0xFFFFFFFF,"none");
+            JuiceType juiceType = heldItem.getOrDefault(JUICE_TYPE.get(), nullJuiceType);
+            this.inputWineColour = juiceType.colour();
+            this.inputWineName = juiceType.name();
+
+            System.out.print("Juice Colour " + inputWineColour);
+            System.out.print("Juice Name " + inputWineName);
+        }
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
@@ -218,8 +221,7 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private static final Map<Fluid, Supplier<Item>> FLUID_TO_BOTTLE = Map.of(
-            RED_WINE.source().get(), ModItems.RED_WINE_BOTTLE,
-            ModFluids.WHITE_WINE.source().get(), ModItems.WHITE_WINE_BOTTLE
+            WINE.source().get(), ModItems.RED_WINE_BOTTLE
     );
 
     private boolean isOutputEmpty() {
@@ -231,10 +233,12 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         ItemStack input = inventory.getStackInSlot(BOTTLE_INPUT_SLOT);
         ItemStack output = inventory.getStackInSlot(BOTTLE_OUTPUT_SLOT);
         FluidStack fluid = fluidTank.getFluid();
+        JuiceType data = new JuiceType(inputWineColour, inputWineName);
 
         DataComponentPatch agedComponents = DataComponentPatch.builder()
                 .set(WINE_AGE.get(), wineAge)
                 .set(WOOD_TYPE.get(), woodType)
+                .set(JUICE_TYPE.get(), data)
                 .build();
 
         if (fluid.isEmpty() || input.isEmpty() || output.getCount() >= output.getMaxStackSize()) {
@@ -327,6 +331,8 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         pTag.putFloat("bottling_machine.fill_progress", fillProgress);
         pTag.putInt("bottling_machine.wine_age", wineAge);
         pTag.putString("bottling_machine.wood_type", woodType);
+        pTag.putInt("inputWineColour", inputWineColour);
+        pTag.putString("inputWineName", inputWineName);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -344,6 +350,8 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         fillProgress = pTag.getFloat("bottling_machine.fill_progress");
         wineAge = pTag.getInt("bottling_machine.wine_age");
         woodType = pTag.getString("bottling_machine.wood_type");
+        inputWineColour = pTag.getInt("inputWineColour");
+        inputWineName = pTag.getString("inputWineName");
     }
 
     @Override

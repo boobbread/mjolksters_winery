@@ -1,7 +1,10 @@
 package com.mjolkster.mjolksters_winery.block.entity;
 
+import com.mjolkster.mjolksters_winery.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
+import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.screen.AgingBarrelMenu;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -33,8 +36,7 @@ import javax.annotation.Nullable;
 
 import java.util.Optional;
 
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_AGE;
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WOOD_TYPE;
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.*;
 
 public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider {
     public final FluidTank fluidTank = new FluidTank(4* FluidType.BUCKET_VOLUME, this::isFluidValid) {
@@ -49,6 +51,8 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
     protected final ContainerData data;
 
     public int gameTime = 0;
+    public int inputWineColour = 0;
+    public String inputWineName = "";
 
     public AgingBarrelBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.AGING_BARREL_BE.get(), pos, blockState);
@@ -64,15 +68,7 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
                     case 1 -> fluidTank.getCapacity();
                     case 2 -> gameTime;
                     case 3 -> (int)AgingBarrelBlockEntity.this.insertTime;
-                    case 4 -> {
-                        FluidStack fluid = fluidTank.getFluid();
-                        if (!fluid.isEmpty()) {
-                            FluidType type = fluid.getFluid().getFluidType();
-                            IClientFluidTypeExtensions cExt = IClientFluidTypeExtensions.of(type);
-                            yield cExt.getTintColor();
-                        }
-                        yield 0xFFFFFFFF; // Default to white if no fluid
-                    }
+                    case 4 -> inputWineColour;
                     default -> 0;
                 };
             }
@@ -110,7 +106,6 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
 
     public ItemInteractionResult onBucketUse(Player player, InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-        Optional<FluidStack> contained = FluidUtil.getFluidContained(heldItem);
         // 1. Handle extracting fluid into an empty bucket
         if (heldItem.is(Items.BUCKET)) {
             if (!fluidTank.isEmpty()) {
@@ -118,10 +113,12 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
                 if (!drained.isEmpty()) {
                     long ageInTicks = level.getGameTime() - insertTime;
                     String state = getBlockState().toString();
+                    JuiceType data = new JuiceType(inputWineColour, inputWineName);
 
                     DataComponentPatch agedComponents = DataComponentPatch.builder()
                             .set(WINE_AGE.get(), (int)ageInTicks)
                             .set(WOOD_TYPE.get(), state)
+                            .set(JUICE_TYPE.get(), data)
                             .build();
 
                     FluidStack agedDrained = new FluidStack(
@@ -147,11 +144,13 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
                     return ItemInteractionResult.sidedSuccess(level.isClientSide());
                 }
             }
-        } else if (contained.isPresent()) {
-            FluidStack fluidStack = contained.get();
+        } else if (heldItem.getItem() instanceof WineBucketItem) {
+            FluidStack fluidStack = new FluidStack(ModFluids.WINE.source().get(), FluidType.BUCKET_VOLUME);
             if (fluidTank.isFluidValid(fluidStack)) {
                 int filledAmount = fluidTank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
                 if (filledAmount == FluidType.BUCKET_VOLUME) {
+
+                    getInfo(heldItem);
 
                     assert level != null;
                     this.insertTime = level.getGameTime();
@@ -173,12 +172,26 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
         return ItemInteractionResult.FAIL;
     }
 
+    private void getInfo(ItemStack heldItem) {
+        if (!heldItem.isEmpty()) {
+            JuiceType nullJuiceType = new JuiceType(0xFFFFFFFF,"none");
+            JuiceType juiceType = heldItem.getOrDefault(JUICE_TYPE.get(), nullJuiceType);
+            this.inputWineColour = juiceType.colour();
+            this.inputWineName = juiceType.name();
+
+            System.out.print("Juice Colour " + inputWineColour);
+            System.out.print("Juice Name " + inputWineName);
+        }
+    }
+
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
 
         CompoundTag fluidTag = new CompoundTag();
         fluidTank.writeToNBT(pRegistries, fluidTag);
         pTag.put("fluidTank", fluidTag);
+        pTag.putInt("inputWineColour", inputWineColour);
+        pTag.putString("inputWineName", inputWineName);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -190,6 +203,9 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
         if (pTag.contains("fluidTank")) {
             fluidTank.readFromNBT(pRegistries, pTag.getCompound("fluidTank"));
         }
+
+        inputWineColour = pTag.getInt("inputWineColour");
+        inputWineName = pTag.getString("inputWineName");
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {

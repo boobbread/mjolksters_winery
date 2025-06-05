@@ -2,9 +2,11 @@ package com.mjolkster.mjolksters_winery.block.entity;
 
 import com.mjolkster.mjolksters_winery.recipe.DemijohnRecipe;
 import com.mjolkster.mjolksters_winery.recipe.DemijohnRecipeInput;
+import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.registry.ModRecipes;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.DemijohnMenu;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -34,6 +36,8 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
+
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.JUICE_TYPE;
 
 
 public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
@@ -67,6 +71,9 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
     private boolean hasInitialItem = false;
     private boolean hasCraftingFinished = false;
+
+    public String inputJuiceName = "";
+    public int inputJuiceColour = 0;
 
     public DemijohnBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.DEMIJOHN_BE.get(), pos, blockState);
@@ -109,27 +116,29 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public ItemInteractionResult onBucketUse(Player player, InteractionHand hand) {
-        ItemStack heldItem = player.getItemInHand(hand);
-
-        // Try to fill a bucket
-        // Early exit if not a bucket
-        if (!heldItem.is(Items.BUCKET)) {
-            return ItemInteractionResult.FAIL;
-        }
-
         // Check if we can extract fluid
         if (!fluidTank.isEmpty() && hasCraftingFinished) {
-            FluidStack drained = fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
-            if (!drained.isEmpty()) {
+            ItemStack heldItem = player.getItemInHand(hand);
 
-                // Perform extraction
-                fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-                heldItem.shrink(1);
+            if (!(heldItem.is(Items.BUCKET))) {
+                return ItemInteractionResult.FAIL;
+            }
 
-                // Give filled bucket
-                ItemStack filledBucket = drained.getFluid().getBucket().getDefaultInstance();
-                if (!player.getInventory().add(filledBucket)) {
-                    player.drop(filledBucket, false);
+            if (!fluidTank.isEmpty() && fluidTank.getFluidAmount() >= FluidType.BUCKET_VOLUME) {
+                ItemStack filledContainer = fillContainer(heldItem);
+                if (filledContainer.isEmpty()) {
+                    return ItemInteractionResult.FAIL;
+                }
+
+                if (!player.isCreative()) {
+                    heldItem.shrink(1);
+                    if (heldItem.isEmpty()) {
+                        player.setItemInHand(hand, filledContainer);
+                    } else {
+                        player.getInventory().add(filledContainer);
+                    }
+                } else {
+                    player.getInventory().add(filledContainer.copy());
                 }
 
                 setChanged();
@@ -139,6 +148,23 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             }
         }
         return ItemInteractionResult.FAIL;
+    }
+
+    private ItemStack fillContainer(ItemStack heldItem) {
+        if (heldItem.is(Items.BUCKET)) {
+            FluidStack drained = fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
+            if (drained.getAmount() == FluidType.BUCKET_VOLUME) {
+                fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+                ItemStack filledBucket = new ItemStack(ModItems.WINE_BUCKET.get());
+
+                JuiceType juiceType = new JuiceType(inputJuiceColour, inputJuiceName);
+                System.out.println("Setting juice type: " + juiceType.name() + ", Color: " + juiceType.colour());
+                filledBucket.set(JUICE_TYPE.get(), juiceType);
+
+                return filledBucket;
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     private void fillToMax() {
@@ -179,6 +205,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
         pTag.putInt("demijohn.progress", progress);
         pTag.putInt("demijohn.max_progress", maxProgress);
+        pTag.putString("inputJuiceName", inputJuiceName);
+        pTag.putInt("inputJuiceColour", inputJuiceColour);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -195,6 +223,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
         progress = pTag.getInt("demijohn.progress");
         maxProgress = pTag.getInt("demijohn.max_progress");
+        inputJuiceName = pTag.getString("inputJuiceName");
+        inputJuiceColour = pTag.getInt("inputJuiceColour");
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
@@ -203,6 +233,7 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         if(hasRecipe()) {
             if(!hasInitialItem) {
                 hasInitialItem = true;
+                getInfo();
                 setChanged();
                 fillToMax();
                 if(!level.isClientSide()){
@@ -219,6 +250,18 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             }
         } else {
             resetProgress();
+        }
+    }
+
+    private void getInfo() {
+        ItemStack firstSlot = inventory.getStackInSlot(0);
+        if (!firstSlot.isEmpty()) {
+            JuiceType juiceType = firstSlot.get(JUICE_TYPE.get());
+            this.inputJuiceColour = juiceType.colour();
+            this.inputJuiceName = juiceType.name();
+
+            System.out.print("Juice Colour " + inputJuiceColour);
+            System.out.print("Juice Name " + inputJuiceName);
         }
     }
 
@@ -252,7 +295,6 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         if (level != null) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         }
-
 
     }
 

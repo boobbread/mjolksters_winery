@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery;
 
-import com.mjolkster.mjolksters_winery.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
 import com.mjolkster.mjolksters_winery.registry.*;
 import com.mjolkster.mjolksters_winery.util.renderer.BottlingMachineBlockRenderer;
 import com.mjolkster.mjolksters_winery.util.renderer.DemijohnBlockRenderer;
@@ -9,25 +9,13 @@ import com.mjolkster.mjolksters_winery.screen.AgingBarrelScreen;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineScreen;
 import com.mjolkster.mjolksters_winery.screen.DemijohnScreen;
 import com.mjolkster.mjolksters_winery.util.TooltipHandler;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.client.model.BakedModelWrapper;
-import net.neoforged.neoforge.client.model.CompositeModel;
 import net.neoforged.neoforge.fluids.FluidType;
-import org.checkerframework.checker.units.qual.N;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -44,9 +32,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Mod(Winery.MODID)
 public class Winery
@@ -159,6 +144,18 @@ public class Winery
                 }
                 return -1;
             }, ModItems.JUICE_BUCKET.get());
+
+            event.register((stack, tintIndex) -> {
+                if (tintIndex == 1) {
+                    JuiceType data = stack.get(ModDataComponents.JUICE_TYPE.get());
+
+                    if (data != null) {
+                        return data.colour();
+                    }
+
+                }
+                return -1;
+            }, ModItems.WINE_BUCKET.get());
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.mjolkster.mjolksters_winery.codec;
+package com.mjolkster.mjolksters_winery.util.codec;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

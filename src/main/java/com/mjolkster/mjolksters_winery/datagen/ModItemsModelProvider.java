@@ -32,8 +32,7 @@ public class ModItemsModelProvider extends ItemModelProvider {
         basicItem(ModItems.KOSHU.get());
         basicItem(ModItems.PINOT_DE_LENFER.get());
 
-        basicItem(ModItems.RED_WINE_BUCKET.get());
-        basicItem(ModItems.WHITE_WINE_BUCKET.get());
+        basicItem(ModItems.WINE_BUCKET.get());
 
     }
 }

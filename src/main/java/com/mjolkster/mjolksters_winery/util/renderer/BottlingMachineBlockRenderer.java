@@ -60,9 +60,7 @@ public class BottlingMachineBlockRenderer implements BlockEntityRenderer<Bottlin
             return;
         }
 
-        FluidType type = fluid.getFluidType();
-        IClientFluidTypeExtensions cExt = IClientFluidTypeExtensions.of(type);
-        int argb = cExt.getTintColor(fluid);
+        int argb = be.inputWineColour;
 
         float a = 1.0f;
         float r = ((argb >> 16) & 0xFF) / 255.0f;

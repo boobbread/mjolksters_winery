@@ -14,7 +14,9 @@
   "item.mjolksters_winery.white_wine_bucket": "Bucket of White Wine",
 
   "item.mjolksters_winery.juice_bucket": "%s Juice Bucket",
-  "item.mjolksters_winery.juice_bucket.empty": "Empty Juice Bucket",
+  "item.mjolksters_winery.juice_bucket_empty": "Empty Juice Bucket",
+  "item.mjolksters_winery.wine_bucket": "%s Wine Bucket",
+  "item.mjolksters_winery.wine_bucket_empty": "Empty Wine Bucket",
 
   "item.mjolksters_winery.pinot_noir_grapes": "Pinot Noir Grapes",
   "item.mjolksters_winery.sangiovese_grapes": "Sangiovese Grapes",
