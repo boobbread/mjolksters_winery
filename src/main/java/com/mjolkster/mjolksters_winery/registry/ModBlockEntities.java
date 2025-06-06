@@ -37,6 +37,16 @@ public class ModBlockEntities {
                     BottlingMachineBlockEntity::new, ModBlocks.BOTTLING_MACHINE.get()).build(null)
             );
 
+    public static final Supplier<BlockEntityType<YeastPotBlockEntity>> YEAST_POT_BE =
+            BLOCK_ENTITIES.register("yeast_pot_be", () -> BlockEntityType.Builder.of(
+                    YeastPotBlockEntity::new, ModBlocks.YEAST_POT.get()).build(null)
+            );
+
+    public static final Supplier<BlockEntityType<SommeliersTableBlockEntity>> SOMMELIERS_TABLE_BE =
+            BLOCK_ENTITIES.register("sommeliers_table_be", () -> BlockEntityType.Builder.of(
+                    SommeliersTableBlockEntity::new, ModBlocks.SOMMELIERS_TABLE.get()).build(null)
+            );
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

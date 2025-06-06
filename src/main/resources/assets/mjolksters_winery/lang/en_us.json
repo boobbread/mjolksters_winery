@@ -6,6 +6,8 @@
   "block.mjolksters_winery.spruce_aging_barrel": "Spruce Aging Barrel",
   "block.mjolksters_winery.acacia_aging_barrel": "Acacia Aging Barrel",
   "block.mjolksters_winery.bottling_machine": "Auto Bottler",
+  "block.mjolksters_winery.sommeliers_table": "Sommeliers Table",
+  "block.mjolksters_winery.yeast_pot": "Yeast Pot",
 
   "item.mjolksters_winery.red_wine_bottle": "Red Wine Bottle",
   "item.mjolksters_winery.white_wine_bottle": "White Wine Bottle",
@@ -42,6 +44,29 @@
   "item.mjolksters_winery.cote_des_blancs_yeast": "Cote des Blancs Yeast",
   "item.mjolksters_winery.premier_cuvee_yeast": "Premier Cuvee Yeast",
   "item.mjolksters_winery.champagne_yeast": "Champagne Yeast",
+
+  "item.mjolksters_winery.pinot_noir_wine_bottle": "Pinot Noir Wine Bottle",
+  "item.mjolksters_winery.sangiovese_wine_bottle": "Sangiovese Wine Bottle",
+  "item.mjolksters_winery.cabernet_sauvignon_wine_bottle": "Cabernet Sauvignon Wine Bottle",
+  "item.mjolksters_winery.tempranillo_wine_bottle": "Tempranillo Wine Bottle",
+  "item.mjolksters_winery.moondrop_wine_bottle": "Moondrop Wine Bottle",
+  "item.mjolksters_winery.autumn_royal_wine_bottle": "Autumn Royal Wine Bottle",
+  "item.mjolksters_winery.ruby_roman_wine_bottle": "Ruby Roman Wine Bottle",
+
+  "item.mjolksters_winery.riesling_wine_bottle": "Riesling Wine Bottle",
+  "item.mjolksters_winery.chardonnay_wine_bottle": "Chardonnay Wine Bottle",
+  "item.mjolksters_winery.sauvignon_blanc_wine_bottle": "Sauvignon Blanc Wine Bottle",
+  "item.mjolksters_winery.pinot_grigio_wine_bottle": "Pinot Grigio Wine Bottle",
+  "item.mjolksters_winery.cotton_candy_wine_bottle": "Cotton Candy Wine Bottle",
+  "item.mjolksters_winery.grenache_blanc_wine_bottle": "Grenache Blanc Wine Bottle",
+  "item.mjolksters_winery.waterfall_wine_bottle": "Waterfall Wine Bottle",
+
+  "item.mjolksters_winery.koshu_wine_bottle": "Koshu Wine Bottle",
+  "item.mjolksters_winery.pinot_de_lenfer_wine_bottle": "Pinot des L'enfer Wine Bottle",
+
+  "item.mjolksters_winery.sweet_berry_wine_bottle": "Sweet Berry Wine Bottle",
+  "item.mjolksters_winery.glow_berry_wine_bottle": "Glow Berry Wine Bottle",
+  "item.mjolksters_winery.chorus_fruit_wine_bottle": "Chorus Wine Bottle",
 
   "itemGroup.mjolksters_winery": "Mjolkster's Winery"
 }

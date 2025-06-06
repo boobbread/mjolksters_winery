@@ -3,7 +3,7 @@
   "id": "mjolksters_winery:red_wine",
   "ingredient1": { "item": "mjolksters_winery:juice_bucket" },
   "ingredient2": { "item": "minecraft:sugar" },
-  "ingredient3": { "item": "minecraft:sweet_berries" },
+  "ingredient3": { "tag": "winery:yeast" },
   "result": {
     "id": "mjolksters_winery:source_wine",
     "amount": 1000

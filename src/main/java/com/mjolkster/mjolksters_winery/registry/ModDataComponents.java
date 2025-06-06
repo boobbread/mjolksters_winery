@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery.registry;
 
-import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -11,39 +11,37 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
+import static com.ibm.icu.text.PluralRules.Operand.w;
+
 public class ModDataComponents {
     public static final String MODID = "mjolksters_winery";
 
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS =
             DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, MODID);
 
-    public static final Supplier<DataComponentType<Integer>> WINE_AGE = DATA_COMPONENTS.register("wine_age",
-            () -> DataComponentType.<Integer>builder()
-                    .persistent(ExtraCodecs.NON_NEGATIVE_INT)
-                    .networkSynchronized(StreamCodec.of(RegistryFriendlyByteBuf::writeVarInt, RegistryFriendlyByteBuf::readVarInt))
-                    .build());
-
-    public static final Supplier<DataComponentType<String>> WOOD_TYPE = DATA_COMPONENTS.register("wood_type",
-            () -> DataComponentType.<String>builder()
-                    .persistent(ExtraCodecs.NON_EMPTY_STRING)
-                    .networkSynchronized(StreamCodec.of(RegistryFriendlyByteBuf::writeUtf, RegistryFriendlyByteBuf::readUtf))
-                    .build());
-
-    public static final Supplier<DataComponentType<JuiceType>> JUICE_TYPE = DATA_COMPONENTS.register("juice_type",
-            () -> DataComponentType.<JuiceType>builder()
-                    .persistent(JuiceType.CODEC)
+    public static final Supplier<DataComponentType<WineData>> WINE_DATA = DATA_COMPONENTS.register("wine_data",
+            () -> DataComponentType.<WineData>builder()
+                    .persistent(WineData.CODEC)
                     .networkSynchronized(new StreamCodec<>() {
                         @Override
-                        public JuiceType decode(RegistryFriendlyByteBuf buf) {
+                        public WineData decode(RegistryFriendlyByteBuf buf) {
                             int colour = buf.readInt();
                             String type = buf.readUtf();
-                            return new JuiceType(colour, type);
+                            int barrelAge = buf.readInt();
+                            String barrelType = buf.readUtf();
+                            float alcoholPerc = buf.readFloat();
+                            float wineSweetness = buf.readFloat();
+                            return new WineData(colour, type, barrelAge, barrelType, alcoholPerc, wineSweetness);
                         }
 
                         @Override
-                        public void encode(RegistryFriendlyByteBuf buf, JuiceType data) {
+                        public void encode(RegistryFriendlyByteBuf buf, WineData data) {
                             buf.writeInt(data.colour());
                             buf.writeUtf(data.name());
+                            buf.writeInt(data.barrelAge());
+                            buf.writeUtf(data.barrelType());
+                            buf.writeFloat(data.alcoholPercentage());
+                            buf.writeFloat(data.wineSweetness());
                         }
                     })
                     .build()

@@ -1,6 +1,7 @@
 package com.mjolkster.mjolksters_winery;
 
-import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.screen.SommeliersTableScreen;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import com.mjolkster.mjolksters_winery.registry.*;
 import com.mjolkster.mjolksters_winery.util.renderer.BottlingMachineBlockRenderer;
 import com.mjolkster.mjolksters_winery.util.renderer.DemijohnBlockRenderer;
@@ -91,6 +92,7 @@ public class Winery
             event.register(ModMenuTypes.DEMIJOHN_MENU.get(), DemijohnScreen::new);
             event.register(ModMenuTypes.AGING_BARREL_MENU.get(), AgingBarrelScreen::new);
             event.register(ModMenuTypes.BOTTLING_MACHINE_MENU.get(), BottlingMachineScreen::new);
+            event.register(ModMenuTypes.SOMMELIERS_TABLE_MENU.get(), SommeliersTableScreen::new);
         }
     }
 
@@ -107,6 +109,8 @@ public class Winery
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPRUCE_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.ACACIA_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOTTLING_MACHINE.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.YEAST_POT.get(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.SOMMELIERS_TABLE.get(), RenderType.translucent());
 
                 // fluids
                 for (ModFluids.WineryFluid fluid : ModFluids.WINERY_FLUIDS) {
@@ -135,7 +139,7 @@ public class Winery
         public static void registerItemColours(RegisterColorHandlersEvent.Item event) {
             event.register((stack, tintIndex) -> {
                 if (tintIndex == 1) {
-                    JuiceType data = stack.get(ModDataComponents.JUICE_TYPE.get());
+                    WineData data = stack.get(ModDataComponents.WINE_DATA.get());
 
                     if (data != null) {
                         return data.colour();
@@ -147,7 +151,7 @@ public class Winery
 
             event.register((stack, tintIndex) -> {
                 if (tintIndex == 1) {
-                    JuiceType data = stack.get(ModDataComponents.JUICE_TYPE.get());
+                    WineData data = stack.get(ModDataComponents.WINE_DATA.get());
 
                     if (data != null) {
                         return data.colour();

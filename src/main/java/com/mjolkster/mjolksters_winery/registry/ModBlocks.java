@@ -29,4 +29,10 @@ public class ModBlocks {
 
     public static final Supplier<Block> BOTTLING_MACHINE = BLOCKS.register("bottling_machine",
             () -> new BottlingMachineBlock(BlockBehaviour.Properties.of()));
+
+    public static final Supplier<Block> YEAST_POT = BLOCKS.register("yeast_pot",
+            () -> new YeastPotBlock(BlockBehaviour.Properties.of()));
+
+    public static final Supplier<Block> SOMMELIERS_TABLE = BLOCKS.register("sommeliers_table",
+            () -> new SommeliersTableBlock(BlockBehaviour.Properties.of()));
 }

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "mjolksters_winery:pasteur_red_yeast",
+    "mjolksters_winery:montrachet_yeast",
+    "mjolksters_winery:champagne_yeast",
+    "mjolksters_winery:premier_cuvee_yeast",
+    "mjolksters_winery:cote_des_blancs_yeast"
+  ]
+}

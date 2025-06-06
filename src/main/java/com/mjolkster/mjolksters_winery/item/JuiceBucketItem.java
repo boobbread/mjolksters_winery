@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery.item;
 
-import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import com.mjolkster.mjolksters_winery.registry.ModDataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BucketItem;
@@ -15,7 +15,7 @@ public class JuiceBucketItem extends BucketItem{
 
     @Override
     public Component getName(ItemStack stack) {
-        JuiceType data = stack.get(ModDataComponents.JUICE_TYPE.get());
+        WineData data = stack.get(ModDataComponents.WINE_DATA.get());
         return data != null ?
                 Component.translatable("item.mjolksters_winery.juice_bucket", data.name()) :
                 Component.translatable("item.mjolksters_winery.juice_bucket_empty");

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "GcR",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:spruce_planks"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "N": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "id": "mjolksters_winery:bottling_machine",
+    "count": 1
+  }
+}

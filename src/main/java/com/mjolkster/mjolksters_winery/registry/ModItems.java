@@ -62,6 +62,10 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.ACACIA_AGING_BARREL.get(), basicItem()));
     public static final Supplier<Item> BOTTLING_MACHINE = registerWithTab("bottling_machine",
             () -> new BlockItem(ModBlocks.BOTTLING_MACHINE.get(), basicItem()));
+    public static final Supplier<Item> YEAST_POT = registerWithTab("yeast_pot",
+            () -> new BlockItem(ModBlocks.YEAST_POT.get(), basicItem()));
+    public static final Supplier<Item> SOMMELIERS_TABLE = registerWithTab("sommeliers_table",
+            () -> new BlockItem(ModBlocks.SOMMELIERS_TABLE.get(), basicItem()));
 
     // buckets
 
@@ -74,7 +78,47 @@ public class ModItems {
 
     public static final Supplier<Item> RED_WINE_BOTTLE = registerWithTab("red_wine_bottle",
             () -> new Item(drinkableItem()));
-    public static final Supplier<Item> WHITE_WINE_BOTTLE = registerWithTab("white_wine_bottle",
+
+    public static final Supplier<Item> PINOT_NOIR_BOTTLE = registerWithTab("pinot_noir_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> SANGIOVESE_BOTTLE = registerWithTab("sangiovese_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> CABERNET_SAUVIGNON_BOTTLE = registerWithTab("cabernet_sauvignon_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> TEMPRANILLO_BOTTLE = registerWithTab("tempranillo_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> MOONDROP_BOTTLE = registerWithTab("moondrop_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> RUBY_ROMAN_BOTTLE = registerWithTab("ruby_roman_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> AUTUMN_ROYAL_BOTTLE = registerWithTab("autumn_royal_wine_bottle",
+            () -> new Item(drinkableItem()));
+
+    public static final Supplier<Item> RIESLING_BOTTLE = registerWithTab("riesling_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> CHARDONNAY_BOTTLE = registerWithTab("chardonnay_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> SAUVIGNON_BLANC_BOTTLE = registerWithTab("sauvignon_blanc_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> PINOT_GRIGIO_BOTTLE = registerWithTab("pinot_grigio_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> COTTON_CANDY_BOTTLE = registerWithTab("cotton_candy_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> GRENACHE_BLANC_BOTTLE = registerWithTab("grenache_blanc_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> WATERFALL_BOTTLE = registerWithTab("waterfall_wine_bottle",
+            () -> new Item(drinkableItem()));
+
+    public static final Supplier<Item> KOSHU_BOTTLE = registerWithTab("koshu_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> PINOT_DE_LENFER_BOTTLE = registerWithTab("pinot_de_lenfer_wine_bottle",
+            () -> new Item(drinkableItem()));
+
+    public static final Supplier<Item> SWEET_BERRY_WINE_BOTTLE = registerWithTab("sweet_berry_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> GLOW_BERRY_WINE_BOTTLE = registerWithTab("glow_berry_wine_bottle",
+            () -> new Item(drinkableItem()));
+    public static final Supplier<Item> CHORUS_FRUIT_WINE_BOTTLE = registerWithTab("chorus_fruit_wine_bottle",
             () -> new Item(drinkableItem()));
 
     // grapes - red

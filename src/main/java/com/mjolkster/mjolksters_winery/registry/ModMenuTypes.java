@@ -4,6 +4,7 @@ import com.mjolkster.mjolksters_winery.Winery;
 import com.mjolkster.mjolksters_winery.screen.AgingBarrelMenu;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineMenu;
 import com.mjolkster.mjolksters_winery.screen.DemijohnMenu;
+import com.mjolkster.mjolksters_winery.screen.SommeliersTableMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -25,6 +26,9 @@ public class ModMenuTypes {
 
     public static final DeferredHolder<MenuType<?>, MenuType<BottlingMachineMenu>> BOTTLING_MACHINE_MENU =
             registerMenuType("bottling_machine_menu", BottlingMachineMenu::new);
+
+    public static final DeferredHolder<MenuType<?>, MenuType<SommeliersTableMenu>> SOMMELIERS_TABLE_MENU =
+            registerMenuType("sommeliers_table_menu", SommeliersTableMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
 

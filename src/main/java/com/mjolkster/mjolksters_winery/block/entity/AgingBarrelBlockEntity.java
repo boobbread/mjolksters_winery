@@ -4,7 +4,7 @@ import com.mjolkster.mjolksters_winery.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.screen.AgingBarrelMenu;
-import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -25,16 +25,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
-
-import java.util.Optional;
 
 import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.*;
 
@@ -53,6 +49,8 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
     public int gameTime = 0;
     public int inputWineColour = 0;
     public String inputWineName = "";
+    public float inputAlcoholPercentage = 0.0f;
+    public float inputWineSweetness = 0.0f;
 
     public AgingBarrelBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.AGING_BARREL_BE.get(), pos, blockState);
@@ -113,12 +111,10 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
                 if (!drained.isEmpty()) {
                     long ageInTicks = level.getGameTime() - insertTime;
                     String state = getBlockState().toString();
-                    JuiceType data = new JuiceType(inputWineColour, inputWineName);
+                    WineData data = new WineData(inputWineColour, inputWineName, (int)ageInTicks, state, inputAlcoholPercentage, inputWineSweetness);
 
                     DataComponentPatch agedComponents = DataComponentPatch.builder()
-                            .set(WINE_AGE.get(), (int)ageInTicks)
-                            .set(WOOD_TYPE.get(), state)
-                            .set(JUICE_TYPE.get(), data)
+                            .set(WINE_DATA.get(), data)
                             .build();
 
                     FluidStack agedDrained = new FluidStack(
@@ -174,13 +170,13 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
 
     private void getInfo(ItemStack heldItem) {
         if (!heldItem.isEmpty()) {
-            JuiceType nullJuiceType = new JuiceType(0xFFFFFFFF,"none");
-            JuiceType juiceType = heldItem.getOrDefault(JUICE_TYPE.get(), nullJuiceType);
-            this.inputWineColour = juiceType.colour();
-            this.inputWineName = juiceType.name();
+            WineData nullWineData = new WineData(0xFFFFFFFF,"none", 0, "none",0, 0);
+            WineData wineData = heldItem.getOrDefault(WINE_DATA.get(), nullWineData);
+            this.inputWineColour = wineData.colour();
+            this.inputWineName = wineData.name();
+            this.inputAlcoholPercentage = wineData.alcoholPercentage();
+            this.inputWineSweetness = wineData.wineSweetness();
 
-            System.out.print("Juice Colour " + inputWineColour);
-            System.out.print("Juice Name " + inputWineName);
         }
     }
 
@@ -192,6 +188,8 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
         pTag.put("fluidTank", fluidTag);
         pTag.putInt("inputWineColour", inputWineColour);
         pTag.putString("inputWineName", inputWineName);
+        pTag.putFloat("inputAlcohol", inputAlcoholPercentage);
+        pTag.putFloat("inputSweetness", inputWineSweetness);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -206,6 +204,8 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
 
         inputWineColour = pTag.getInt("inputWineColour");
         inputWineName = pTag.getString("inputWineName");
+        inputAlcoholPercentage = pTag.getFloat("inputAlcohol");
+        inputWineSweetness = pTag.getFloat("inputSweetness");
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {

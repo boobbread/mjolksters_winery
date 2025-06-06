@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# ",
+    "SG",
+    "F "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "G": {
+      "tag": "winery:grape"
+    },
+    "F": {
+      "item": "minecraft:flower_pot"
+    }
+  },
+  "result": {
+    "id": "mjolksters_winery:yeast_pot",
+    "count": 1
+  }
+}

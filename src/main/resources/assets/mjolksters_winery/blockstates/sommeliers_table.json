@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mjolksters_winery:block/sommeliers_table"
+    },
+    "facing=south": {
+      "model": "mjolksters_winery:block/sommeliers_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mjolksters_winery:block/sommeliers_table",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "mjolksters_winery:block/sommeliers_table",
+      "y": 90
+    }
+  }
+}

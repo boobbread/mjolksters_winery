@@ -14,6 +14,8 @@ import javax.swing.text.html.HTML;
 public class CommonTags {
     public static final TagKey<Fluid> WINE = commonFluidTag("wine");
     public static final TagKey<Item> GRAPE = commonItemTag("grape");
+    public static final TagKey<Item> YEAST = commonItemTag("yeast");
+    public static final TagKey<Item> BOTTLE = commonItemTag("bottle");
 
     private static TagKey<Block> commonBlockTag(String path) {
         return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", path));

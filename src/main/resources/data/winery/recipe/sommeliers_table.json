@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#BW",
+    "___",
+    "S S"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass_bottle"
+    },
+    "W": {
+      "item": "minecraft:writable_book"
+    },
+    "B": {
+      "tag": "winery:bottle"
+    },
+    "_": {
+      "item": "minecraft:spruce_slab"
+    },
+    "S": {
+      "item": "minecraft:spruce_fence"
+    }
+  },
+  "result": {
+    "id": "mjolksters_winery:sommeliers_table",
+    "count": 1
+  }
+}

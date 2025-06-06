@@ -6,7 +6,7 @@ import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.registry.ModRecipes;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.DemijohnMenu;
-import com.mjolkster.mjolksters_winery.util.codec.JuiceType;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -36,8 +36,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.JUICE_TYPE;
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_DATA;
 
 
 public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
@@ -74,6 +73,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
     public String inputJuiceName = "";
     public int inputJuiceColour = 0;
+    public float alcoholPercentage = 0.0f;
+    public float wineSweetness = 0.0f;
 
     public DemijohnBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.DEMIJOHN_BE.get(), pos, blockState);
@@ -157,9 +158,9 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
                 ItemStack filledBucket = new ItemStack(ModItems.WINE_BUCKET.get());
 
-                JuiceType juiceType = new JuiceType(inputJuiceColour, inputJuiceName);
-                System.out.println("Setting juice type: " + juiceType.name() + ", Color: " + juiceType.colour());
-                filledBucket.set(JUICE_TYPE.get(), juiceType);
+                WineData wineData = new WineData(inputJuiceColour, inputJuiceName, 0, "none", alcoholPercentage, wineSweetness);
+                System.out.println("Setting juice type: " + wineData.name() + ", Color: " + wineData.colour());
+                filledBucket.set(WINE_DATA.get(), wineData);
 
                 return filledBucket;
             }
@@ -207,6 +208,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         pTag.putInt("demijohn.max_progress", maxProgress);
         pTag.putString("inputJuiceName", inputJuiceName);
         pTag.putInt("inputJuiceColour", inputJuiceColour);
+        pTag.putFloat("alcoholPerc", alcoholPercentage);
+        pTag.putFloat("sweetness", wineSweetness);
 
         super.saveAdditional(pTag, pRegistries);
     }
@@ -225,6 +228,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         maxProgress = pTag.getInt("demijohn.max_progress");
         inputJuiceName = pTag.getString("inputJuiceName");
         inputJuiceColour = pTag.getInt("inputJuiceColour");
+        alcoholPercentage = pTag.getFloat("alcoholPerc");
+        wineSweetness = pTag.getFloat("sweetness");
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState blockState) {
@@ -253,15 +258,51 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    private float getMaxAlcoholForYeast(ItemStack yeastSlot) {
+        String yeastName = yeastSlot.toString().toLowerCase();
+        if (yeastName.contains("premier")) return 0.18f;
+        if (yeastName.contains("pasteur")) return 0.16f;
+        if (yeastName.contains("champagne")) return 0.15f;
+        if (yeastName.contains("blancs")) return 0.14f;
+        if (yeastName.contains("montrachet")) return 0.13f;
+        return 0.10f;
+    }
+
     private void getInfo() {
         ItemStack firstSlot = inventory.getStackInSlot(0);
         if (!firstSlot.isEmpty()) {
-            JuiceType juiceType = firstSlot.get(JUICE_TYPE.get());
-            this.inputJuiceColour = juiceType.colour();
-            this.inputJuiceName = juiceType.name();
+            WineData wineData = firstSlot.get(WINE_DATA.get());
+            this.inputJuiceColour = wineData.colour();
+            this.inputJuiceName = wineData.name();
 
             System.out.print("Juice Colour " + inputJuiceColour);
             System.out.print("Juice Name " + inputJuiceName);
+        }
+
+        ItemStack yeastSlot = inventory.getStackInSlot(2);
+        if (!yeastSlot.isEmpty()) {
+            String yeastName = yeastSlot.toString();
+            if (yeastName.contains("premier")) {
+                this.alcoholPercentage = 0.18f;
+            } else if (yeastName.contains("pasteur")) {
+                this.alcoholPercentage = 0.16f;
+            } else if (yeastName.contains("champagne")) {
+                this.alcoholPercentage = 0.15f;
+            } else if (yeastName.contains("blancs")) {
+                this.alcoholPercentage = 0.14f;
+            } else if (yeastName.contains("montrachet")) {
+                this.alcoholPercentage = 0.13f;
+            }
+        }
+
+        ItemStack sugarSlot = inventory.getStackInSlot(1);
+        if (!sugarSlot.isEmpty()) {
+            int sugarCount = sugarSlot.getCount();
+            float maxAlcohol = getMaxAlcoholForYeast(yeastSlot); // new method
+            float sugarEffect = 0.01f * sugarCount;
+            this.alcoholPercentage = Math.min(0.1f + sugarEffect, maxAlcohol);
+            this.wineSweetness = Math.max(0.1f + sugarEffect - maxAlcohol, 0f);
+
         }
     }
 
@@ -277,7 +318,8 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 BlockPos pos = getBlockPos();
                 level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS);
                 ItemStack container = input.getCraftingRemainingItem();
-                inventory.extractItem(i,1,false);
+                int amountInSlot = inventory.getStackInSlot(i).getCount();
+                inventory.extractItem(i, amountInSlot,false);
 
                 if (!container.isEmpty()){
                     inventory.setStackInSlot(i, container);

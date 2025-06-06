@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "mjolksters_winery:pinot_noir_wine_bottle",
+    "mjolksters_winery:sangiovese_wine_bottle",
+    "mjolksters_winery:cabernet_sauvignon_wine_bottle",
+    "mjolksters_winery:tempranillo_wine_bottle",
+    "mjolksters_winery:moondrop_wine_bottle",
+    "mjolksters_winery:autumn_royal_wine_bottle",
+    "mjolksters_winery:ruby_roman_wine_bottle",
+
+    "mjolksters_winery:riesling_wine_bottle",
+    "mjolksters_winery:chardonnay_wine_bottle",
+    "mjolksters_winery:sauvignon_blanc_wine_bottle",
+    "mjolksters_winery:pinot_grigio_wine_bottle",
+    "mjolksters_winery:cotton_candy_wine_bottle",
+    "mjolksters_winery:grenache_blanc_wine_bottle",
+    "mjolksters_winery:waterfall_wine_bottle",
+
+    "mjolksters_winery:koshu_wine_bottle",
+    "mjolksters_winery:pinot_de_lenfer_wine_bottle",
+
+    "mjolksters_winery:glow_berry_wine_bottle",
+    "mjolksters_winery:chorus_fruit_wine_bottle",
+    "mjolksters_winery:sweet_berry_wine_bottle"
+  ]
+}
