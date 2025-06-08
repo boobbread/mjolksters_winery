@@ -1,5 +1,6 @@
 package com.mjolkster.mjolksters_winery;
 
+import com.mjolkster.mjolksters_winery.block.GrapeBushBlock;
 import com.mjolkster.mjolksters_winery.screen.SommeliersTableScreen;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import com.mjolkster.mjolksters_winery.registry.*;
@@ -10,8 +11,12 @@ import com.mjolkster.mjolksters_winery.screen.AgingBarrelScreen;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineScreen;
 import com.mjolkster.mjolksters_winery.screen.DemijohnScreen;
 import com.mjolkster.mjolksters_winery.util.TooltipHandler;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -107,10 +112,12 @@ public class Winery
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRUSHER.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.OAK_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPRUCE_AGING_BARREL.get(), RenderType.solid());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.ACACIA_AGING_BARREL.get(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHERRY_AGING_BARREL.get(), RenderType.solid());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRIMSON_AGING_BARREL.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOTTLING_MACHINE.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.YEAST_POT.get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.SOMMELIERS_TABLE.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.GRAPE_BUSH_BLOCK.get(), RenderType.cutout());
 
                 // fluids
                 for (ModFluids.WineryFluid fluid : ModFluids.WINERY_FLUIDS) {
@@ -161,6 +168,20 @@ public class Winery
                 return -1;
             }, ModItems.WINE_BUCKET.get());
         }
+
+        @SubscribeEvent
+        public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+
+            BlockColor grapeBushTint = (BlockState state, BlockAndTintGetter world, BlockPos pos, int tintIndex) -> {
+                if (tintIndex == 1 && state.hasProperty(GrapeBushBlock.VARIETY)) {
+                    return GrapeBushBlock.getColorForVariety(state.getValue(GrapeBushBlock.VARIETY));
+                }
+                return -1;
+            };
+
+            event.register(grapeBushTint, ModBlocks.GRAPE_BUSH_BLOCK.get());
+        }
+
     }
 }
 

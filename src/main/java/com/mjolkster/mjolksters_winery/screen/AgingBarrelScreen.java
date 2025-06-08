@@ -17,8 +17,10 @@ public class AgingBarrelScreen extends AbstractContainerScreen<AgingBarrelMenu> 
             ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/oak_aging_barrel_gui.png");
     private static final ResourceLocation SPRUCE_GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/spruce_aging_barrel_gui.png");
-    private static final ResourceLocation ACACIA_GUI_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/acacia_aging_barrel_gui.png");
+    private static final ResourceLocation CHERRY_GUI_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/cherry_aging_barrel_gui.png");
+    private static final ResourceLocation CRIMSON_GUI_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/crimson_aging_barrel_gui.png");
     private static final ResourceLocation GUI_BOTTLE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(Winery.MODID,"textures/gui/aging_barrel_fullness.png");
 
@@ -67,9 +69,10 @@ public class AgingBarrelScreen extends AbstractContainerScreen<AgingBarrelMenu> 
             return OAK_GUI_TEXTURE;
         } else if (block == ModBlocks.SPRUCE_AGING_BARREL.get()) {
             return SPRUCE_GUI_TEXTURE;
-        } else {
-            return ACACIA_GUI_TEXTURE;
-    }}
+        } else if (block == ModBlocks.CHERRY_AGING_BARREL.get()) {
+            return CHERRY_GUI_TEXTURE;
+        } else return CRIMSON_GUI_TEXTURE;
+    }
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {

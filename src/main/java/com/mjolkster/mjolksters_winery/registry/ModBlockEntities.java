@@ -28,7 +28,8 @@ public class ModBlockEntities {
                     AgingBarrelBlockEntity::new,
                     ModBlocks.OAK_AGING_BARREL.get(),
                     ModBlocks.SPRUCE_AGING_BARREL.get(),
-                    ModBlocks.ACACIA_AGING_BARREL.get()
+                    ModBlocks.CHERRY_AGING_BARREL.get(),
+                    ModBlocks.CRIMSON_AGING_BARREL.get()
                     ).build(null)
             );
 

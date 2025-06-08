@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "age=0": { "model": "mjolksters_winery:block/grape_bush_age0" },
+    "age=1": { "model": "mjolksters_winery:block/grape_bush_age1" },
+    "age=2": { "model": "mjolksters_winery:block/grape_bush_age2" },
+    "age=3": { "model": "mjolksters_winery:block/grape_bush_age3" }
+  }
+}

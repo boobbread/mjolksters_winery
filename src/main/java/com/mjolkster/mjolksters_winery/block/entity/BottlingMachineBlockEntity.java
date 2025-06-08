@@ -35,6 +35,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -215,10 +216,33 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         }
     }
 
-    private static final Map<String, Supplier<Item>> FLUID_TO_BOTTLE = Map.of(
-            "Pinot Noir", ModItems.PINOT_NOIR_BOTTLE,
-            "Sangiovese", ModItems.SANGIOVESE_BOTTLE
-    );
+    private static final Map<String, Supplier<Item>> FLUID_TO_BOTTLE = new HashMap<>();
+            static {
+                FLUID_TO_BOTTLE.put("Pinot Noir", ModItems.PINOT_NOIR_BOTTLE);
+                FLUID_TO_BOTTLE.put("Sangiovese", ModItems.SANGIOVESE_BOTTLE);
+                FLUID_TO_BOTTLE.put("Cabernet Sauvignon", ModItems.CABERNET_SAUVIGNON_BOTTLE);
+                FLUID_TO_BOTTLE.put("Tempranillo", ModItems.TEMPRANILLO_BOTTLE);
+                FLUID_TO_BOTTLE.put("Moondrop", ModItems.MOONDROP_BOTTLE);
+                FLUID_TO_BOTTLE.put("Ruby Roman", ModItems.RUBY_ROMAN_BOTTLE);
+                FLUID_TO_BOTTLE.put("Autumn Royal", ModItems.AUTUMN_ROYAL_BOTTLE);
+
+                FLUID_TO_BOTTLE.put("Riesling", ModItems.RIESLING_BOTTLE);
+                FLUID_TO_BOTTLE.put("Chardonnay", ModItems.CHARDONNAY_BOTTLE);
+                FLUID_TO_BOTTLE.put("Sauvignon Blanc", ModItems.SAUVIGNON_BLANC_BOTTLE);
+                FLUID_TO_BOTTLE.put("Pinot Grigio", ModItems.PINOT_GRIGIO_BOTTLE);
+                FLUID_TO_BOTTLE.put("Cotton Candy", ModItems.COTTON_CANDY_BOTTLE);
+                FLUID_TO_BOTTLE.put("Grenache Blanc", ModItems.GRENACHE_BLANC_BOTTLE);
+                FLUID_TO_BOTTLE.put("Waterfall", ModItems.WATERFALL_BOTTLE);
+
+                FLUID_TO_BOTTLE.put("Koshu", ModItems.KOSHU_BOTTLE);
+                FLUID_TO_BOTTLE.put("Pinot De L'enfer", ModItems.PINOT_DE_LENFER_BOTTLE);
+
+                FLUID_TO_BOTTLE.put("Sweet Berry", ModItems.SWEET_BERRY_WINE_BOTTLE);
+                FLUID_TO_BOTTLE.put("Glow Berry", ModItems.GLOW_BERRY_WINE_BOTTLE);
+                FLUID_TO_BOTTLE.put("Chorus Fruit", ModItems.CHORUS_FRUIT_WINE_BOTTLE);
+
+    }
+
 
     private boolean isOutputEmpty() {
         ItemStack output = this.inventory.getStackInSlot(BOTTLE_OUTPUT_SLOT);

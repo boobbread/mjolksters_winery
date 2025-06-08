@@ -31,14 +31,27 @@ public class TooltipHandler {
                 event.getToolTip().add(Component.literal("Wood Type: Oak").withStyle(ChatFormatting.GOLD));
             } else if (barrelType.contains("spruce")) {
                 event.getToolTip().add(Component.literal("Wood Type: Spruce").withStyle(ChatFormatting.GOLD));
-            } else if (barrelType.contains("acacia")) {
-                event.getToolTip().add(Component.literal("Wood Type: Acacia").withStyle(ChatFormatting.GOLD));
+            } else if (barrelType.contains("cherry")) {
+                event.getToolTip().add(Component.literal("Wood Type: Cherry").withStyle(ChatFormatting.GOLD));
+            } else if (barrelType.contains("crimson")) {
+                event.getToolTip().add(Component.literal("Wood Type: Crimson").withStyle(ChatFormatting.GOLD));
             } else {
                 event.getToolTip().add(Component.literal("Wood Type: None").withStyle(ChatFormatting.GOLD));
             }
 
             event.getToolTip().add(Component.literal("Alcohol Percentage: " + (int)(alcoholPerc * 100) + "%").withStyle(ChatFormatting.GOLD));
-            event.getToolTip().add(Component.literal("Wine Sweetness: " + (int)(wineSweetness * 100) + "%").withStyle(ChatFormatting.GOLD));
+
+            if (wineSweetness <= 0.02) {
+                event.getToolTip().add(Component.literal("Wine Sweetness: Extra Dry").withStyle(ChatFormatting.GOLD));
+            } else if (wineSweetness <= 0.04 && wineSweetness > 0.02) {
+                event.getToolTip().add(Component.literal("Wine Sweetness: Dry").withStyle(ChatFormatting.GOLD));
+            } else if (wineSweetness <= 0.06 && wineSweetness > 0.04) {
+                event.getToolTip().add(Component.literal("Wine Sweetness: Semi Dry").withStyle(ChatFormatting.GOLD));
+            } else if (wineSweetness <= 0.08 && wineSweetness > 0.06) {
+                event.getToolTip().add(Component.literal("Wine Sweetness: Sweet").withStyle(ChatFormatting.GOLD));
+            } else {
+                event.getToolTip().add(Component.literal("Wine Sweetness: Extra Sweet").withStyle(ChatFormatting.GOLD));
+            }
         }
     }
 }

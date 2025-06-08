@@ -19,7 +19,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.DEMIJOHN.get());
         dropSelf(ModBlocks.OAK_AGING_BARREL.get());
         dropSelf(ModBlocks.SPRUCE_AGING_BARREL.get());
-        dropSelf(ModBlocks.ACACIA_AGING_BARREL.get());
+        dropSelf(ModBlocks.CHERRY_AGING_BARREL.get());
         dropSelf(ModBlocks.CRUSHER.get());
         dropSelf(ModBlocks.BOTTLING_MACHINE.get());
     }

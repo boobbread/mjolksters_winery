@@ -37,6 +37,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
     float alcohol = 0;
     float barrel = 0;
     float sweetness = 0;
+    String name = "";
 
     public final ItemStackHandler inventory = new ItemStackHandler(2) {
 
@@ -97,6 +98,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
 
     private void processBottle() {
         ItemStack inputBottle = inventory.getStackInSlot(BOTTLE_INPUT_SLOT);
+        int inputCount = inputBottle.getCount();
 
         if (!level.isClientSide) {
             WineRating rating = WineQualityChecker.getChecked(inputBottle);
@@ -106,30 +108,31 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
             this.barrel = rating.barrelRating();
             this.sweetness = rating.sweetnessRating();
         }
-
+        WineData wineData = inputBottle.get(ModDataComponents.WINE_DATA.get());
         // Create clean output bottle
-        ItemStack outputBottle = new ItemStack(inputBottle.getItem(), 1);
-
+        ItemStack outputBottle = new ItemStack(inputBottle.getItem(), inputCount);
+        this.name = wineData.name();
         // Build star rating for name
         int numStars = (int) Math.floor(overall * 5);
         String star = "★";
         String starRating = star.repeat(numStars);
-        outputBottle.set(DataComponents.ITEM_NAME, Component.literal("Pinot Noir " + starRating));
+        outputBottle.set(DataComponents.ITEM_NAME, Component.literal(name + " " + starRating));
 
-        WineData wineData = inputBottle.get(ModDataComponents.WINE_DATA.get());
+
         if (wineData != null) {
             List<Component> tooltips = new ArrayList<>();
 
             tooltips.add(createTooltip("Age", formatAge(wineData.barrelAge()), age));
             tooltips.add(createTooltip("Alcohol", formatPercentage(wineData.alcoholPercentage()), alcohol));
-            tooltips.add(createTooltip("Sweetness", formatPercentage(wineData.wineSweetness()), sweetness));
+            tooltips.add(createTooltip("Sweetness", formatSweetness(wineData.wineSweetness()), sweetness));
             tooltips.add(createTooltip("Barrel", formatBarrel(wineData.barrelType()), barrel));
 
             outputBottle.set(DataComponents.LORE, new ItemLore(tooltips));
         }
 
+
         // Consume input and set output
-        inputBottle.shrink(1);
+        inputBottle.shrink(inputCount);
         inventory.setStackInSlot(BOTTLE_OUTPUT_SLOT, outputBottle);
     }
 
@@ -166,5 +169,13 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
         if (barrelType.contains("birch")) return "Birch";
         if (barrelType.contains("cherry")) return "Cherry";
         return "None";
+    }
+
+    private String formatSweetness(float value) {
+        if (value <= 0.02) return "Extra Dry";
+        if (value <= 0.04 && value > 0.02) return "Dry";
+        if (value <= 0.06 && value > 0.04) return "Semi Dry";
+        if (value <= 0.08 && value > 0.06) return "Sweet";
+        return "Extra Sweet";
     }
 }

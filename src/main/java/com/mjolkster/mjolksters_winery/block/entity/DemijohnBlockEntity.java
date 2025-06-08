@@ -301,7 +301,7 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             float maxAlcohol = getMaxAlcoholForYeast(yeastSlot); // new method
             float sugarEffect = 0.01f * sugarCount;
             this.alcoholPercentage = Math.min(0.1f + sugarEffect, maxAlcohol);
-            this.wineSweetness = Math.max(0.1f + sugarEffect - maxAlcohol, 0f);
+            this.wineSweetness = (0.1f + sugarEffect) - maxAlcohol;
 
         }
     }

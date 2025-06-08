@@ -1,14 +1,13 @@
 package com.mjolkster.mjolksters_winery.registry;
 
 import com.google.common.collect.Sets;
+import com.mjolkster.mjolksters_winery.item.GrapeSeedItem;
 import com.mjolkster.mjolksters_winery.item.JuiceBucketItem;
 import com.mjolkster.mjolksters_winery.Winery;
 import com.mjolkster.mjolksters_winery.item.WineBucketItem;
+import com.mjolkster.mjolksters_winery.util.GrapeVariety;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.LinkedHashSet;
@@ -38,10 +37,10 @@ public class ModItems {
         return new Item.Properties();
     }
     public static Item.Properties drinkableItem() {
-        return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
+        return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1);
     }
     public static Item.Properties grapeItem() {
-        return new Item.Properties().stacksTo(64);
+        return new Item.Properties().stacksTo(64).food(ModFoodProperties.GRAPE);
     }
     public static Item.Properties yeastItem() {
         return new Item.Properties().stacksTo(1);
@@ -58,8 +57,10 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.OAK_AGING_BARREL.get(), basicItem()));
     public static final Supplier<Item> SPRUCE_AGING_BARREL = registerWithTab("spruce_aging_barrel",
             () -> new BlockItem(ModBlocks.SPRUCE_AGING_BARREL.get(), basicItem()));
-    public static final Supplier<Item> ACACIA_AGING_BARREL = registerWithTab("acacia_aging_barrel",
-            () -> new BlockItem(ModBlocks.ACACIA_AGING_BARREL.get(), basicItem()));
+    public static final Supplier<Item> CHERRY_AGING_BARREL = registerWithTab("cherry_aging_barrel",
+            () -> new BlockItem(ModBlocks.CHERRY_AGING_BARREL.get(), basicItem()));
+    public static final Supplier<Item> CRIMSON_AGING_BARREL = registerWithTab("crimson_aging_barrel",
+            () -> new BlockItem(ModBlocks.CRIMSON_AGING_BARREL.get(), basicItem()));
     public static final Supplier<Item> BOTTLING_MACHINE = registerWithTab("bottling_machine",
             () -> new BlockItem(ModBlocks.BOTTLING_MACHINE.get(), basicItem()));
     public static final Supplier<Item> YEAST_POT = registerWithTab("yeast_pot",
@@ -124,43 +125,43 @@ public class ModItems {
     // grapes - red
 
     public static final Supplier<Item> PINOT_NOIR = registerWithTab("pinot_noir_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.PINOT_NOIR, grapeItem()));
     public static final Supplier<Item> SANGIOVESE = registerWithTab("sangiovese_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.SANGIOVESE, grapeItem()));
     public static final Supplier<Item> CABERNET_SAUVIGNON = registerWithTab("cabernet_sauvignon_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.CABERNET_SAUVIGNON, grapeItem()));
     public static final Supplier<Item> TEMPRANILLO = registerWithTab("tempranillo_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.TEMPRANILLO, grapeItem()));
     public static final Supplier<Item> MOONDROP = registerWithTab("moondrop_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.MOONDROP, grapeItem()));
     public static final Supplier<Item> RUBY_ROMAN = registerWithTab("ruby_roman_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.RUBY_ROMAN, grapeItem()));
     public static final Supplier<Item> AUTUMN_ROYAL = registerWithTab("autumn_royal_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.AUTUMN_ROYAL, grapeItem()));
 
     // grapes - white
 
     public static final Supplier<Item> RIESLING = registerWithTab("riesling_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.RIESLING, grapeItem()));
     public static final Supplier<Item> CHARDONNAY = registerWithTab("chardonnay_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.CHARDONNAY, grapeItem()));
     public static final Supplier<Item> SAUVIGNON_BLANC = registerWithTab("sauvignon_blanc_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.SAUVIGNON_BLANC, grapeItem()));
     public static final Supplier<Item> PINOT_GRIGIO = registerWithTab("pinot_grigio_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.PINOT_GRIGIO, grapeItem()));
     public static final Supplier<Item> COTTON_CANDY = registerWithTab("cotton_candy_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.COTTON_CANDY, grapeItem()));
     public static final Supplier<Item> GRENACHE_BLANC = registerWithTab("grenache_blanc_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.GRENACHE_BLANC, grapeItem()));
     public static final Supplier<Item> WATERFALL = registerWithTab("waterfall_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.WATERFALL, grapeItem()));
 
     // grapes - special
 
     public static final Supplier<Item> KOSHU = registerWithTab("koshu_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.KOSHU, grapeItem()));
     public static final Supplier<Item> PINOT_DE_LENFER = registerWithTab("pinot_de_lenfer_grapes",
-            () -> new Item(grapeItem()));
+            () -> new GrapeSeedItem(GrapeVariety.PINOT_DE_LENFER, grapeItem()));
 
     // yeasts
 
