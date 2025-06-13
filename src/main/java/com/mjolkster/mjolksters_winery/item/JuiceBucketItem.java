@@ -1,7 +1,7 @@
 package com.mjolkster.mjolksters_winery.item;
 
-import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import com.mjolkster.mjolksters_winery.registry.ModDataComponents;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;

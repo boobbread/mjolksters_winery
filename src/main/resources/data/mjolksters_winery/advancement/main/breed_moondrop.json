@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:moondrop_grapes"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.moondrop"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.moondrop.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/mutate_grape",
+  "criteria": {
+    "breed_moondrop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:moondrop_grapes"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "breed_moondrop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

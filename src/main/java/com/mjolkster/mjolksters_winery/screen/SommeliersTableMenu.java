@@ -1,19 +1,20 @@
 package com.mjolkster.mjolksters_winery.screen;
 
-import com.mjolkster.mjolksters_winery.block.BottlingMachineBlock;
 import com.mjolkster.mjolksters_winery.block.SommeliersTableBlock;
 import com.mjolkster.mjolksters_winery.block.entity.SommeliersTableBlockEntity;
 import com.mjolkster.mjolksters_winery.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class SommeliersTableMenu extends AbstractContainerMenu {
     public final SommeliersTableBlockEntity blockEntity;

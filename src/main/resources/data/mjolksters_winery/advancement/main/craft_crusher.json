@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:crusher"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.crusher"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.crusher.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/get_grape",
+  "criteria": {
+    "craft_crusher": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:crusher"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craft_crusher"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

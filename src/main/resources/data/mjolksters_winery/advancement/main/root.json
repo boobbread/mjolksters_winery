@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/husbandry.png",
+    "description": {
+      "translate": "mjolksters_winery.advancement.root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "mjolksters_winery:demijohn"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "mjolksters_winery.advancement.root"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

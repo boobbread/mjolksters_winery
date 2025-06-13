@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "mjolksters_winery:riesling_grapes",
+    "mjolksters_winery:chardonnay_grapes",
+    "mjolksters_winery:sauvignon_blanc_grapes",
+    "mjolksters_winery:pinot_grigio_grapes",
+    "mjolksters_winery:cotton_candy_grapes",
+    "mjolksters_winery:grenache_blanc_grapes",
+    "mjolksters_winery:waterfall_grapes"
+  ]
+}

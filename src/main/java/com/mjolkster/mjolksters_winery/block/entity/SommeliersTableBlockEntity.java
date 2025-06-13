@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 import static com.mjolkster.mjolksters_winery.tag.CommonTags.BOTTLE;
 
@@ -113,7 +112,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
         ItemStack outputBottle = new ItemStack(inputBottle.getItem(), inputCount);
         this.name = wineData.name();
         // Build star rating for name
-        int numStars = (int) Math.floor(overall * 5);
+        int numStars = Math.round(overall * 5);
         String star = "★";
         String starRating = star.repeat(numStars);
         outputBottle.set(DataComponents.ITEM_NAME, Component.literal(name + " " + starRating));
@@ -143,7 +142,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private ChatFormatting getColorForRating(float rating) {
-        int score = (int) (rating * 10);
+        int score = Math.round(rating * 10);
         return switch (score) {
             case 0, 1, 2, 3, 4 -> ChatFormatting.RED;
             case 5, 6, 7 -> ChatFormatting.GRAY;
@@ -154,8 +153,9 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private String formatAge(int barrelAge) {
-        double years = barrelAge / 24000.0;
-        return String.format("%.1f years", years);
+        float years = barrelAge / 24000.0f;
+        int months = Math.round(years * 12);
+        return String.format(months + "Months");
     }
 
     private String formatPercentage(float value) {

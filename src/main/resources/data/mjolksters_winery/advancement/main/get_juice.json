@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:juice_bucket"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.juice_bucket"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.juice_bucket.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/craft_crusher",
+  "criteria": {
+    "get_juice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:juice_bucket"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_juice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

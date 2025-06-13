@@ -1,9 +1,9 @@
 package com.mjolkster.mjolksters_winery.block.entity;
 
 import com.mjolkster.mjolksters_winery.item.WineBucketItem;
+import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
-import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.BottlingMachineMenu;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -41,7 +40,7 @@ import java.util.function.Supplier;
 
 import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.FACING;
 import static com.mjolkster.mjolksters_winery.block.BottlingMachineBlock.IN_USE;
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.*;
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_DATA;
 
 public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvider {
     public final FluidTank fluidTank = new FluidTank(FluidType.BUCKET_VOLUME, this::isFluidValid) {

@@ -1,6 +1,5 @@
 package com.mjolkster.mjolksters_winery.block;
 
-import com.mjolkster.mjolksters_winery.block.entity.BottlingMachineBlockEntity;
 import com.mjolkster.mjolksters_winery.block.entity.SommeliersTableBlockEntity;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.util.VoxelShapeHandler;

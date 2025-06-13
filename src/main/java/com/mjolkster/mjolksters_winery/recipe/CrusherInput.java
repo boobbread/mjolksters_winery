@@ -1,10 +1,10 @@
 package com.mjolkster.mjolksters_winery.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
+
+import java.util.List;
 
 public class CrusherInput implements RecipeInput {
     public static final CrusherInput EMPTY = new CrusherInput(List.of());

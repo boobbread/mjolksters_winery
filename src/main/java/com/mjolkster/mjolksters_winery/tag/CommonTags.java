@@ -9,20 +9,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
-import javax.swing.text.html.HTML;
-
 public class CommonTags {
     public static final TagKey<Fluid> WINE = commonFluidTag("wine");
     public static final TagKey<Item> GRAPE = commonItemTag("grape");
     public static final TagKey<Item> YEAST = commonItemTag("yeast");
     public static final TagKey<Item> BOTTLE = commonItemTag("bottle");
+    public static final TagKey<Item> WHITE_GRAPES = commonItemTag("white_grapes");
+    public static final TagKey<Item> RED_GRAPES = commonItemTag("red_grapes");
+    public static final TagKey<Item> SPECIAL_GRAPES = commonItemTag("special_grapes");
 
     private static TagKey<Block> commonBlockTag(String path) {
         return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", path));
     }
 
     private static TagKey<Item> commonItemTag(String path) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("winery", path));
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("mjolksters_winery", path));
     }
 
     private static TagKey<Fluid> commonFluidTag(String path) {

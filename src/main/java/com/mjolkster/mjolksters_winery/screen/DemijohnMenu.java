@@ -1,7 +1,7 @@
 package com.mjolkster.mjolksters_winery.screen;
 
-import com.mjolkster.mjolksters_winery.registry.ModBlocks;
 import com.mjolkster.mjolksters_winery.block.entity.DemijohnBlockEntity;
+import com.mjolkster.mjolksters_winery.registry.ModBlocks;
 import com.mjolkster.mjolksters_winery.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,17 +1,12 @@
 package com.mjolkster.mjolksters_winery.block;
 
-import com.mjolkster.mjolksters_winery.block.entity.BottlingMachineBlockEntity;
 import com.mjolkster.mjolksters_winery.block.entity.CrusherBlockEntity;
 import com.mjolkster.mjolksters_winery.util.VoxelShapeHandler;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;

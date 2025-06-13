@@ -41,4 +41,8 @@ public class ModBlocks {
 
     public static final Supplier<Block> GRAPE_BUSH_BLOCK = BLOCKS.register("grape_bush_block",
             () -> new GrapeBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).randomTicks()));
+
+    public static final Supplier<Block> TRELLIS = BLOCKS.register("trellis",
+            () -> new TrellisBlock(BlockBehaviour.Properties.of()));
+
 }

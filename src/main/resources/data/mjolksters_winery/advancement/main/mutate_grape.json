@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:pinot_grigio_grapes"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.mutate_grape"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.mutate_grape.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/get_grape",
+  "criteria": {
+    "mutate_grape": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:pinot_grigio_grapes"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mutate_grape"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

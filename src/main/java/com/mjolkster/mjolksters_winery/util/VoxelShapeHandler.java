@@ -19,6 +19,7 @@ public class VoxelShapeHandler {
         registerShapeMap("aging_barrel", makeDirectionalShapes(new AABB(2 / 16.0, 0, 2 / 16.0, 14 / 16.0, 14 / 16.0, 1.0)));
         registerShapeMap("crusher", makeDirectionalShapes(new AABB(3 / 16.0, 0, 3 / 16.0, 13 / 16.0, 9 / 16.0, 13 / 16.0)));
         registerShapeMap("sommeliers_table", makeDirectionalShapes(new AABB(0, 0.001, 0, 1, 12 / 16.0, 1)));
+        registerShapeMap("rack", makeDirectionalShapes(new AABB(0, 0.001, 7/16f, 1, 1, 1)));
     }
 
     public static Map<Direction, VoxelShape> makeDirectionalShapes(AABB baseBox) {

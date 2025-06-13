@@ -2,9 +2,9 @@ package com.mjolkster.mjolksters_winery.block.entity;
 
 import com.mjolkster.mjolksters_winery.recipe.DemijohnRecipe;
 import com.mjolkster.mjolksters_winery.recipe.DemijohnRecipeInput;
+import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.registry.ModRecipes;
-import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.screen.DemijohnMenu;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
@@ -36,6 +36,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
+
 import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_DATA;
 
 

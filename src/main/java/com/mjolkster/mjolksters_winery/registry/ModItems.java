@@ -1,13 +1,17 @@
 package com.mjolkster.mjolksters_winery.registry;
 
 import com.google.common.collect.Sets;
+import com.mjolkster.mjolksters_winery.Winery;
 import com.mjolkster.mjolksters_winery.item.GrapeSeedItem;
 import com.mjolkster.mjolksters_winery.item.JuiceBucketItem;
-import com.mjolkster.mjolksters_winery.Winery;
 import com.mjolkster.mjolksters_winery.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.util.GrapeVariety;
+import com.mjolkster.mjolksters_winery.util.WineProperties;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.*;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.LinkedHashSet;
@@ -36,8 +40,11 @@ public class ModItems {
 
         return new Item.Properties();
     }
-    public static Item.Properties drinkableItem() {
-        return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(1);
+    public static Item.Properties wineItem(FoodProperties food) {
+        return new Item.Properties()
+                .craftRemainder(Items.GLASS_BOTTLE)
+                .stacksTo(1)
+                .food(food);
     }
     public static Item.Properties grapeItem() {
         return new Item.Properties().stacksTo(64).food(ModFoodProperties.GRAPE);
@@ -67,6 +74,8 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.YEAST_POT.get(), basicItem()));
     public static final Supplier<Item> SOMMELIERS_TABLE = registerWithTab("sommeliers_table",
             () -> new BlockItem(ModBlocks.SOMMELIERS_TABLE.get(), basicItem()));
+    public static final Supplier<Item> TRELLIS = registerWithTab("trellis",
+            () -> new BlockItem(ModBlocks.TRELLIS.get(), basicItem()));
 
     // buckets
 
@@ -77,50 +86,47 @@ public class ModItems {
 
     // bottles
 
-    public static final Supplier<Item> RED_WINE_BOTTLE = registerWithTab("red_wine_bottle",
-            () -> new Item(drinkableItem()));
-
     public static final Supplier<Item> PINOT_NOIR_BOTTLE = registerWithTab("pinot_noir_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.PINOT_NOIR)));
     public static final Supplier<Item> SANGIOVESE_BOTTLE = registerWithTab("sangiovese_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.SANGIOVESE)));
     public static final Supplier<Item> CABERNET_SAUVIGNON_BOTTLE = registerWithTab("cabernet_sauvignon_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.CABERNET_SAUVIGNON)));
     public static final Supplier<Item> TEMPRANILLO_BOTTLE = registerWithTab("tempranillo_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.TEMPRANILLO)));
     public static final Supplier<Item> MOONDROP_BOTTLE = registerWithTab("moondrop_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.MOONDROP)));
     public static final Supplier<Item> RUBY_ROMAN_BOTTLE = registerWithTab("ruby_roman_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.RUBY_ROMAN)));
     public static final Supplier<Item> AUTUMN_ROYAL_BOTTLE = registerWithTab("autumn_royal_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.AUTUMN_ROYAL)));
 
     public static final Supplier<Item> RIESLING_BOTTLE = registerWithTab("riesling_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.RIESLING)));
     public static final Supplier<Item> CHARDONNAY_BOTTLE = registerWithTab("chardonnay_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.CHARDONNAY)));
     public static final Supplier<Item> SAUVIGNON_BLANC_BOTTLE = registerWithTab("sauvignon_blanc_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.SAUVIGNON_BLANC)));
     public static final Supplier<Item> PINOT_GRIGIO_BOTTLE = registerWithTab("pinot_grigio_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.PINOT_GRIGIO)));
     public static final Supplier<Item> COTTON_CANDY_BOTTLE = registerWithTab("cotton_candy_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.COTTON_CANDY)));
     public static final Supplier<Item> GRENACHE_BLANC_BOTTLE = registerWithTab("grenache_blanc_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.GRENACHE_BLANC)));
     public static final Supplier<Item> WATERFALL_BOTTLE = registerWithTab("waterfall_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.WATERFALL)));
 
     public static final Supplier<Item> KOSHU_BOTTLE = registerWithTab("koshu_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.KOSHU)));
     public static final Supplier<Item> PINOT_DE_LENFER_BOTTLE = registerWithTab("pinot_de_lenfer_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.PINOT_DE_LENFER)));
 
     public static final Supplier<Item> SWEET_BERRY_WINE_BOTTLE = registerWithTab("sweet_berry_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.SWEET_BERRY)));
     public static final Supplier<Item> GLOW_BERRY_WINE_BOTTLE = registerWithTab("glow_berry_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.GLOW_BERRY)));
     public static final Supplier<Item> CHORUS_FRUIT_WINE_BOTTLE = registerWithTab("chorus_fruit_wine_bottle",
-            () -> new Item(drinkableItem()));
+            () -> new Item(wineItem(WineProperties.CHORUS_FRUIT)));
 
     // grapes - red
 

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:sangiovese_grapes"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.sangiovese"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.sangiovese.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/mutate_grape",
+  "criteria": {
+    "breed_sangiovese": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:sangiovese_grapes"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "breed_sangiovese"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

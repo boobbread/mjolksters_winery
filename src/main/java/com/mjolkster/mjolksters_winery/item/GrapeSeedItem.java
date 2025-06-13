@@ -2,7 +2,6 @@ package com.mjolkster.mjolksters_winery.item;
 
 import com.mjolkster.mjolksters_winery.block.GrapeBushBlock;
 import com.mjolkster.mjolksters_winery.registry.ModBlocks;
-import com.mjolkster.mjolksters_winery.util.GrapeMutationHandler;
 import com.mjolkster.mjolksters_winery.util.GrapeVariety;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class GrapeSeedItem extends Item {
-    private final GrapeVariety variety;
+    private GrapeVariety variety;
 
     public GrapeSeedItem(GrapeVariety variety, Properties properties) {
         super(properties);

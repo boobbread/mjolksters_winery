@@ -32,7 +32,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
 
-import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.*;
+import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_DATA;
 
 public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider {
     public final FluidTank fluidTank = new FluidTank(4* FluidType.BUCKET_VOLUME, this::isFluidValid) {

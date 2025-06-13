@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "mjolksters_winery:vintner_poi",
+      "required": false
+    }
+  ]
+}

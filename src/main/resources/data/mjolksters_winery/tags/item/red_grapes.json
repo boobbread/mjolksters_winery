@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "mjolksters_winery:pinot_noir_grapes",
+    "mjolksters_winery:sangiovese_grapes",
+    "mjolksters_winery:cabernet_sauvignon_grapes",
+    "mjolksters_winery:tempranillo_grapes",
+    "mjolksters_winery:moondrop_grapes",
+    "mjolksters_winery:autumn_royal_grapes",
+    "mjolksters_winery:ruby_roman_grapes"
+  ]
+}

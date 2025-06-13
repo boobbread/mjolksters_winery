@@ -1,10 +1,10 @@
 package com.mjolkster.mjolksters_winery.block.entity;
 
-import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.registry.ModItems;
 import com.mjolkster.mjolksters_winery.tag.CommonTags;
+import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,6 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +67,7 @@ public class CrusherBlockEntity extends BlockEntity {
         GRAPE_JUICE_MAP.put(Items.CHORUS_FRUIT, new WineData(0xFF8F5CB5, "Chorus", 0, "none", 0, 0));
     }
 
-    public final FluidTank fluidTank = new FluidTank(3 * FluidType.BUCKET_VOLUME, fluidStack ->
+    public final FluidTank fluidTank = new FluidTank(FluidType.BUCKET_VOLUME, fluidStack ->
             fluidStack.getFluid() == ModFluids.JUICE.source().get()) {
         @Override
         protected void onContentsChanged() {
@@ -136,18 +135,23 @@ public class CrusherBlockEntity extends BlockEntity {
             }
         }
 
-        ItemStack toInsert = grapeStack.copyWithCount(1);
-        if (currentGrapes.isEmpty()) {
-            inventory.setStackInSlot(grapeSlot, toInsert);
-        } else {
-            currentGrapes.grow(1);
+        if (grapeStack.getCount() >= 5) {
+            ItemStack toInsert = grapeStack.copyWithCount(5);
+            if (currentGrapes.isEmpty()) {
+                inventory.setStackInSlot(grapeSlot, toInsert);
+            } else {
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            }
+
+            if (!player.isCreative()) {
+                grapeStack.shrink(5);
+            }
+
+            assert level != null;
+            level.playSound(null, worldPosition, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 0.8f, 1.2f);
         }
 
-        if (!player.isCreative()) {
-            grapeStack.shrink(1);
-        }
 
-        level.playSound(null, worldPosition, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 0.8f, 1.2f);
         setChanged();
         return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
@@ -159,17 +163,22 @@ public class CrusherBlockEntity extends BlockEntity {
             return ItemInteractionResult.FAIL;
         }
 
-        FluidStack simulatedFill = new FluidStack(ModFluids.JUICE.source().get(), juicePerGrape);
-        int filled = fluidTank.fill(simulatedFill, IFluidHandler.FluidAction.SIMULATE);
-        if (filled < juicePerGrape) {
+        int grapeCount = grapes.getCount();
+        int maxJuiceSpace = fluidTank.getSpace();
+        int maxCrushable = maxJuiceSpace / juicePerGrape;
+        int toCrush = Math.min(grapeCount, maxCrushable);
+
+        if (toCrush <= 0) {
             return ItemInteractionResult.FAIL;
         }
 
-        grapes.shrink(1);
-        fluidTank.fill(simulatedFill, IFluidHandler.FluidAction.EXECUTE);
+        grapes.shrink(toCrush);
+        fluidTank.fill(new FluidStack(ModFluids.JUICE.source().get(), toCrush * juicePerGrape), IFluidHandler.FluidAction.EXECUTE);
 
+        assert level != null;
         level.playSound(null, worldPosition, SoundEvents.HONEY_BLOCK_BREAK,
                 SoundSource.BLOCKS, 0.8f, 0.9f);
+
         setChanged();
         return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }

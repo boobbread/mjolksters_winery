@@ -1,20 +1,25 @@
 package com.mjolkster.mjolksters_winery.util;
 
 import com.mjolkster.mjolksters_winery.block.GrapeBushBlock;
-import com.mjolkster.mjolksters_winery.item.GrapeSeedItem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import java.util.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class GrapeMutationHandler {
+    public static Level grapeLevel;
     public static GrapeVariety determineOffspring(GrapeVariety thisVariety, GrapeVariety thatVariety, Level level, BlockPos pos, RandomSource random) {
         Pair<GrapeVariety, GrapeVariety> parentVarieties = Pair.of(thisVariety, thatVariety);
 
+        grapeLevel = level;
         GrapeVariety p1 = parentVarieties.getFirst();
         GrapeVariety p2 = parentVarieties.getSecond();
 
@@ -46,7 +51,7 @@ public class GrapeMutationHandler {
 
             if (v1 == GrapeVariety.PINOT_NOIR){
 
-                if (isNight(GrapeBushBlock.grapeLevel)) {
+                if (isNight(grapeLevel)) {
                     return GrapeVariety.MOONDROP;
                 } else return GrapeVariety.PINOT_GRIGIO;
 

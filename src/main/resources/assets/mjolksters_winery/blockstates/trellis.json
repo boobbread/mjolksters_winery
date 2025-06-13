@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "top=false,connection=none": {
+      "model": "mjolksters_winery:block/trellis_ground_none"
+    },
+    "top=false,connection=east": {
+      "model": "mjolksters_winery:block/trellis_ground_east"
+    },
+    "top=false,connection=west": {
+      "model": "mjolksters_winery:block/trellis_ground_west"
+    },
+    "top=false,connection=east_west": {
+      "model": "mjolksters_winery:block/trellis_ground_both"
+    },
+
+    "top=true,connection=none": {
+      "model": "mjolksters_winery:block/trellis_top_none"
+    },
+    "top=true,connection=east": {
+      "model": "mjolksters_winery:block/trellis_top_east"
+    },
+    "top=true,connection=west": {
+      "model": "mjolksters_winery:block/trellis_top_west"
+    },
+    "top=true,connection=east_west": {
+      "model": "mjolksters_winery:block/trellis_top_both"
+    }
+  }
+}

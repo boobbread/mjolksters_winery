@@ -9,6 +9,8 @@
   "block.mjolksters_winery.bottling_machine": "Auto Bottler",
   "block.mjolksters_winery.sommeliers_table": "Sommeliers Table",
   "block.mjolksters_winery.yeast_pot": "Yeast Pot",
+  "block.mjolksters_winery.trellis": "Trellis",
+  "block.mjolksters_winery.spruce_rack": "Spruce Rack",
 
   "item.mjolksters_winery.red_wine_bottle": "Red Wine Bottle",
   "item.mjolksters_winery.white_wine_bottle": "White Wine Bottle",
@@ -69,5 +71,25 @@
   "item.mjolksters_winery.glow_berry_wine_bottle": "Glow Berry Wine Bottle",
   "item.mjolksters_winery.chorus_fruit_wine_bottle": "Chorus Wine Bottle",
 
-  "itemGroup.mjolksters_winery": "Mjolkster's Winery"
+  "itemGroup.mjolksters_winery": "Mjolkster's Winery",
+
+  "entity.minecraft.villager.mjolksters_winery.vintner": "Vintner",
+
+  "mjolksters_winery.advancement.root": "Mjolkster's Winery",
+  "mjolksters_winery.advancement.root.desc": "Buckle up, it's wine time!",
+
+  "mjolksters_winery.advancement.mutate_grape": "It's Alive!",
+  "mjolksters_winery.advancement.mutate_grape.disc": "Mutate your first grape.",
+  "mjolksters_winery.advancement.sangiovese": "The Blood of Jupiter",
+  "mjolksters_winery.advancement.sangiovese.disc": "Climb a mountain and breed a sangiovese grape.",
+  "mjolksters_winery.advancement.moondrop": "A Little Drop of Moonlight",
+  "mjolksters_winery.advancement.moondrop.disc": "Stay up late and breed a moondrop grape.",
+  "mjolksters_winery.advancement.crusher": "Rip and Tear...",
+  "mjolksters_winery.advancement.crusher.disc": "Obtain a crusher",
+  "mjolksters_winery.advancement.juice_bucket": "Until It Is Done",
+  "mjolksters_winery.advancement.juice_bucket.disc": "Crush grapes to extract their juice.",
+  "mjolksters_winery.advancement.demijohn": "Bubble Bubble, Toil and Trouble",
+  "mjolksters_winery.advancement.demijohn.disc": "Craft a demijohn to really start the brewing journey.",
+  "mjolksters_winery.advancement.all_white_grapes": "White As Snow",
+  "mjolksters_winery.advancement.all_white_grapes.disc": "Collect all white grapes."
 }

@@ -1,10 +1,11 @@
 package com.mjolkster.mjolksters_winery.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DemijohnRecipeInput implements RecipeInput {
     public static final DemijohnRecipeInput EMPTY = new DemijohnRecipeInput(3, 1, List.of());

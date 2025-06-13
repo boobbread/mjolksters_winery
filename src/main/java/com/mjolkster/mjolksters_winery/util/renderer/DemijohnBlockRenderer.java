@@ -4,32 +4,21 @@ import com.mjolkster.mjolksters_winery.block.entity.DemijohnBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
 import org.joml.Matrix4f;
 
 public class DemijohnBlockRenderer implements BlockEntityRenderer<DemijohnBlockEntity> {
     public DemijohnBlockRenderer(BlockEntityRendererProvider.Context context) {
         // Constructor can remain empty unless you need to initialize something
     }
-    public int getLightLevel(Level level, BlockPos pos) {
-        int bLight = level.getBrightness(LightLayer.BLOCK, pos);
-        int sLight = level.getBrightness(LightLayer.SKY, pos);
-        return LightTexture.pack(bLight, sLight);
 
-    }
     @Override
     public void render(DemijohnBlockEntity be, float partialTick, PoseStack poseStack,
                        MultiBufferSource buffer, int packedLight, int packedOverlay) {

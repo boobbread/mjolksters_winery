@@ -43,6 +43,7 @@ public class GrapeBushBlock extends SweetBerryBushBlock {
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         GrapeVariety variety = state.getValue(VARIETY);
+
         return switch (variety) {
             case PINOT_NOIR -> new ItemStack(ModItems.PINOT_NOIR.get());
             case SANGIOVESE -> new ItemStack(ModItems.SANGIOVESE.get());
@@ -156,6 +157,7 @@ public class GrapeBushBlock extends SweetBerryBushBlock {
 
         GrapeVariety thisVariety = state.getValue(VARIETY);
         System.out.println("Parent variety: " + thisVariety);
+        grapeLevel = level;
 
         List<BlockPos> validAirPositions = new ArrayList<>();
         for (Direction dir : Direction.Plane.HORIZONTAL) {

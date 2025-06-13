@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:demijohn"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.demijohn"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.demijohn.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/root",
+  "criteria": {
+    "craft_demijohn": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "mjolksters_winery:demijohn"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craft_demijohn"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

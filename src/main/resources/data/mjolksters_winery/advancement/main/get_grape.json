@@ -1,0 +1,30 @@
+{
+  "parent": "mjolksters_winery:main/root",
+  "criteria": {
+    "get_grape": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:pinot_noir_grapes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Find your first grape",
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "mjolksters_winery:pinot_noir_grapes"
+    },
+    "title": "A Grape Start"
+  },
+  "requirements": [
+    [
+      "get_grape"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

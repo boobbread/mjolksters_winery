@@ -1,6 +1,5 @@
 package com.mjolkster.mjolksters_winery.datagen;
 
-import com.mjolkster.mjolksters_winery.Winery;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;

@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import static com.mjolkster.mjolksters_winery.registry.ModDataComponents.WINE_DATA;
 import static com.mjolkster.mjolksters_winery.tag.CommonTags.BOTTLE;
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.clamp;
 
 public class WineQualityChecker {
 
@@ -67,10 +67,10 @@ public class WineQualityChecker {
         float actualSweetness = actualData.wineSweetness();
 
         float barrelRating = actualBarrel.contains(idealBarrel) ? 1.0f : 0.0f;
-        float ageRating = idealAge == 0 ? 0.0f : (float) exp(-((actualAge - idealAge) ^ 2) / 4.7);
+        float ageRating = idealAge == 0 ? 0.0f : clamp((float) Math.exp(-(Math.pow(actualAge - idealAge, 2)) / (4700.0 * (idealAge * 0.63))), 0.0f, 1.0f);
         float alcoholRating = idealAlcohol == 0 ? 0.0f : clamp(1 - abs((idealAlcohol - actualAlcohol) / idealAlcohol), 0.0f, 1.0f);
         float sweetnessRating = idealSweetness == 0 ? 0.0f : clamp(1 - abs((idealSweetness - actualSweetness) / (idealSweetness * 10)), 0.0f, 1.0f);
-        float overallRating = (barrelRating + ageRating + alcoholRating) / 3.0f;
+        float overallRating = (barrelRating + ageRating + alcoholRating + sweetnessRating) / 4.0f;
 
         return new WineRating(barrelRating, ageRating, alcoholRating, sweetnessRating, overallRating);
     }

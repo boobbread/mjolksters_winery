@@ -48,6 +48,11 @@ public class ModBlockEntities {
                     SommeliersTableBlockEntity::new, ModBlocks.SOMMELIERS_TABLE.get()).build(null)
             );
 
+    public static final Supplier<BlockEntityType<TrellisBlockEntity>> TRELLIS_BE =
+            BLOCK_ENTITIES.register("trellis_be", () -> BlockEntityType.Builder.of(
+                    TrellisBlockEntity::new, ModBlocks.TRELLIS.get()).build(null)
+            );
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
