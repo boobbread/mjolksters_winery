@@ -1,8 +1,8 @@
-package com.mjolkster.mjolksters_winery.screen;
+package com.mjolkster.mjolksters_winery.client.screen;
 
-import com.mjolkster.mjolksters_winery.block.entity.DistillerBlockEntity;
-import com.mjolkster.mjolksters_winery.registry.ModBlocks;
-import com.mjolkster.mjolksters_winery.registry.ModMenuTypes;
+import com.mjolkster.mjolksters_winery.common.block.entity.DistillerBlockEntity;
+import com.mjolkster.mjolksters_winery.common.registry.ModBlocks;
+import com.mjolkster.mjolksters_winery.common.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

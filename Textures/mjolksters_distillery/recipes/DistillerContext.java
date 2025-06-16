@@ -1,4 +1,4 @@
-package com.mjolkster.mjolksters_winery.recipe;
+package com.mjolkster.mjolksters_winery.common.recipe;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;

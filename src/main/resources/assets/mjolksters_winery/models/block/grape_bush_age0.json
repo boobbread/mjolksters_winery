@@ -1,7 +1,7 @@
 {
   "textures": {
     "leaves":  "mjolksters_winery:block/grape_bush_age0_leaves",
-    "particles": "mjolksters_winery:block/grape_bush_age3_leaves"
+    "particle": "mjolksters_winery:block/grape_bush_age3_leaves"
   },
   "elements": [
     {

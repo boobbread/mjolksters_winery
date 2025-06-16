@@ -1,0 +1,76 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:pasteur_red_yeast"
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.get_yeast"
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.get_yeast.disc"
+    }
+  },
+  "parent": "mjolksters_winery:main/root",
+  "criteria": {
+    "pr": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:pasteur_red_yeast"
+          }
+        ]
+      }
+    },
+    "mo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:montrachet_yeast"
+          }
+        ]
+      }
+    },
+    "cb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:cote_des_blancs_yeast"
+          }
+        ]
+      }
+    },
+    "pc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:premier_cuvee_yeast"
+          }
+        ]
+      }
+    },
+    "ch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "mjolksters_winery:champagne_yeast"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pr",
+      "mo",
+      "cb",
+      "pc",
+      "ch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

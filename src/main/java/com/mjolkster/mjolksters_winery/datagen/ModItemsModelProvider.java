@@ -1,14 +1,14 @@
 package com.mjolkster.mjolksters_winery.datagen;
 
-import com.mjolkster.mjolksters_winery.Winery;
-import com.mjolkster.mjolksters_winery.registry.ModItems;
+import com.mjolkster.mjolksters_winery.MjolkstersWinery;
+import com.mjolkster.mjolksters_winery.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModItemsModelProvider extends ItemModelProvider {
     public ModItemsModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, Winery.MODID, existingFileHelper);
+        super(output, MjolkstersWinery.MODID, existingFileHelper);
     }
 
     @Override

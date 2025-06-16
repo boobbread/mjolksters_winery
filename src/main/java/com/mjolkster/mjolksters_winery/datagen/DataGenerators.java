@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery.datagen;
 
-import com.mjolkster.mjolksters_winery.Winery;
+import com.mjolkster.mjolksters_winery.MjolkstersWinery;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -11,7 +11,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = Winery.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MjolkstersWinery.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

@@ -1,6 +1,6 @@
 package com.mjolkster.mjolksters_winery.datagen;
 
-import com.mjolkster.mjolksters_winery.registry.ModBlocks;
+import com.mjolkster.mjolksters_winery.common.registry.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;

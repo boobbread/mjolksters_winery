@@ -1,0 +1,59 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:pinot_noir_grapes",
+      "components": {}
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.all_red_grapes",
+      "extra": [],
+      "color": "#f8b61d",
+      "bold": true
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.all_red_grapes.disc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "mjolksters_winery:main/mutate_grape",
+  "criteria": {
+    "pinor_noir": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:pinot_noir_grapes"}]}
+    },
+    "sangiovese": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:sangiovese_grapes"}]}
+    },
+    "cabernet_sauvignon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:cabernet_sauvignon_grapes"}]}
+    },
+    "tempranillo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:tempranillo_grapes"}]}
+    },
+    "moondrop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:moondrop_grapes"}]}
+    },
+    "ruby_roman": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:ruby_roman_grapes"}]}
+    },
+    "autumn_royal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:autumn_royal_grapes"}]}
+    }
+  },
+  "requirements": [
+    ["pinor_noir"],
+    ["sangiovese"],
+    ["cabernet_sauvignon"],
+    ["tempranillo"],
+    ["moondrop"],
+    ["ruby_roman"],
+    ["autumn_royal"]
+  ],
+  "sends_telemetry_event": true
+}

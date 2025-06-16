@@ -1,0 +1,17 @@
+{
+  "type": "mjolksters_winery:demijohn",
+  "ingredient1": {
+    "item" : "mjolksters_winery:juice_bucket"
+  },
+  "ingredient2": {
+    "item" : "minecraft:sugar"
+  },
+  "ingredient3": {
+    "tag" : "c:yeast"
+  },
+  "result": {
+    "fluid": "mjolksters_winery:source_wine",
+    "amount": 1000,
+    "id": "mjolksters_winery:source_wine"
+  }
+}

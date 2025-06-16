@@ -13,7 +13,7 @@
       "item": "minecraft:writable_book"
     },
     "B": {
-      "tag": "winery:bottle"
+      "tag": "c:bottle"
     },
     "_": {
       "item": "minecraft:spruce_slab"

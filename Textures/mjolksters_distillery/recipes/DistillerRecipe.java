@@ -1,6 +1,6 @@
-package com.mjolkster.mjolksters_winery.recipe;
+package com.mjolkster.mjolksters_winery.common.recipe;
 
-import com.mjolkster.mjolksters_winery.registry.ModRecipes;
+import com.mjolkster.mjolksters_winery.common.registry.ModRecipes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;

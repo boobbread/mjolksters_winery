@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "id": "mjolksters_winery:autumn_royal_grapes",
+      "components": {}
+    },
+    "title": {
+      "translate": "mjolksters_winery.advancement.rare_grapes",
+      "extra": [],
+      "color": "#f8b61d",
+      "bold": true
+    },
+    "description": {
+      "translate": "mjolksters_winery.advancement.rare_grapes.disc"
+    },
+    "frame": "task"
+  },
+  "parent": "mjolksters_winery:main/get_grape",
+  "criteria": {
+    "sauvignon_blanc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:sauvignon_blanc_grapes"}]}
+    },
+    "grenache_blanc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:grenache_blanc_grapes"}]}
+    },
+    "cabernet_sauvignon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:cabernet_sauvignon_grapes"}]}
+    },
+    "autumn_royal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {"items": [{"items": "mjolksters_winery:autumn_royal_grapes"}]}
+    }
+  },
+  "requirements": [
+    [
+      "sauvignon_blanc",
+      "grenache_blanc",
+      "cabernet_sauvignon",
+      "autumn_royal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

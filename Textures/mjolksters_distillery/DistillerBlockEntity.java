@@ -1,10 +1,10 @@
-package com.mjolkster.mjolksters_winery.block.entity;
+package com.mjolkster.mjolksters_winery.common.block.entity;
 
-import com.mjolkster.mjolksters_winery.recipe.DistillerContext;
-import com.mjolkster.mjolksters_winery.recipe.DistillerRecipe;
-import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
-import com.mjolkster.mjolksters_winery.registry.ModRecipes;
-import com.mjolkster.mjolksters_winery.screen.DistillerMenu;
+import com.mjolkster.mjolksters_winery.common.recipe.DistillerContext;
+import com.mjolkster.mjolksters_winery.common.recipe.DistillerRecipe;
+import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
+import com.mjolkster.mjolksters_winery.common.registry.ModRecipes;
+import com.mjolkster.mjolksters_winery.client.screen.DistillerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

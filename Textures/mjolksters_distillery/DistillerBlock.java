@@ -1,7 +1,7 @@
-package com.mjolkster.mjolksters_winery.block;
+package com.mjolkster.mjolksters_winery.common.block;
 
-import com.mjolkster.mjolksters_winery.block.entity.DistillerBlockEntity;
-import com.mjolkster.mjolksters_winery.registry.ModBlockEntities;
+import com.mjolkster.mjolksters_winery.common.block.entity.DistillerBlockEntity;
+import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.util.VoxelShapeHandler;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;

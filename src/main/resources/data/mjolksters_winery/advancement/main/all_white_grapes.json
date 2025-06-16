@@ -47,15 +47,13 @@
     }
   },
   "requirements": [
-    [
-      "riesling",
-      "chardonnay",
-      "sauvignon_blanc",
-      "pinot_grigio",
-      "cotton_candy",
-      "grenache_blanc",
-      "waterfall"
-    ]
+      ["riesling"],
+      ["chardonnay"],
+      ["sauvignon_blanc"],
+      ["pinot_grigio"],
+      ["cotton_candy"],
+      ["grenache_blanc"],
+      ["waterfall"]
   ],
   "sends_telemetry_event": true
 }

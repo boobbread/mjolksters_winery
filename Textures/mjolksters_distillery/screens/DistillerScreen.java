@@ -1,7 +1,7 @@
-package com.mjolkster.mjolksters_winery.screen;
+package com.mjolkster.mjolksters_winery.client.screen;
 
 import com.mjolkster.mjolksters_winery.Winery;
-import com.mjolkster.mjolksters_winery.block.entity.DistillerBlockEntity;
+import com.mjolkster.mjolksters_winery.common.block.entity.DistillerBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

@@ -1,6 +1,7 @@
 package com.mjolkster.mjolksters_winery.util;
 
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 public enum BiomeType implements StringRepresentable {
     FREEZING("freezing"),
@@ -16,7 +17,7 @@ public enum BiomeType implements StringRepresentable {
     }
 
     @Override
-    public String getSerializedName() {
+    public @NotNull String getSerializedName() {
         return name;
     }
 }

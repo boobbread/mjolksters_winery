@@ -2,11 +2,10 @@
   "required": true,
   "package": "com.mjolkster.mjolksters_winery.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "mjolksters_winery.refmap.json",
   "mixins": [
-    "StructureTemplatePoolAccessor"
+    "VillagerGossipAccessor"
   ],
-  "client": [],
-  "server": [],
-  "minVersion": "0.8.5"
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

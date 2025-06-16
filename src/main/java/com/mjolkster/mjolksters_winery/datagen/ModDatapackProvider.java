@@ -1,9 +1,9 @@
 package com.mjolkster.mjolksters_winery.datagen;
 
-import com.mjolkster.mjolksters_winery.Winery;
-import com.mjolkster.mjolksters_winery.worldgen.ModBiomeModifiers;
-import com.mjolkster.mjolksters_winery.worldgen.ModConfiguredFeatures;
-import com.mjolkster.mjolksters_winery.worldgen.ModPlacedFeatures;
+import com.mjolkster.mjolksters_winery.MjolkstersWinery;
+import com.mjolkster.mjolksters_winery.common.worldgen.ModBiomeModifiers;
+import com.mjolkster.mjolksters_winery.common.worldgen.ModConfiguredFeatures;
+import com.mjolkster.mjolksters_winery.common.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +21,6 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(Winery.MODID));
+        super(output, registries, BUILDER, Set.of(MjolkstersWinery.MODID));
     }
 }
