@@ -1,4 +1,4 @@
 
 Mjolkster's Winery
 =======
-An addon for Farmers Delight which adds realistic (hopefully) and immersive winemaking to the game!
+An addon which adds realistic (hopefully) and immersive winemaking to the game!
