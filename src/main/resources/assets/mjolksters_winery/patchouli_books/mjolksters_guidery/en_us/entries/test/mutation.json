@@ -1,0 +1,48 @@
+{
+  "name": "Mutation",
+  "icon": "mjolksters_winery:pinot_grigio_grapes",
+  "category": "mjolksters_winery:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Many variants can only be obtained through mutation, caused by allowing a grape bush to grow diagonally to another mature bush. <br><br>Cross-breeding different grape bushes will result in a new variant, for example breeding to Pinot Noir bushes will produce a Pinot Grigio bush."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Layout",
+      "multiblock": {
+        "pattern": [
+          [
+            "____",
+            "_B0_",
+            "_CB_",
+            "____"
+          ],
+          [
+            "_GG_",
+            "GGGG",
+            "GGGG",
+            "_GG_"
+          ]
+        ],
+        "mapping": {
+          "G": "minecraft:grass_block",
+          "B": "mjolksters_winery:grape_bush_block[age=3]",
+          "C": "mjolksters_winery:grape_bush_block[age=1]"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:text",
+      "text": "<br>A select few variants of grapes require special conditions or a non-grape parent to be created, and special breeds require these unique grapes as parents themselves!<br><br>Both the delicious Koshu and devilish Pinot De L'Enfer fit into this category of specialty breeds, and it really shows in their flavour."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:bee",
+      "scale": 1.2,
+      "name": "Pollination",
+      "text": "If you would like to increase the chances of mutation, ensure to place a beehive nearby to your growth area!"
+    }
+  ]
+}

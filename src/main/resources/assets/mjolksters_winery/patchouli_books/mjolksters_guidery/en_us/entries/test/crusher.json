@@ -1,0 +1,58 @@
+{
+  "name": "Making Wine",
+  "icon": "mjolksters_winery:demijohn",
+  "category": "mjolksters_winery:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are several steps to the wine making process:<br>$(li)$(l:test/crusher#crushing)Crushing$(li)$(l:test/crusher#fermenting)Fermenting$(li)$(l:test/crusher#aging)Aging$(li)$(l:test/crusher#bottling)Bottling$(li)$(l:test/crusher#testing)Testing$()<br><br>Read on to find out about each step in an adequate amount of detail for replication (but not enough to spoil my secrets)"
+    },
+    {
+      "type": "patchouli:crafting",
+      "anchor": "crushing",
+      "recipe": "mjolksters_winery:crusher",
+      "title": "Crushing",
+      "text": "<br>The first block you will need is a crusher, shown above. By inserting 5 grapes (at a time) and crushing them, you can then extract a bucket of the grapes' juice."
+    },
+    {
+      "type": "patchouli:crafting",
+      "anchor": "fermenting",
+      "recipe": "mjolksters_winery:demijohn",
+      "title": "Fermenting",
+      "text": "<br>The second block you will need is a demijohn. Simply add your grape juice, sugar and some yeast, and you have your own, freshly brewed wine. Careful with thee sugar though, you may ruin the batch."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "mjolksters_winery:yeast_pot",
+      "title": " ",
+      "text": "<br>As for the aforementioned yeast, this can be obtained by making a yeast pot and placing it down somewhere. Give it some time and you'll have cultivated your own yeast!"
+    },
+    {
+      "type": "patchouli:crafting",
+      "anchor": "aging",
+      "recipe": "mjolksters_winery:oak_aging_barrel",
+      "title": "Aging",
+      "text": "<br>The next step is to aged your wine, using one of the four types of barrel: Oak, Spruce, Cherry and Crimson. Depending on the wine you are aging, this may take 6 months to several years."
+    },
+    {
+      "type": "patchouli:crafting",
+      "anchor": "bottling",
+      "recipe": "mjolksters_winery:bottling_machine",
+      "title": "Bottling",
+      "text": "<br>Now you have a bucket of aged wine, you will need to bottle it up. You will be glad to know that this is by far the simplest part of the process, just put your bucket of wine in and add some bottles."
+    },
+    {
+      "type": "patchouli:crafting",
+      "anchor": "testing",
+      "recipe": "mjolksters_winery:sommeliers_table",
+      "title": "Testing",
+      "text": "<br>Finally, we draw to the end of the process. With your wine aged and bottled, it now comes time to test it's quality. Simply place your bottle into the table and give it a smell."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:c:bottle",
+      "title": "Rating",
+      "text": "<br>Wine is rating on four factors, each one tuned by a step in the winemaking process: age, barrel, alcohol percentage and sweetness. Each wine has an ideal rating for each of these factors, your proximity to which can be seen in your rating, $(c)bronze, $(7)silver, $(6)gold $()or $(b)diamond."
+    }
+  ]
+}

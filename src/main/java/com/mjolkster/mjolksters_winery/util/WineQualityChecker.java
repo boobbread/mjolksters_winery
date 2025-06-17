@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mjolkster.mjolksters_winery.common.registry.ModDataComponents.WINE_DATA;
 import static com.mjolkster.mjolksters_winery.common.CommonTags.BOTTLE;
+import static com.mjolkster.mjolksters_winery.common.registry.ModDataComponents.WINE_DATA;
 import static java.lang.Math.abs;
 import static java.lang.Math.clamp;
 

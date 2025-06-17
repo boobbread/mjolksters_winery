@@ -53,8 +53,7 @@ public class CrusherInput implements RecipeInput {
         if (other == this) {
             return true;
         } else {
-            if (other instanceof CrusherInput) {
-                CrusherInput craftingInput = (CrusherInput) other;
+            if (other instanceof CrusherInput craftingInput) {
                 return ItemStack.listMatches(this.items, craftingInput.items);
             }
             return false;

@@ -4,7 +4,6 @@ import com.mjolkster.mjolksters_winery.MjolkstersWinery;
 import com.mjolkster.mjolksters_winery.common.block.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

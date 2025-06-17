@@ -1,0 +1,17 @@
+{
+  "name": "Grapes",
+  "icon": "mjolksters_winery:pinot_noir_grapes",
+  "category": "mjolksters_winery:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are a total of 16 grapes and 3 grape-adjacent crops that can all be used to brew. <br><br>Only the base variety of grape, Pinot Noir, can be found in the wild and all other varieties must be sourced through either $(l:test/mutation)mutation$() or trading with villagers."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:c:crops/grape",
+      "title": "Grapes",
+      "text": "<br>All of these grapes yield a different type of wine, all with different effects upon consumption. <br><br>Villagers also tend to appreciate wine, but you best make sure it is good."
+    }
+  ]
+}

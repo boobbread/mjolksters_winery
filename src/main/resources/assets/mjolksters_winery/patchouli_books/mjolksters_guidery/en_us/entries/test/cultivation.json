@@ -1,0 +1,27 @@
+{
+  "name": "Cultivation",
+  "icon": "mjolksters_winery:trellis",
+  "category": "mjolksters_winery:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Say you want to grow and harvest grapes without risking pesky mutations, luckily there's a block for that! The trellis allows you to not only stop mutation, but even grow grapes at a faster rate!<br><br>Trellises should be placed going east to west to ensure the grapes get the most sunlight throughout the day."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "mjolksters_winery:trellis",
+      "title": "Crafting",
+      "text": "<br>Trellises are easy to craft, nice to look at and extremely useful. I would go as far to call them an essential part of any good winery."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:shears,minecraft:bone_meal",
+      "title": "Tools",
+      "text": "<br>A grape's growth can be accelerated using bonemeal, allowing you to very quickly populate a vineyard.<br><br>If you no longer want a grape bush on your trellis, use shears to remove it, yielding one bunch of grapes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "<br>I would recommend placing your trellises in rows, populated by only one type of grape for ease of organisation.<br><br>Grapes should be grown outside (obviously), and can happily thrive in any climate, in this dimension or another.<br><br>Final note, if longer vineyards aren't your thing, trellises can be stacked atop each other to produce a logistical nightmare."
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class GrapeSeedItem extends Item {
-    private GrapeVariety variety;
+    private final GrapeVariety variety;
 
     public GrapeSeedItem(GrapeVariety variety, Properties properties) {
         super(properties);

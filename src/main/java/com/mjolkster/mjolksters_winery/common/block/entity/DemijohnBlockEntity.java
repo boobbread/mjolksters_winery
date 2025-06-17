@@ -1,11 +1,11 @@
 package com.mjolkster.mjolksters_winery.common.block.entity;
 
+import com.mjolkster.mjolksters_winery.client.screen.DemijohnMenu;
 import com.mjolkster.mjolksters_winery.common.recipe.DemijohnRecipe;
 import com.mjolkster.mjolksters_winery.common.recipe.DemijohnRecipeInput;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.registry.ModItems;
 import com.mjolkster.mjolksters_winery.common.registry.ModRecipes;
-import com.mjolkster.mjolksters_winery.client.screen.DemijohnMenu;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -59,7 +59,7 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            };
+            }
         }
     };
 
@@ -247,7 +247,7 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 fillToMax();
                 if(!level.isClientSide()){
                     level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-                };
+                }
             }
 
             increaseCraftingProgress();

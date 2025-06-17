@@ -1,8 +1,8 @@
 package com.mjolkster.mjolksters_winery.common.block.entity;
 
+import com.mjolkster.mjolksters_winery.client.screen.SommeliersTableMenu;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.registry.ModDataComponents;
-import com.mjolkster.mjolksters_winery.client.screen.SommeliersTableMenu;
 import com.mjolkster.mjolksters_winery.util.WineQualityChecker;
 import com.mjolkster.mjolksters_winery.util.WineQualityChecker.WineRating;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
@@ -152,7 +152,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
     private String formatAge(int barrelAge) {
         float years = barrelAge / 24000.0f;
         int months = Math.round(years * 12);
-        return String.format(months + "Months");
+        return String.format(months + " Months");
     }
 
     private String formatPercentage(float value) {

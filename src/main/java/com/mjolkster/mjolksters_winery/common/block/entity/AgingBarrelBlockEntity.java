@@ -1,9 +1,9 @@
 package com.mjolkster.mjolksters_winery.common.block.entity;
 
+import com.mjolkster.mjolksters_winery.client.screen.AgingBarrelMenu;
 import com.mjolkster.mjolksters_winery.common.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.registry.ModFluids;
-import com.mjolkster.mjolksters_winery.client.screen.AgingBarrelMenu;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -22,7 +22,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -40,7 +39,7 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
             setChanged();
             if(!level.isClientSide()){
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            };
+            }
         }
     };
 
@@ -203,9 +202,6 @@ public class AgingBarrelBlockEntity extends BlockEntity implements MenuProvider 
         inputWineName = pTag.getString("inputWineName");
         inputAlcoholPercentage = pTag.getFloat("inputAlcohol");
         inputWineSweetness = pTag.getFloat("inputSweetness");
-    }
-
-    public void tick(Level level, BlockPos blockPos, BlockState blockState) {
     }
 
     private boolean isFluidValid(FluidStack stack) {

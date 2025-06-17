@@ -98,5 +98,12 @@
   "mjolksters_winery.advancement.rare_grapes": "A Rare Find",
   "mjolksters_winery.advancement.rare_grapes.disc": "Mutate a rare variety of grape.",
   "mjolksters_winery.advancement.get_yeast": "The Beauty and The Yeast",
-  "mjolksters_winery.advancement.get_yeast.disc": "Successfully cultivate any strain of yeast."
+  "mjolksters_winery.advancement.get_yeast.disc": "Successfully cultivate any strain of yeast.",
+
+  "mjolksters_winery.advancement.collections": "Mjolkster's Winery Collections",
+  "mjolksters_winery.advancement.collections.disc": "Gotta Catch Them All!",
+  "mjolksters_winery.advancement.grape_collections": "Grape Collections",
+  "mjolksters_winery.advancement.grape_collections.disc": "A place to collect grapes",
+  "mjolksters_winery.advancement.wine_collections": "Wine Collections",
+  "mjolksters_winery.advancement.wine_collections.disc": "A place to collect wine"
 }

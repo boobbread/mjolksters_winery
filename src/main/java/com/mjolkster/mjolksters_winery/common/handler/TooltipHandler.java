@@ -25,7 +25,7 @@ public class TooltipHandler {
             double ageInMCDays = (wineAge / 24000.0);
             BigDecimal ageRounded = new BigDecimal(Double.toString(ageInMCDays));
             ageRounded = ageRounded.setScale(2, RoundingMode.HALF_UP);
-            event.getToolTip().add(Component.literal("Wine Age: " + wineAge + " ticks").withStyle(ChatFormatting.GOLD));
+            event.getToolTip().add(Component.literal("Wine Age: " + ageRounded + " Years").withStyle(ChatFormatting.GOLD));
 
             if (barrelType.contains("oak")) {
                 event.getToolTip().add(Component.literal("Wood Type: Oak").withStyle(ChatFormatting.GOLD));

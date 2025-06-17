@@ -46,7 +46,7 @@ public class DemijohnRecipeInput implements RecipeInput {
                 boolean flag = true;
 
                 for(int j1 = 0; j1 < width; ++j1) {
-                    ItemStack itemstack = (ItemStack)items.get(j1 + i1 * width);
+                    ItemStack itemstack = items.get(j1 + i1 * width);
                     if (!itemstack.isEmpty()) {
                         i = Math.min(i, j1);
                         j = Math.max(j, j1);
@@ -71,7 +71,7 @@ public class DemijohnRecipeInput implements RecipeInput {
                     for(int k2 = 0; k2 < j2; ++k2) {
                         for(int k1 = 0; k1 < i2; ++k1) {
                             int l1 = k1 + i + (k2 + k) * width;
-                            list.add((ItemStack)items.get(l1));
+                            list.add(items.get(l1));
                         }
                     }
 
@@ -86,11 +86,11 @@ public class DemijohnRecipeInput implements RecipeInput {
     }
 
     public ItemStack getItem(int index) {
-        return (ItemStack)this.items.get(index);
+        return this.items.get(index);
     }
 
     public ItemStack getItem(int row, int column) {
-        return (ItemStack)this.items.get(row + column * this.width);
+        return this.items.get(row + column * this.width);
     }
 
     public int size() {
@@ -126,8 +126,7 @@ public class DemijohnRecipeInput implements RecipeInput {
             return true;
         } else {
             boolean var10000;
-            if (other instanceof DemijohnRecipeInput) {
-                DemijohnRecipeInput craftingInput = (DemijohnRecipeInput)other;
+            if (other instanceof DemijohnRecipeInput craftingInput) {
                 var10000 = this.width == craftingInput.width && this.height == craftingInput.height && this.ingredientCount == craftingInput.ingredientCount && ItemStack.listMatches(this.items, craftingInput.items);
             } else {
                 var10000 = false;

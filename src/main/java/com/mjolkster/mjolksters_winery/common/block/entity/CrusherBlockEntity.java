@@ -1,9 +1,9 @@
 package com.mjolkster.mjolksters_winery.common.block.entity;
 
+import com.mjolkster.mjolksters_winery.common.CommonTags;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.common.registry.ModItems;
-import com.mjolkster.mjolksters_winery.common.CommonTags;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -26,6 +26,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class CrusherBlockEntity extends BlockEntity {
     private String grapeType = "";
     private int grapeColour = 0xFFFFFFFF;
 
-    private static final Map<Item, WineData> JUICE_MAP = new HashMap<>();
+    public static final Map<Item, WineData> JUICE_MAP = new HashMap<>();
     static {
         JUICE_MAP.put(ModItems.PINOT_NOIR.get(), new WineData(0xFF1E0926, "Pinot Noir", 0, "none", 0, 0));
         JUICE_MAP.put(ModItems.SANGIOVESE.get(), new WineData(0xFF200F40, "Sangiovese", 0, "none", 0, 0));
@@ -67,7 +68,6 @@ public class CrusherBlockEntity extends BlockEntity {
         JUICE_MAP.put(Items.GLOW_BERRIES, new WineData(0xFFE6922C, "Glow Berry", 0, "none", 0, 0));
         JUICE_MAP.put(Items.CHORUS_FRUIT, new WineData(0xFF8F5CB5, "Chorus", 0, "none", 0, 0));
 
-        JUICE_MAP.put(RICE.get(), new WineData(0xFFE3DFD3, "Rice", 0, "none", 0, 0));
         JUICE_MAP.put(Items.HONEYCOMB, new WineData(0xFFEB8D00, "Honey", 0, "none", 0, 0));
     }
 
@@ -117,12 +117,12 @@ public class CrusherBlockEntity extends BlockEntity {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    private ItemInteractionResult insertGrape(Player player, ItemStack grapeStack) {
+    private ItemInteractionResult insertGrape(Player player, @NotNull ItemStack grapeStack) {
         ItemStack currentGrapes = inventory.getStackInSlot(grapeSlot);
 
         WineData newType = JUICE_MAP.get(grapeStack.getItem());
         if (newType != null && !grapeType.isEmpty() && !newType.name().equals(grapeType)) {
-            return ItemInteractionResult.FAIL; //.*\n Different grape type
+            return ItemInteractionResult.FAIL;
         }
 
         if (!currentGrapes.isEmpty() &&

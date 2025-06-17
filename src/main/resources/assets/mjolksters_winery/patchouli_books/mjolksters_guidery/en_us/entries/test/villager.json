@@ -1,0 +1,18 @@
+{
+  "name": "Villages",
+  "icon": "mjolksters_winery:oak_aging_barrel",
+  "category": "mjolksters_winery:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In villages dotted around the plains biome, you may find an unfamiliar build, the Tavern. Living within you can meet a Vinter, a villager specialising in the production and distribution of wine.<br><br>Not only will the Vintner be happy to sell you equipment, but will also buy wine from you for good money."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mjolksters_winery:textures/gui/vintner.png"],
+      "title": "The Vintner",
+      "text": "For reference, this is what a Vintner looks like.",
+      "border": true
+    }
+  ]
+}

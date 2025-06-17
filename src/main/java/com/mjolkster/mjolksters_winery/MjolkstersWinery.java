@@ -1,7 +1,7 @@
 package com.mjolkster.mjolksters_winery;
 
-import com.mjolkster.mjolksters_winery.common.registry.*;
 import com.mjolkster.mjolksters_winery.common.handler.TooltipHandler;
+import com.mjolkster.mjolksters_winery.common.registry.*;
 import com.mjolkster.mjolksters_winery.common.worldgen.WineryVillageStructures;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;

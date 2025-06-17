@@ -1,9 +1,9 @@
 package com.mjolkster.mjolksters_winery.common.block;
 
+import com.mjolkster.mjolksters_winery.common.handler.GrapeMutationHandler;
 import com.mjolkster.mjolksters_winery.common.item.GrapeSeedItem;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlocks;
 import com.mjolkster.mjolksters_winery.common.registry.ModItems;
-import com.mjolkster.mjolksters_winery.common.handler.GrapeMutationHandler;
 import com.mjolkster.mjolksters_winery.util.GrapeVariety;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

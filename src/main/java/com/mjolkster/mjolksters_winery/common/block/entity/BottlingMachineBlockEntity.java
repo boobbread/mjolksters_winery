@@ -1,10 +1,10 @@
 package com.mjolkster.mjolksters_winery.common.block.entity;
 
+import com.mjolkster.mjolksters_winery.client.screen.BottlingMachineMenu;
 import com.mjolkster.mjolksters_winery.common.item.WineBucketItem;
 import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.registry.ModFluids;
 import com.mjolkster.mjolksters_winery.common.registry.ModItems;
-import com.mjolkster.mjolksters_winery.client.screen.BottlingMachineMenu;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -49,7 +49,6 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
             if (!level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
-            ;
         }
     };
 

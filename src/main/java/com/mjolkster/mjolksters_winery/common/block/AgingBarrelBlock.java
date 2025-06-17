@@ -1,7 +1,6 @@
 package com.mjolkster.mjolksters_winery.common.block;
 
 import com.mjolkster.mjolksters_winery.common.block.entity.AgingBarrelBlockEntity;
-import com.mjolkster.mjolksters_winery.common.registry.ModBlockEntities;
 import com.mjolkster.mjolksters_winery.common.handler.VoxelShapeHandler;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -19,8 +18,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -116,16 +113,5 @@ public class AgingBarrelBlock extends BaseEntityBlock {
         }
 
         return ItemInteractionResult.FAIL;
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        if(level.isClientSide()) {
-            return null;
-        }
-
-        return createTickerHelper(blockEntityType, ModBlockEntities.AGING_BARREL_BE.get(),
-                (level1, blockPos, blockState, blockEntity) -> blockEntity.tick(level1, blockPos, blockState));
     }
 }
