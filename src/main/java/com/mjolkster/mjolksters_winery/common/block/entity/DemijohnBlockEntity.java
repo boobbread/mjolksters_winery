@@ -50,6 +50,9 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
         @Override
         protected void onContentsChanged(int slot) {
+            if (slot == 0) {
+                getInfo();
+            }
             if (inventory.getStackInSlot(slot).isEmpty()) {
                 resetProgress();
             }
@@ -276,6 +279,7 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack firstSlot = inventory.getStackInSlot(0);
         if (!firstSlot.isEmpty()) {
             WineData wineData = firstSlot.get(WINE_DATA.get());
+            assert wineData != null;
             this.inputJuiceColour = wineData.colour();
             this.inputJuiceName = wineData.name();
 

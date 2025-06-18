@@ -15,34 +15,48 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(Registries.BLOCK, MjolkstersWinery.MODID);
 
+    public static BlockBehaviour.Properties woodenTypeProperties() {
+        return BlockBehaviour.Properties.of()
+                .strength(1.3f)
+                .sound(SoundType.WOOD)
+                .noOcclusion();
+    }
+
+    public static BlockBehaviour.Properties ceramicTypeProperties() {
+        return BlockBehaviour.Properties.of()
+                .strength(1.0f)
+                .noOcclusion()
+                .sound(SoundType.DECORATED_POT);
+    }
+
     public static final Supplier<Block> DEMIJOHN = BLOCKS.register("demijohn",
-            () -> new DemijohnBlock(BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.GLASS).strength(1.5f)));
+            () -> new DemijohnBlock(ceramicTypeProperties()));
 
     public static final Supplier<Block> CRUSHER = BLOCKS.register("crusher",
-            () -> new CrusherBlock(BlockBehaviour.Properties.of()));
+            () -> new CrusherBlock(woodenTypeProperties()));
 
     public static final Supplier<Block> OAK_AGING_BARREL = BLOCKS.register("oak_aging_barrel",
-            () -> new AgingBarrelBlock(BlockBehaviour.Properties.of()));
+            () -> new AgingBarrelBlock(woodenTypeProperties()));
     public static final Supplier<Block> SPRUCE_AGING_BARREL = BLOCKS.register("spruce_aging_barrel",
-            () -> new AgingBarrelBlock(BlockBehaviour.Properties.of()));
+            () -> new AgingBarrelBlock(woodenTypeProperties()));
     public static final Supplier<Block> CHERRY_AGING_BARREL = BLOCKS.register("cherry_aging_barrel",
-            () -> new AgingBarrelBlock(BlockBehaviour.Properties.of()));
+            () -> new AgingBarrelBlock(woodenTypeProperties()));
     public static final Supplier<Block> CRIMSON_AGING_BARREL = BLOCKS.register("crimson_aging_barrel",
-            () -> new AgingBarrelBlock(BlockBehaviour.Properties.of()));
+            () -> new AgingBarrelBlock(woodenTypeProperties()));
 
     public static final Supplier<Block> BOTTLING_MACHINE = BLOCKS.register("bottling_machine",
-            () -> new BottlingMachineBlock(BlockBehaviour.Properties.of()));
+            () -> new BottlingMachineBlock(woodenTypeProperties()));
 
     public static final Supplier<Block> YEAST_POT = BLOCKS.register("yeast_pot",
-            () -> new YeastPotBlock(BlockBehaviour.Properties.of()));
+            () -> new YeastPotBlock(ceramicTypeProperties()));
 
     public static final Supplier<Block> SOMMELIERS_TABLE = BLOCKS.register("sommeliers_table",
-            () -> new SommeliersTableBlock(BlockBehaviour.Properties.of()));
+            () -> new SommeliersTableBlock(woodenTypeProperties()));
 
     public static final Supplier<Block> GRAPE_BUSH_BLOCK = BLOCKS.register("grape_bush_block",
             () -> new GrapeBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH).randomTicks()));
 
     public static final Supplier<Block> TRELLIS = BLOCKS.register("trellis",
-            () -> new TrellisBlock(BlockBehaviour.Properties.of()));
+            () -> new TrellisBlock(woodenTypeProperties()));
 
 }

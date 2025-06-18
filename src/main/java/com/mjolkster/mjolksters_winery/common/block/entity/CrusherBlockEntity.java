@@ -118,28 +118,28 @@ public class CrusherBlockEntity extends BlockEntity {
     }
 
     private ItemInteractionResult insertGrape(Player player, @NotNull ItemStack grapeStack) {
-        ItemStack currentGrapes = inventory.getStackInSlot(grapeSlot);
+        if (grapeStack.getCount() >= 5 ){
+            ItemStack currentGrapes = inventory.getStackInSlot(grapeSlot);
 
-        WineData newType = JUICE_MAP.get(grapeStack.getItem());
-        if (newType != null && !grapeType.isEmpty() && !newType.name().equals(grapeType)) {
-            return ItemInteractionResult.FAIL;
-        }
-
-        if (!currentGrapes.isEmpty() &&
-                (!ItemStack.isSameItem(currentGrapes, grapeStack) ||
-                        currentGrapes.getCount() >= currentGrapes.getMaxStackSize())) {
-            return ItemInteractionResult.FAIL;
-        }
-
-        if (currentGrapes.isEmpty()) {
-            WineData info = JUICE_MAP.get(grapeStack.getItem());
-            if (info != null) {
-                this.grapeType = info.name();
-                this.grapeColour = info.colour();
+            WineData newType = JUICE_MAP.get(grapeStack.getItem());
+            if (newType != null && !grapeType.isEmpty() && !newType.name().equals(grapeType)) {
+                return ItemInteractionResult.FAIL;
             }
-        }
 
-        if (grapeStack.getCount() >= 5) {
+            if (!currentGrapes.isEmpty() &&
+                    (!ItemStack.isSameItem(currentGrapes, grapeStack) ||
+                            currentGrapes.getCount() >= currentGrapes.getMaxStackSize())) {
+                return ItemInteractionResult.FAIL;
+            }
+
+            if (currentGrapes.isEmpty()) {
+                WineData info = JUICE_MAP.get(grapeStack.getItem());
+                if (info != null) {
+                    this.grapeType = info.name();
+                    this.grapeColour = info.colour();
+                }
+            }
+
             ItemStack toInsert = grapeStack.copyWithCount(5);
             if (currentGrapes.isEmpty()) {
                 inventory.setStackInSlot(grapeSlot, toInsert);
@@ -156,6 +156,7 @@ public class CrusherBlockEntity extends BlockEntity {
         }
 
 
+
         setChanged();
         return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
@@ -168,20 +169,23 @@ public class CrusherBlockEntity extends BlockEntity {
         }
 
         int grapeCount = grapes.getCount();
-        int maxJuiceSpace = fluidTank.getSpace();
-        int maxCrushable = maxJuiceSpace / juicePerGrape;
-        int toCrush = Math.min(grapeCount, maxCrushable);
 
-        if (toCrush <= 0) {
-            return ItemInteractionResult.FAIL;
+        if (grapeCount >= 5){
+            int maxJuiceSpace = fluidTank.getSpace();
+            int maxCrushable = maxJuiceSpace / juicePerGrape;
+            int toCrush = Math.min(grapeCount, maxCrushable);
+
+            if (toCrush <= 0) {
+                return ItemInteractionResult.FAIL;
+            }
+
+            grapes.shrink(toCrush);
+            fluidTank.fill(new FluidStack(ModFluids.JUICE.source().get(), toCrush * juicePerGrape), IFluidHandler.FluidAction.EXECUTE);
+
+            assert level != null;
+            level.playSound(null, worldPosition, SoundEvents.HONEY_BLOCK_BREAK,
+                    SoundSource.BLOCKS, 0.8f, 0.9f);
         }
-
-        grapes.shrink(toCrush);
-        fluidTank.fill(new FluidStack(ModFluids.JUICE.source().get(), toCrush * juicePerGrape), IFluidHandler.FluidAction.EXECUTE);
-
-        assert level != null;
-        level.playSound(null, worldPosition, SoundEvents.HONEY_BLOCK_BREAK,
-                SoundSource.BLOCKS, 0.8f, 0.9f);
 
         setChanged();
         return ItemInteractionResult.sidedSuccess(level.isClientSide());
@@ -220,17 +224,19 @@ public class CrusherBlockEntity extends BlockEntity {
     }
 
     private ItemStack fillContainer(ItemStack heldItem) {
-        if (heldItem.is(Items.BUCKET)) {
-            FluidStack drained = fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
-            if (drained.getAmount() == FluidType.BUCKET_VOLUME) {
-                fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-                ItemStack filledBucket = new ItemStack(ModItems.JUICE_BUCKET.get());
+        if (grapeColour != 0 && !grapeType.isBlank()) {
+            if (heldItem.is(Items.BUCKET)) {
+                FluidStack drained = fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
+                if (drained.getAmount() == FluidType.BUCKET_VOLUME) {
+                    fluidTank.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
+                    ItemStack filledBucket = new ItemStack(ModItems.JUICE_BUCKET.get());
 
-                WineData wineData = new WineData(grapeColour, grapeType, 0, "none", 0, 0);
-                System.out.println("Setting juice type: " + wineData.name() + ", Color: " + wineData.colour());
-                filledBucket.set(WINE_DATA.get(), wineData);
+                    WineData wineData = new WineData(grapeColour, grapeType, 0, "none", 0, 0);
+                    System.out.println("Setting juice type: " + wineData.name() + ", Color: " + wineData.colour());
+                    filledBucket.set(WINE_DATA.get(), wineData);
 
-                return filledBucket;
+                    return filledBucket;
+                }
             }
         }
         return ItemStack.EMPTY;

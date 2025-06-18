@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -20,8 +21,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.OAK_AGING_BARREL.get());
         dropSelf(ModBlocks.SPRUCE_AGING_BARREL.get());
         dropSelf(ModBlocks.CHERRY_AGING_BARREL.get());
+        dropSelf(ModBlocks.CRIMSON_AGING_BARREL.get());
         dropSelf(ModBlocks.CRUSHER.get());
         dropSelf(ModBlocks.BOTTLING_MACHINE.get());
+        dropSelf(ModBlocks.SOMMELIERS_TABLE.get());
+        dropSelf(ModBlocks.TRELLIS.get());
+        dropWhenSilkTouch(ModBlocks.YEAST_POT.get());
+        dropWhenSilkTouch(ModBlocks.GRAPE_BUSH_BLOCK.get());
     }
 
     @Override
