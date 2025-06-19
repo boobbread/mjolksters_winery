@@ -1,7 +1,7 @@
 {
   "name": "Mutation",
   "icon": "mjolksters_winery:pinot_grigio_grapes",
-  "category": "mjolksters_winery:getting_started",
+  "category": "mjolksters_winery:advanced_concepts",
   "pages": [
     {
       "type": "patchouli:text",

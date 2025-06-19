@@ -1,8 +1,10 @@
 package com.mjolkster.mjolksters_winery.common.registry;
 
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -42,4 +44,9 @@ public class ModDataComponents {
                     })
                     .build()
     );
+
+    public static final Supplier<DataComponentType<Integer>> WINE_QUALITY = DATA_COMPONENTS.register("wine_quality",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .build());
 }

@@ -1,6 +1,0 @@
-[[dependencies.mjolksters_winery]]
-modId="farmersdelight"
-mandatory=true
-versionRange="[1.0.0,)"
-ordering="AFTER"
-side="BOTH"

@@ -68,13 +68,6 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.mjolksters_winery]]
-modId="farmersdelight"
-mandatory=true
-versionRange="[1.0.0,)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies.mjolksters_winery]]
 modId="patchouli"
 mandatory=true
 versionRange="[1.0.0,)"

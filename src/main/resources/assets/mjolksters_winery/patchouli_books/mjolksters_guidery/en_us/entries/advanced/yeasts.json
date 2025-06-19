@@ -1,0 +1,17 @@
+{
+  "name": "Yeasts",
+  "icon": "mjolksters_winery:montrachet_yeast",
+  "category": "mjolksters_winery:advanced_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are a total of 5 yeast types available to you. <br><br>Each yeast type can only go up to a certain alcohol percentage, and so each wine requires a specific breed of yeast in order to reach it's optimal alcohol content for rating."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:c:yeast",
+      "title": "Yeasts",
+      "text": "<br>The yeast type which yields from your yeast pot is dependant on the temperature at which the yeast pot was allowed to ferment. <br><br>For example, mild environments yield Champagne yeast, capable of reaching up to 15% alcohol."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Alcohol and Sweetness",
+  "icon": "minecraft:sugar",
+  "category": "mjolksters_winery:advanced_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "As mentioned in the yeast section, each yeast has a max alcohol content, but this is only achieved if the sweetness is high enough.<br><br>The sweetness is defined as the base sweetness of the must you put into the demijohn, along with any sugar you add to the mix."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:sugar",
+      "title": "Sweetness",
+      "text": "<br>Both the alcohol content and sweetness of the wine in your bucket can be seen by hovering over it.<br><br>The alcohol ranges from 0% (for a must bucket) and 18%, while the sweetness has 5 values; Extra Dry, Dry, Semi-Dry, Sweet, Extra Sweet"
+    }
+  ]
+}

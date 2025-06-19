@@ -122,7 +122,6 @@ configurations {
 }
 
 dependencies {
-    implementation "maven.modrinth:farmers-delight:1.21.1-1.2.4a"
     implementation "vazkii.patchouli:Patchouli:1.21-88-NEOFORGE"
 
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")

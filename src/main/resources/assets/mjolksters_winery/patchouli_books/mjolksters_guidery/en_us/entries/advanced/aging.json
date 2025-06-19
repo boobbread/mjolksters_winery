@@ -1,0 +1,17 @@
+{
+  "name": "Aging",
+  "icon": "mjolksters_winery:oak_aging_barrel",
+  "category": "mjolksters_winery:advanced_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In winemaking, aging is used to mellow out existing flavours and introduce new ones into mix.<br><br>Each wood type imparts a different flavour into your wine, and the wrong wood can cause discordance in the profile of the finished product."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "mjolksters_winery:oak_aging_barrel, mjolksters_winery:spruce_aging_barrel, mjolksters_winery:cherry_aging_barrel, mjolksters_winery:crimson_aging_barrel",
+      "title": "Barrels",
+      "text": "<br>Because of this, each wine type requires the correct barrel to achieve perfection. <br><br>Every wine also has an optimal barrel time, and the Barrel Age tooltip can be used to hint towards the ideal value."
+    }
+  ]
+}

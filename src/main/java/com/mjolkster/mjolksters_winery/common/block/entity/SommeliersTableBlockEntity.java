@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mjolkster.mjolksters_winery.common.CommonTags.BOTTLE;
+import static com.mjolkster.mjolksters_winery.common.registry.ModDataComponents.WINE_QUALITY;
 
 public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -119,6 +120,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
 
 
         if (wineData != null) {
+
             List<Component> tooltips = new ArrayList<>();
 
             tooltips.add(createTooltip("Age", formatAge(wineData.barrelAge()), age));
@@ -127,6 +129,7 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
             tooltips.add(createTooltip("Barrel", formatBarrel(wineData.barrelType()), barrel));
 
             outputBottle.set(DataComponents.LORE, new ItemLore(tooltips));
+            outputBottle.set(WINE_QUALITY.get(), numStars);
         }
 
         inputBottle.shrink(inputCount);

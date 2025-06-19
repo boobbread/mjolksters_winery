@@ -9,11 +9,13 @@ import com.mjolkster.mjolksters_winery.common.registry.ModRecipes;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -80,8 +82,10 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
     public String inputJuiceName = "";
     public int inputJuiceColour = 0;
+    public float inputJuiceSweetness = 0.0f;
     public float alcoholPercentage = 0.0f;
     public float wineSweetness = 0.0f;
+    public float overallSweetness = 0.0f;
 
     public DemijohnBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.DEMIJOHN_BE.get(), pos, blockState);
@@ -243,9 +247,10 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         if(hasCraftingFinished && !fluidTank.isEmpty()) return;
 
         if(hasRecipe()) {
+            getInfo();
+
             if(!hasInitialItem) {
                 hasInitialItem = true;
-                getInfo();
                 setChanged();
                 fillToMax();
                 if(!level.isClientSide()){
@@ -253,16 +258,61 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 }
             }
 
+            if (overallSweetness >= 0.5f) {
+                // initiate explosion
+                if (progress < maxProgress) {
+                    if (level.random.nextFloat() > 0.5) {
+                        spawnBubbleParticles();
+                    }
+                }
+            }
+
             increaseCraftingProgress();
             setChanged(level, blockPos, blockState);
 
             if(hasCraftingFinished()) {
+                if (overallSweetness >= 0.5f) {
+
+                    // EXPLOSION TIME!!!!!!
+
+                    if (!level.isClientSide()) {
+                        level.explode(
+                                null,
+                                blockPos.getX() + 0.5,
+                                blockPos.getY() + 0.5,
+                                blockPos.getZ() + 0.5,
+                                1.0f,
+                                Level.ExplosionInteraction.BLOCK
+                        );
+                    }
+                }
                 craftItem();
                 resetProgress();
             }
         } else {
             resetProgress();
         }
+    }
+
+    private void spawnBubbleParticles() {
+        if (!(level instanceof ServerLevel serverLevel)) return;
+
+        double x = worldPosition.getX() + 0.5;
+        double y = worldPosition.getY() + 0.8;
+        double z = worldPosition.getZ() + 0.5;
+
+        float bubbleVolume = 0.8f + ((1 /600) * progress) ;
+
+        BlockPos pos = getBlockPos();
+        serverLevel.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.BLOCKS, bubbleVolume, 0.5f);
+
+        serverLevel.sendParticles(
+                ParticleTypes.DUST_PLUME,
+                x, y, z,
+                2,
+                0.02, (0.05/600) * progress, 0.02,
+                0.05
+        );
     }
 
     private float getMaxAlcoholForYeast(ItemStack yeastSlot) {
@@ -279,12 +329,15 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack firstSlot = inventory.getStackInSlot(0);
         if (!firstSlot.isEmpty()) {
             WineData wineData = firstSlot.get(WINE_DATA.get());
-            assert wineData != null;
-            this.inputJuiceColour = wineData.colour();
-            this.inputJuiceName = wineData.name();
+            if (wineData != null) {
+                this.inputJuiceColour = wineData.colour();
+                this.inputJuiceName = wineData.name();
+                this.inputJuiceSweetness = wineData.wineSweetness();
+            }
 
             System.out.print("Juice Colour " + inputJuiceColour);
             System.out.print("Juice Name " + inputJuiceName);
+            System.out.print("Juice Sweetness " + inputJuiceSweetness);
         }
 
         ItemStack yeastSlot = inventory.getStackInSlot(2);
@@ -308,8 +361,12 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             int sugarCount = sugarSlot.getCount();
             float maxAlcohol = getMaxAlcoholForYeast(yeastSlot);
             float sugarEffect = 0.01f * sugarCount;
-            this.alcoholPercentage = Math.min(0.1f + sugarEffect, maxAlcohol);
-            this.wineSweetness = (0.1f + sugarEffect) - maxAlcohol;
+            this.alcoholPercentage = Math.min(inputJuiceSweetness + sugarEffect, maxAlcohol);
+            this.wineSweetness = (inputJuiceSweetness + sugarEffect) - alcoholPercentage;
+            this.overallSweetness = inputJuiceSweetness + sugarEffect;
+
+            System.out.print("Wine Alc " + alcoholPercentage);
+            System.out.print("Wine Sweetness " + wineSweetness);
 
         }
     }
@@ -364,6 +421,13 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
 
     private void increaseCraftingProgress() {
         progress++;
+        assert level != null;
+        if (level.random.nextFloat() > 0.8) {
+            if (!(level instanceof ServerLevel serverLevel)) return;
+
+            BlockPos pos = getBlockPos();
+            serverLevel.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.BLOCKS, 0.8f, 0.5f);
+        }
     }
 
     private boolean hasRecipe() {

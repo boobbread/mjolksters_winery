@@ -168,7 +168,7 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
         if (!level.isClientSide) {
             if (canBottle()) {
                 if (fluidTank.getFluidAmount() > 0) {
-                    fillProgress += 0.01f; //.*\n Increment progress by some amount per tick
+                    fillProgress += 0.01f;
                     if (fillProgress > 1f) fillProgress = 1f;
 
                 } else {
@@ -230,7 +230,7 @@ public class BottlingMachineBlockEntity extends BlockEntity implements MenuProvi
                 FLUID_TO_BOTTLE.put("Waterfall", ModItems.WATERFALL_BOTTLE);
 
                 FLUID_TO_BOTTLE.put("Koshu", ModItems.KOSHU_BOTTLE);
-                FLUID_TO_BOTTLE.put("Pinot De L'enfer", ModItems.PINOT_DE_LENFER_BOTTLE);
+                FLUID_TO_BOTTLE.put("Pinot De l'Enfer", ModItems.PINOT_DE_LENFER_BOTTLE);
 
                 FLUID_TO_BOTTLE.put("Sweet Berry", ModItems.SWEET_BERRY_WINE_BOTTLE);
                 FLUID_TO_BOTTLE.put("Glow Berry", ModItems.GLOW_BERRY_WINE_BOTTLE);

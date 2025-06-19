@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "There are a total of 16 grapes and 3 grape-adjacent crops that can all be used to brew. <br><br>Only the base variety of grape, Pinot Noir, can be found in the wild and all other varieties must be sourced through either $(l:test/mutation)mutation$() or trading with villagers."
+      "text": "There are a total of 16 grapes and 3 grape-adjacent crops that can all be used to brew. <br><br>Only the base variety of grape, Pinot Noir, can be found in the wild and all other varieties must be sourced through either $(l:advanced/mutation)mutation$() or trading with villagers."
     },
     {
       "type": "patchouli:spotlight",
