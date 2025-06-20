@@ -137,11 +137,11 @@ public class SommeliersTableBlockEntity extends BlockEntity implements MenuProvi
     }
 
     private Component createTooltip(String label, String value, float rating) {
-        return Component.literal(label + ": " + value).withStyle(getColorForRating(rating))
+        return Component.literal(label + ": " + value).withStyle(getColourForRating(rating))
                 .withStyle(Style.EMPTY.withItalic(false));
     }
 
-    private ChatFormatting getColorForRating(float rating) {
+    private ChatFormatting getColourForRating(float rating) {
         int score = Math.round(rating * 10);
         return switch (score) {
             case 0, 1, 2, 3, 4 -> ChatFormatting.RED;

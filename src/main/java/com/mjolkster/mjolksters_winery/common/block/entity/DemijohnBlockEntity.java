@@ -170,7 +170,6 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 ItemStack filledBucket = new ItemStack(ModItems.WINE_BUCKET.get());
 
                 WineData wineData = new WineData(inputJuiceColour, inputJuiceName, 0, "none", alcoholPercentage, wineSweetness);
-                System.out.println("Setting juice type: " + wineData.name() + ", Color: " + wineData.colour());
                 filledBucket.set(WINE_DATA.get(), wineData);
 
                 return filledBucket;
@@ -334,10 +333,6 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
                 this.inputJuiceName = wineData.name();
                 this.inputJuiceSweetness = wineData.wineSweetness();
             }
-
-            System.out.print("Juice Colour " + inputJuiceColour);
-            System.out.print("Juice Name " + inputJuiceName);
-            System.out.print("Juice Sweetness " + inputJuiceSweetness);
         }
 
         ItemStack yeastSlot = inventory.getStackInSlot(2);
@@ -364,9 +359,6 @@ public class DemijohnBlockEntity extends BlockEntity implements MenuProvider {
             this.alcoholPercentage = Math.min(inputJuiceSweetness + sugarEffect, maxAlcohol);
             this.wineSweetness = (inputJuiceSweetness + sugarEffect) - alcoholPercentage;
             this.overallSweetness = inputJuiceSweetness + sugarEffect;
-
-            System.out.print("Wine Alc " + alcoholPercentage);
-            System.out.print("Wine Sweetness " + wineSweetness);
 
         }
     }

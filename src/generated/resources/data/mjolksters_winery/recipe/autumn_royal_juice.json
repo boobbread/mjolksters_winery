@@ -1,0 +1,21 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "mjolksters_winery:autumn_royal_grapes"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "mjolksters_winery:create_source_autumn_royal_juice",
+      "amount": 1000,
+      "id": "mjolksters_winery:create_source_autumn_royal_juice"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ]
+}

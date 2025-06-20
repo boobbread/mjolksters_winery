@@ -30,6 +30,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
 
 import java.util.*;
 
@@ -115,31 +116,31 @@ public class GrapeBushBlock extends SweetBerryBushBlock {
         builder.add(AGE, VARIETY);
     }
 
-    public static Map<GrapeVariety, Integer> VARIETY_COLORS = new HashMap<>();
+    public static Map<GrapeVariety, Integer> VARIETY_COLOURS = new HashMap<>();
             static {
-                VARIETY_COLORS.put(GrapeVariety.PINOT_NOIR, 0xFF1E0926);
-                VARIETY_COLORS.put(GrapeVariety.SANGIOVESE, 0xFF200F40);
-                VARIETY_COLORS.put(GrapeVariety.CABERNET_SAUVIGNON, 0xFF1C0F2E);
-                VARIETY_COLORS.put(GrapeVariety.TEMPRANILLO, 0xFF291261);
-                VARIETY_COLORS.put(GrapeVariety.MOONDROP, 0xFF1F072E);
-                VARIETY_COLORS.put(GrapeVariety.AUTUMN_ROYAL, 0xFF1B0D40);
-                VARIETY_COLORS.put(GrapeVariety.RUBY_ROMAN, 0xFF820C1B);
+                VARIETY_COLOURS.put(GrapeVariety.PINOT_NOIR, 0xFF1E0926);
+                VARIETY_COLOURS.put(GrapeVariety.SANGIOVESE, 0xFF200F40);
+                VARIETY_COLOURS.put(GrapeVariety.CABERNET_SAUVIGNON, 0xFF1C0F2E);
+                VARIETY_COLOURS.put(GrapeVariety.TEMPRANILLO, 0xFF291261);
+                VARIETY_COLOURS.put(GrapeVariety.MOONDROP, 0xFF1F072E);
+                VARIETY_COLOURS.put(GrapeVariety.AUTUMN_ROYAL, 0xFF1B0D40);
+                VARIETY_COLOURS.put(GrapeVariety.RUBY_ROMAN, 0xFF820C1B);
 
-                VARIETY_COLORS.put(GrapeVariety.RIESLING, 0xFFACB030);
-                VARIETY_COLORS.put(GrapeVariety.CHARDONNAY, 0xFFCFBD48);
-                VARIETY_COLORS.put(GrapeVariety.SAUVIGNON_BLANC, 0xFFB8A727);
-                VARIETY_COLORS.put(GrapeVariety.PINOT_GRIGIO, 0xFFD9B841);
-                VARIETY_COLORS.put(GrapeVariety.COTTON_CANDY, 0xFFFFE9AA);
-                VARIETY_COLORS.put(GrapeVariety.GRENACHE_BLANC, 0xFFD6D060);
-                VARIETY_COLORS.put(GrapeVariety.WATERFALL, 0xFF8DBD4A);
+                VARIETY_COLOURS.put(GrapeVariety.RIESLING, 0xFFACB030);
+                VARIETY_COLOURS.put(GrapeVariety.CHARDONNAY, 0xFFCFBD48);
+                VARIETY_COLOURS.put(GrapeVariety.SAUVIGNON_BLANC, 0xFFB8A727);
+                VARIETY_COLOURS.put(GrapeVariety.PINOT_GRIGIO, 0xFFD9B841);
+                VARIETY_COLOURS.put(GrapeVariety.COTTON_CANDY, 0xFFFFE9AA);
+                VARIETY_COLOURS.put(GrapeVariety.GRENACHE_BLANC, 0xFFD6D060);
+                VARIETY_COLOURS.put(GrapeVariety.WATERFALL, 0xFF8DBD4A);
 
-                VARIETY_COLORS.put(GrapeVariety.KOSHU, 0xFFFF8797);
-                VARIETY_COLORS.put(GrapeVariety.PINOT_DE_LENFER, 0xFF33060C);
+                VARIETY_COLOURS.put(GrapeVariety.KOSHU, 0xFFFF8797);
+                VARIETY_COLOURS.put(GrapeVariety.PINOT_DE_LENFER, 0xFF33060C);
     }
 
 
-    public static int getColorForVariety(GrapeVariety variety) {
-        return VARIETY_COLORS.getOrDefault(variety, 0xFFFFFFFF);
+    public static int getColourForVariety(GrapeVariety variety) {
+        return VARIETY_COLOURS.getOrDefault(variety, 0xFFFFFFFF);
     }
 
     @Override
@@ -156,69 +157,77 @@ public class GrapeBushBlock extends SweetBerryBushBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!(state.getBlock() instanceof GrapeBushBlock) || state.getValue(AGE) < 2) return;
 
-        GrapeVariety thisVariety = state.getValue(VARIETY);
-        System.out.println("Parent variety: " + thisVariety);
-        grapeLevel = level;
+        int age = state.getValue(AGE);
 
-        List<BlockPos> validAirPositions = new ArrayList<>();
-        for (Direction dir : Direction.Plane.HORIZONTAL) {
-            BlockPos target = pos.relative(dir);
-            if (level.getBlockState(target).isAir()) {
-                validAirPositions.add(target);
-            }
+        if (age < 3 && level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(5) == 0)) {
+            BlockState blockstate = state.setValue(AGE, age + 1);
+            level.setBlock(pos, blockstate, 2);
+            CommonHooks.fireCropGrowPost(level, pos, state);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(blockstate));
         }
 
-        if (validAirPositions.isEmpty()) return;
+        if (age >= 2) {
+            GrapeVariety thisVariety = state.getValue(VARIETY);
+            grapeLevel = level;
 
-        BlockPos[] diagonals = {
-                pos.north().west(),
-                pos.north().east(),
-                pos.south().west(),
-                pos.south().east()
-        };
-
-        GrapeVariety childVariety = thisVariety;
-
-        List<BlockPos> shuffledDiagonals = Arrays.asList(diagonals);
-        Collections.shuffle(shuffledDiagonals, new Random(random.nextLong()));
-
-        for (BlockPos diagonal : shuffledDiagonals) {
-            BlockState neighborState = level.getBlockState(diagonal);
-
-            if (neighborState.getBlock() instanceof GrapeBushBlock && neighborState.getValue(AGE) >= 2) {
-                childVariety = GrapeMutationHandler.determineOffspring(
-                        thisVariety,
-                        neighborState.getValue(VARIETY),
-                        level,
-                        pos,
-                        random
-                );
-                break;
-            } else {
-                GrapeVariety potentialVariety = GrapeMutationHandler.determineSpecialOffspring(
-                        thisVariety,
-                        neighborState.getBlock(),
-                        level,
-                        pos,
-                        random
-                );
-
-                if (potentialVariety != thisVariety) {
-                    childVariety = potentialVariety;
-                    break;
+            List<BlockPos> validAirPositions = new ArrayList<>();
+            for (Direction dir : Direction.Plane.HORIZONTAL) {
+                BlockPos target = pos.relative(dir);
+                if (level.getBlockState(target).isAir()) {
+                    validAirPositions.add(target);
                 }
             }
+
+            if (validAirPositions.isEmpty()) return;
+
+            BlockPos[] diagonals = {
+                    pos.north().west(),
+                    pos.north().east(),
+                    pos.south().west(),
+                    pos.south().east()
+            };
+
+            GrapeVariety childVariety = thisVariety;
+
+            List<BlockPos> shuffledDiagonals = Arrays.asList(diagonals);
+            Collections.shuffle(shuffledDiagonals, new Random(random.nextLong()));
+
+            for (BlockPos diagonal : shuffledDiagonals) {
+                BlockState neighborState = level.getBlockState(diagonal);
+
+                if (neighborState.getBlock() instanceof GrapeBushBlock && neighborState.getValue(AGE) >= 2) {
+                    childVariety = GrapeMutationHandler.determineOffspring(
+                            thisVariety,
+                            neighborState.getValue(VARIETY),
+                            level,
+                            pos,
+                            random
+                    );
+                    break;
+                } else {
+                    GrapeVariety potentialVariety = GrapeMutationHandler.determineSpecialOffspring(
+                            thisVariety,
+                            neighborState.getBlock(),
+                            level,
+                            pos,
+                            random
+                    );
+
+                    if (potentialVariety != thisVariety) {
+                        childVariety = potentialVariety;
+                        break;
+                    }
+                }
+            }
+
+            BlockPos placementPos = validAirPositions.get(random.nextInt(validAirPositions.size()));
+            BlockState newState = ModBlocks.GRAPE_BUSH_BLOCK.get().defaultBlockState()
+                    .setValue(AGE, 0)
+                    .setValue(VARIETY, childVariety);
+
+            level.setBlock(placementPos, newState, Block.UPDATE_ALL);
         }
-
-        BlockPos placementPos = validAirPositions.get(random.nextInt(validAirPositions.size()));
-        BlockState newState = ModBlocks.GRAPE_BUSH_BLOCK.get().defaultBlockState()
-                .setValue(AGE, 0)
-                .setValue(VARIETY, childVariety);
-
-        level.setBlock(placementPos, newState, Block.UPDATE_ALL);
-        System.out.println("Placed new bush with variety: " + childVariety);
     }
 
     @Override

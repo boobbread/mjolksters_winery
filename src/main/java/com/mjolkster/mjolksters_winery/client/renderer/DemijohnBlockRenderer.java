@@ -34,7 +34,6 @@ public class DemijohnBlockRenderer implements BlockEntityRenderer<DemijohnBlockE
 
 
         if (sprite == null) {
-            System.out.print(sprite.toString());
             return;
         }
 

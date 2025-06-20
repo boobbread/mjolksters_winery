@@ -1,4 +1,4 @@
-package com.mjolkster.mjolksters_winery.compat;
+package com.mjolkster.mjolksters_winery.compat.jei;
 
 import com.mjolkster.mjolksters_winery.MjolkstersWinery;
 import com.mjolkster.mjolksters_winery.common.block.entity.CrusherBlockEntity;
@@ -21,6 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import static com.mjolkster.mjolksters_winery.util.JuiceMap.JUICE_CREATION_MAP;
 
 public class DemijohnRecipeCategory implements IRecipeCategory<DemijohnRecipe> {
 
@@ -62,7 +64,7 @@ public class DemijohnRecipeCategory implements IRecipeCategory<DemijohnRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, DemijohnRecipe recipe, IFocusGroup focuses) {
 
-        List<ItemStack> juiceBuckets = CrusherBlockEntity.JUICE_MAP.values().stream()
+        List<ItemStack> juiceBuckets = JUICE_CREATION_MAP.values().stream()
                         .map(data -> createJuiceBucket(data.colour(), data.name(), 0,"none", 0,0))
                         .toList();
 

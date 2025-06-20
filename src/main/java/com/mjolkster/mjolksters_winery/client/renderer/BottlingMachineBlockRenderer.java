@@ -52,7 +52,6 @@ public class BottlingMachineBlockRenderer implements BlockEntityRenderer<Bottlin
         TextureAtlasSprite sprite = atlas.getSprite(ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_still"));
 
         if (sprite == null) {
-            System.out.print(sprite.toString());
             return;
         }
 

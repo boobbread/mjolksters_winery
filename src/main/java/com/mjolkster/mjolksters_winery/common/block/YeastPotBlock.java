@@ -112,8 +112,6 @@ public class YeastPotBlock extends BaseEntityBlock {
             return List.of();
         }
 
-        System.out.println("hasAgedEnough: " + yeastPot.hasAgedEnough());
-
         BiomeType temp = state.getValue(BIOME_TYPE);
         Item item;
 

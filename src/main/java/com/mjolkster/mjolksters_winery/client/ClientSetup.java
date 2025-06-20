@@ -7,6 +7,7 @@ import com.mjolkster.mjolksters_winery.client.renderer.TrellisBlockRenderer;
 import com.mjolkster.mjolksters_winery.common.block.GrapeBushBlock;
 import com.mjolkster.mjolksters_winery.common.fluid.BaseFluidType;
 import com.mjolkster.mjolksters_winery.common.registry.*;
+import com.mjolkster.mjolksters_winery.compat.create.CreateWineryFluids;
 import com.mjolkster.mjolksters_winery.util.codec.WineData;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -49,6 +51,13 @@ public class ClientSetup {
                 ItemBlockRenderTypes.setRenderLayer(fluid.source().get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(fluid.flowing().get(), RenderType.translucent());
             }
+
+            if (ModList.get().isLoaded("create")) {
+                for (CreateWineryFluids.WineryFluid fluid : CreateWineryFluids.WINERY_FLUIDS) {
+                    ItemBlockRenderTypes.setRenderLayer(fluid.source().get(), RenderType.translucent());
+                    ItemBlockRenderTypes.setRenderLayer(fluid.flowing().get(), RenderType.translucent());
+                }
+            }
         });
     }
 
@@ -65,6 +74,15 @@ public class ClientSetup {
             FluidType type = fluid.fluidType().get();
             if (type instanceof BaseFluidType baseType) {
                 event.registerFluidType(baseType.getClientFluidTypeExtensions(), type);
+            }
+        }
+
+        if (ModList.get().isLoaded("create")) {
+            for (CreateWineryFluids.WineryFluid fluid : CreateWineryFluids.WINERY_FLUIDS) {
+                FluidType type = fluid.fluidType().get();
+                if (type instanceof BaseFluidType baseType) {
+                    event.registerFluidType(baseType.getClientFluidTypeExtensions(), type);
+                }
             }
         }
     }
@@ -101,7 +119,7 @@ public class ClientSetup {
 
         BlockColor grapeBushTint = (BlockState state, BlockAndTintGetter world, BlockPos pos, int tintIndex) -> {
             if (tintIndex == 1 && state.hasProperty(GrapeBushBlock.VARIETY)) {
-                return GrapeBushBlock.getColorForVariety(state.getValue(GrapeBushBlock.VARIETY));
+                return GrapeBushBlock.getColourForVariety(state.getValue(GrapeBushBlock.VARIETY));
             }
             return -1;
         };

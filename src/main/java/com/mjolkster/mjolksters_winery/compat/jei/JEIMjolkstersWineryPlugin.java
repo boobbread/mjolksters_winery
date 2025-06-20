@@ -1,4 +1,4 @@
-package com.mjolkster.mjolksters_winery.compat;
+package com.mjolkster.mjolksters_winery.compat.jei;
 
 import com.mjolkster.mjolksters_winery.MjolkstersWinery;
 import com.mjolkster.mjolksters_winery.client.screen.DemijohnScreen;

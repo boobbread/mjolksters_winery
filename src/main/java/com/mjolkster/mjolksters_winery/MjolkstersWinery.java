@@ -3,9 +3,11 @@ package com.mjolkster.mjolksters_winery;
 import com.mjolkster.mjolksters_winery.common.handler.TooltipHandler;
 import com.mjolkster.mjolksters_winery.common.registry.*;
 import com.mjolkster.mjolksters_winery.common.worldgen.WineryVillageStructures;
+import com.mjolkster.mjolksters_winery.compat.create.CreateWineryFluids;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
@@ -38,6 +40,11 @@ public class MjolkstersWinery
         ModRecipes.TYPES.register(modEventBus);
 
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
+
+        if (ModList.get().isLoaded("create")) {
+            CreateWineryFluids.FLUIDS.register(modEventBus);
+            CreateWineryFluids.FLUID_TYPES.register(modEventBus);
+        }
 
         ModSounds.register(modEventBus);
 
